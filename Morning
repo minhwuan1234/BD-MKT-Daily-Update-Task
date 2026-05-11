@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Report ☀️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page-wrapper">
+  <div class="card">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="hero-gif" id="hero-gif"></div>
+      <div class="hero-blur"></div>
+      <div class="quote-overlay">
+        <span class="quote-mark">"</span>
+        <p class="quote-text" id="daily-quote"></p>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+      <!-- STATE: Loading -->
+      <div id="state-loading" class="state-box">
+        <div class="spinner"></div>
+        <p>Đang tải...</p>
+      </div>
+
+      <!-- STATE: Error -->
+      <div id="state-error" class="state-box" style="display:none;">
+        <p class="state-icon">⚠️</p>
+        <p id="error-msg">Link không hợp lệ.</p>
+        <p class="state-sub">Vui lòng dùng link được gửi qua Lark.</p>
+      </div>
+
+      <!-- STATE: Success -->
+      <div id="state-success" class="state-box" style="display:none;">
+        <p class="state-icon">✅</p>
+        <p>Báo cáo sáng của bạn đã được ghi nhận! ☀️</p>
+        <p class="state-sub">Chúc bạn một ngày làm việc hiệu quả 🚀</p>
+      </div>
+
+      <!-- STATE: Form -->
+      <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
+
+        <div class="form-header">
+          <div class="title-row">
+            <div class="gap-8">
+              <h1 class="form-title">Daily Report<span class="spark">✦</span></h1>
+              <p class="form-subtitle">Hôm nay bạn plan làm gì? — <span id="today-label"></span></p>
+            </div>
+            <div class="rocket-icon">☀️</div>
+          </div>
+        </div>
+
+        <div class="form-body">
+
+          <!-- Task 1 -->
+          <div class="field-group">
+            <label class="field-label">Task 1</label>
+            <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
+          </div>
+
+          <!-- Task 2 -->
+          <div class="field-group">
+            <label class="field-label">Task 2 <span class="optional">(optional)</span></label>
+            <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
+          </div>
+
+          <!-- Task phụ -->
+          <div class="field-group">
+            <label class="field-label">Task phụ <span class="optional">(optional)</span></label>
+            <textarea class="field-textarea" id="task-extra" placeholder="Có task ngoài kế hoạch không? Note lại nhé..."></textarea>
+          </div>
+
+          <button class="submit-btn" id="submit-btn" type="button">Submit ☀️</button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const WORKER_URL = 'https://daily-standup-proxy.minhwuan889.workers.dev';
+
+const QUOTES = [
+  "It takes a great deal of courage to stand alone even if you believe in something very strongly.",
+  "I think I have this thing where everybody has to think I'm the greatest. And if they aren't completely knocked out and dazzled and slightly intimidated by me, I don't feel good about myself.",
+  "At the end of the day, it's not about what you have or even what you've accomplished. It's about who you've lifted up, who you've made better.",
+  "Some people can't believe in themselves until someone else believes in them first.",
+  "Love is the one thing we're capable of perceiving that transcends dimensions of time and space.",
+  "Not anyone can become a great artist, but a great artist can come from anywhere."
+];
+
+const IMAGES = [
+  'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80',
+  'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80',
+  'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80',
+  'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900&q=80',
+  'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80',
+  'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=900&q=80',
+];
+
+// Init quote + image theo ngày VN
+const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
+const vnDay  = vnDate.getDay(); // 0=Sun
+const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
+
+document.getElementById('daily-quote').textContent = QUOTES[dayIdx];
+document.getElementById('hero-gif').style.backgroundImage = `url('${IMAGES[dayIdx]}')`;
+
+function getDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function todayLabel() {
+  return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function showState(name) {
+  ['loading', 'error', 'success', 'form'].forEach(s => {
+    const el = document.getElementById(`state-${s}`);
+    if (!el) return;
+    el.style.display = (s === name)
+      ? (s === 'form' ? 'flex' : 'flex')
+      : 'none';
+  });
+}
+
+function highlightPicker(pickerId) {
+  const el = document.getElementById(pickerId);
+  el.classList.add('picker-error');
+  el.addEventListener('animationend', () => el.classList.remove('picker-error'), { once: true });
+}
+
+// Read userId
+const userId = new URLSearchParams(location.search).get('userId');
+
+if (!userId) {
+  showState('error');
+  document.getElementById('error-msg').textContent = '❌ Link không hợp lệ — thiếu userId.';
+} else {
+  showState('form');
+  document.getElementById('today-label').textContent = todayLabel();
+}
+
+// Submit
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const task1 = document.getElementById('task1').value.trim();
+  const task2 = document.getElementById('task2').value.trim();
+  const taskExtra = document.getElementById('task-extra').value.trim();
+
+  // Validate task1
+  if (!task1) {
+    const inp = document.getElementById('task1');
+    inp.classList.add('field-error');
+    inp.focus();
+    setTimeout(() => inp.classList.remove('field-error'), 1500);
+    const btn = document.getElementById('submit-btn');
+    btn.classList.add('shake');
+    btn.addEventListener('animationend', () => btn.classList.remove('shake'), { once: true });
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi...';
+
+  // Build tasks array
+  const tasks = [{ title: task1 }];
+  if (task2) tasks.push({ title: task2 });
+  if (taskExtra) tasks.push({ subtask: taskExtra });
+
+  const payload = {
+    type: 'morning',
+    userId,
+    date: getDateStr(vnDate),
+    tasks,
+    submittedAt: new Date().toISOString(),
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Server error ${res.status}`);
+    }
+    showState('success');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Submit ☀️';
+    alert(`❌ Gửi thất bại: ${e.message}`);
+  }
+});
+</script>
+
+</body>
+</html>
