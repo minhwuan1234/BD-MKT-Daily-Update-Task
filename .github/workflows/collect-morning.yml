@@ -23,7 +23,7 @@ jobs:
           PM_IDS:          ${{ secrets.PM_IDS }}
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, os, datetime
+          import json, urllib.request, os, datetime, pathlib
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
@@ -48,13 +48,11 @@ jobs:
           )
           token = auth['tenant_access_token']
 
-          # Lookup tên thật từ members.json
           with open('members.json') as f:
               members = json.load(f)
           id_to_name = {v: k for k, v in members.items()}
           name = id_to_name.get(USER_ID, USER_ID)
 
-          # Load report
           try:
               with open(FILE) as f:
                   report = json.load(f)
@@ -71,14 +69,14 @@ jobs:
           except:
               time_str = submitted_at
 
-          # Format date hiển thị
+          # Format date
           try:
               d = datetime.datetime.strptime(DATE, '%Y-%m-%d')
               date_str = d.strftime('%d/%m/%Y')
           except:
               date_str = DATE
 
-          # Build task lines
+          # Build task content
           tasks = report.get('tasks', [])
           task_lines = []
           extra_lines = []
@@ -88,31 +86,76 @@ jobs:
               elif 'subtask' in t:
                   extra_lines.append(f"📎 Task phụ: {t['subtask']}")
 
-          tasks_text = '\n'.join(task_lines) if task_lines else '(không có task)'
-          extra_text = '\n' + '\n'.join(extra_lines) if extra_lines else ''
+          tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
+          extra_md = '\n'.join(extra_lines) if extra_lines else None
 
-          # Đếm số người đã submit hôm nay
-          import pathlib
+          # Đếm submit
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
           submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
           total = len(members)
 
-          msg = (
-              f"🌿 Kế hoạch hôm nay — {date_str}\n\n"
-              f"👤 {name} vừa submit\n"
-              f"📅 {time_str}\n\n"
-              f"{tasks_text}"
-              f"{extra_text}\n\n"
-              f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
-          )
+          # Build card elements
+          elements = [
+              {
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
+                }
+              },
+              {"tag": "hr"},
+              {
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": tasks_md
+                }
+              }
+          ]
+
+          if extra_md:
+              elements += [
+                  {"tag": "hr"},
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": extra_md
+                    }
+                  }
+              ]
+
+          elements += [
+              {"tag": "hr"},
+              {
+                "tag": "note",
+                "elements": [
+                  {
+                    "tag": "plain_text",
+                    "content": f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
+                  }
+                ]
+              }
+          ]
+
+          card = {
+            "header": {
+              "title": {
+                "tag": "plain_text",
+                "content": f"☀️ Kế hoạch sáng — {date_str}"
+              },
+              "template": "green"
+            },
+            "elements": elements
+          }
 
           for pm_id in PM_IDS:
               result = lark_post(
                   'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
                   {
                       'receive_id': pm_id,
-                      'msg_type':   'text',
-                      'content':    json.dumps({'text': msg}),
+                      'msg_type':   'interactive',
+                      'content':    json.dumps(card),
                   },
                   token=token
               )
