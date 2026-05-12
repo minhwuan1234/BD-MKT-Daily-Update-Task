@@ -53,22 +53,27 @@
           </div>
         </div>
         <div class="form-body">
+
           <!-- Task 1 -->
           <div class="field-group">
             <label class="field-label">Task 1</label>
             <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
           </div>
+
           <!-- Task 2 -->
           <div class="field-group">
             <label class="field-label">Task 2 <span class="optional">(optional)</span></label>
             <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
           </div>
-          <!-- Task phụ -->
+
+          <!-- Khó khăn -->
           <div class="field-group">
-            <label class="field-label">Task phụ <span class="optional">(optional)</span></label>
-            <textarea class="field-textarea" id="task-extra" placeholder="Có task ngoài kế hoạch không? Note lại nhé..."></textarea>
+            <label class="field-label">Có khó khăn gì không? <span class="optional">(optional)</span></label>
+            <textarea class="field-textarea" id="blockers" placeholder="Đang bị stuck ở đâu không? Note lại để team support nhé..."></textarea>
           </div>
+
           <button class="submit-btn" id="submit-btn" type="button">Chạm nhẹ ☀️</button>
+
         </div>
       </div>
     </div>
@@ -88,7 +93,7 @@ const QUOTES = [
 
 const IMAGES = [
   'assets/hero-1.png',
-  'assets/hero-2.png',   // Thứ 3 — dùng video hôm nay
+  'assets/hero-2.png',
   'assets/hero-3.png',
   'assets/hero-4.png',
   'assets/hero-5.png',
@@ -101,6 +106,7 @@ const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
 document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
+
 const src = IMAGES[dayIdx];
 const heroEl = document.getElementById('hero-gif');
 if (src.endsWith('.mp4') || src.endsWith('.webm')) {
@@ -112,18 +118,10 @@ if (src.endsWith('.mp4') || src.endsWith('.webm')) {
       v.muted=!v.muted;
       this.textContent=v.muted?'🔇':'🔊';
     " style="
-      position:absolute;
-      bottom:16px;
-      right:16px;
-      z-index:20;
-      background:rgba(0,0,0,0.45);
-      border:none;
-      color:white;
-      border-radius:99px;
-      padding:6px 14px;
-      cursor:pointer;
-      font-size:16px;
-      backdrop-filter:blur(4px);
+      position:absolute;bottom:16px;right:16px;z-index:20;
+      background:rgba(0,0,0,0.45);border:none;color:white;
+      border-radius:99px;padding:6px 14px;cursor:pointer;
+      font-size:16px;backdrop-filter:blur(4px);
     ">🔇</button>
   `);
 } else {
@@ -159,9 +157,9 @@ if (!userId) {
 }
 
 document.getElementById('submit-btn').addEventListener('click', async () => {
-  const task1     = document.getElementById('task1').value.trim();
-  const task2     = document.getElementById('task2').value.trim();
-  const taskExtra = document.getElementById('task-extra').value.trim();
+  const task1    = document.getElementById('task1').value.trim();
+  const task2    = document.getElementById('task2').value.trim();
+  const blockers = document.getElementById('blockers').value.trim();
 
   if (!task1) {
     const inp = document.getElementById('task1');
@@ -180,13 +178,13 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
 
   const tasks = [{ title: task1 }];
   if (task2) tasks.push({ title: task2 });
-  if (taskExtra) tasks.push({ subtask: taskExtra });
 
   const payload = {
     type: 'morning',
     userId,
     date: getDateStr(vnDate),
     tasks,
+    blockers: blockers || null,
     submittedAt: new Date().toISOString(),
   };
 
