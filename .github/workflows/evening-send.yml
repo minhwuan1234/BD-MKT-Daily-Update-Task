@@ -2,7 +2,7 @@ name: Evening Send
 
 on:
   schedule:
-    - cron: '0 10 * * 1-5'
+    - cron: '45 17 * * *'
   workflow_dispatch: {}
 
 jobs:
