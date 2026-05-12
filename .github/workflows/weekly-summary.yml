@@ -1,0 +1,180 @@
+name: Weekly Summary
+
+on:
+  schedule:
+    # Thứ 6 6:00 CH GMT+7 = 11:00 UTC
+    - cron: '0 11 * * 5'
+  workflow_dispatch: {}
+
+jobs:
+  weekly-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pull latest
+        run: git pull --rebase origin main
+
+      - name: Build & send weekly summary
+        env:
+          LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          PM_IDS:          ${{ secrets.PM_IDS }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, urllib.request, os, datetime, pathlib, collections
+
+          APP_ID     = os.environ['LARK_APP_ID']
+          APP_SECRET = os.environ['LARK_APP_SECRET']
+          PM_IDS     = json.loads(os.environ['PM_IDS'])
+
+          tz_offset  = datetime.timezone(datetime.timedelta(hours=7))
+          today      = datetime.datetime.now(tz_offset)
+
+          # ── Build T2→T6 date range this week ─────────────────────────────
+          # weekday(): Mon=0 ... Fri=4
+          mon = today - datetime.timedelta(days=today.weekday())
+          week_dates = [(mon + datetime.timedelta(days=i)).strftime('%Y-%m-%d') for i in range(5)]
+          week_label = f"{week_dates[0]} → {week_dates[4]}"
+          print(f'Summary for week: {week_label}')
+
+          # ── Load members ──────────────────────────────────────────────────
+          with open('members.json') as f:
+              members = json.load(f)
+          id_to_name = {v: k for k, v in members.items()}
+
+          # ── Collect all reports ───────────────────────────────────────────
+          # Structure: { open_id: { date: { morning: {...}, evening: {...} } } }
+          all_data = collections.defaultdict(lambda: collections.defaultdict(dict))
+
+          reports_root = pathlib.Path('reports')
+          for date_str in week_dates:
+              date_dir = reports_root / date_str
+              if not date_dir.exists():
+                  continue
+              for period in ('morning', 'evening'):
+                  period_dir = date_dir / period
+                  if not period_dir.exists():
+                      continue
+                  for json_file in period_dir.glob('*.json'):
+                      open_id = json_file.stem
+                      try:
+                          with open(json_file) as f:
+                              all_data[open_id][date_str][period] = json.load(f)
+                      except Exception as e:
+                          print(f'Skip {json_file}: {e}')
+
+          def lark_post(url, payload, token=None):
+              data = json.dumps(payload).encode()
+              headers = {'Content-Type': 'application/json'}
+              if token:
+                  headers['Authorization'] = f'Bearer {token}'
+              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+              with urllib.request.urlopen(req) as r:
+                  return json.loads(r.read())
+
+          auth  = lark_post(
+              'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
+              {'app_id': APP_ID, 'app_secret': APP_SECRET}
+          )
+          token = auth['tenant_access_token']
+
+          # ── 1. PM Summary: tất cả member ─────────────────────────────────
+          pm_lines = [f"📊 *Weekly Summary* — Tuần {week_label}\n"]
+          day_names = {0:'T2', 1:'T3', 2:'T4', 3:'T5', 4:'T6'}
+
+          for name, open_id in members.items():
+              member_data = all_data.get(open_id, {})
+              pm_lines.append(f"\n👤 *{name}*")
+
+              if not member_data:
+                  pm_lines.append("  (không có report nào tuần này)")
+                  continue
+
+              for i, date_str in enumerate(week_dates):
+                  day_reports = member_data.get(date_str)
+                  if not day_reports:
+                      continue
+                  day_label = day_names.get(i, date_str)
+                  pm_lines.append(f"  [{day_label} {date_str[5:]}]")
+
+                  morning = day_reports.get('morning', {})
+                  if morning:
+                      for t in morning.get('tasks', []):
+                          if 'title' in t:
+                              pm_lines.append(f"    ☀ {t['title']}")
+                          elif 'subtask' in t:
+                              pm_lines.append(f"    📎 {t['subtask']}")
+
+                  evening = day_reports.get('evening', {})
+                  if evening:
+                      for t in evening.get('tasks', []):
+                          prog  = t.get('progress', '—')
+                          time_ = t.get('timeSpent', '—')
+                          title = t.get('title', '?')
+                          pm_lines.append(f"    🌙 {title} → {prog} / {time_}")
+
+          pm_msg = '\n'.join(pm_lines)
+
+          for pm_id in PM_IDS:
+              result = lark_post(
+                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+                  {
+                      'receive_id': pm_id,
+                      'msg_type':   'text',
+                      'content':    json.dumps({'text': pm_msg}),
+                  },
+                  token=token
+              )
+              print(f'PM summary sent to {pm_id}: code={result.get("code","?")}')
+
+          # ── 2. Personal summary: gửi từng member report của họ ───────────
+          for name, open_id in members.items():
+              member_data = all_data.get(open_id, {})
+              if not member_data:
+                  continue  # không có report thì không nhắn
+
+              lines = [f"📋 *Tổng kết tuần của bạn* — {name}\nTuần {week_label}\n"]
+
+              for i, date_str in enumerate(week_dates):
+                  day_reports = member_data.get(date_str)
+                  if not day_reports:
+                      continue
+                  day_label = day_names.get(i, date_str)
+                  lines.append(f"[{day_label} {date_str[5:]}]")
+
+                  morning = day_reports.get('morning', {})
+                  if morning:
+                      lines.append("  ☀️ Sáng:")
+                      for t in morning.get('tasks', []):
+                          if 'title' in t:
+                              lines.append(f"    • {t['title']}")
+                          elif 'subtask' in t:
+                              lines.append(f"    📎 {t['subtask']}")
+
+                  evening = day_reports.get('evening', {})
+                  if evening:
+                      lines.append("  🌙 Chiều:")
+                      for t in evening.get('tasks', []):
+                          prog  = t.get('progress', '—')
+                          time_ = t.get('timeSpent', '—')
+                          title = t.get('title', '?')
+                          lines.append(f"    • {title}: {prog} / {time_}")
+
+              personal_msg = '\n'.join(lines)
+              result = lark_post(
+                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+                  {
+                      'receive_id': open_id,
+                      'msg_type':   'text',
+                      'content':    json.dumps({'text': personal_msg}),
+                  },
+                  token=token
+              )
+              print(f'Personal summary sent to {name} ({open_id}): code={result.get("code","?")}')
+
+          print('Weekly summary done.')
+          PYEOF
