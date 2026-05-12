@@ -79,7 +79,7 @@ const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 
 const QUOTES = [
   { text: "It takes a great deal of courage to stand alone even if you believe in something very strongly.", author: "— Dumbledore" },
-  { text: "I think I have this thing where everybody has to think I'm the greatest. And if they aren't completely knocked out and dazzled and slightly intimidated by me, I don't feel good about myself.", author: "— Kanye West" },
+  { text: "", author: "— Kanye West" },
   { text: "At the end of the day, it's not about what you have or even what you've accomplished. It's about who you've lifted up, who you've made better.", author: "— Barack Obama" },
   { text: "Some people can't believe in themselves until someone else believes in them first.", author: "— Good Will Hunting" },
   { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space.", author: "— Interstellar" },
@@ -88,7 +88,7 @@ const QUOTES = [
 
 const IMAGES = [
   'assets/hero-1.png',
-  'assets/hero-2.png',
+  'assets/hero-2.mp4',   // Thứ 3 — dùng video hôm nay
   'assets/hero-3.png',
   'assets/hero-4.png',
   'assets/hero-5.png',
@@ -101,7 +101,34 @@ const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
 document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
-document.getElementById('hero-gif').style.backgroundImage = `url('${IMAGES[dayIdx]}')`;
+const src = IMAGES[dayIdx];
+const heroEl = document.getElementById('hero-gif');
+if (src.endsWith('.mp4') || src.endsWith('.webm')) {
+  heroEl.style.backgroundImage = '';
+  heroEl.innerHTML = `<video id="hero-video" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
+  heroEl.insertAdjacentHTML('afterend', `
+    <button id="btn-mute" onclick="
+      const v=document.getElementById('hero-video');
+      v.muted=!v.muted;
+      this.textContent=v.muted?'🔇':'🔊';
+    " style="
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      z-index:20;
+      background:rgba(0,0,0,0.45);
+      border:none;
+      color:white;
+      border-radius:99px;
+      padding:6px 14px;
+      cursor:pointer;
+      font-size:16px;
+      backdrop-filter:blur(4px);
+    ">🔇</button>
+  `);
+} else {
+  heroEl.style.backgroundImage = `url('${src}')`;
+}
 
 function getDateStr(d) {
   const y = d.getFullYear();
