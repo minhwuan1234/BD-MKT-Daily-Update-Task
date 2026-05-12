@@ -53,7 +53,15 @@ export default {
 
     // Build file path: reports/YYYY-MM-DD/morning|evening/ou_xxx.json
     const filePath = `reports/${date}/${type}/${userId}.json`;
-    const fileContent = JSON.stringify({ userId, tasks, submittedAt }, null, 2);
+    // Lookup tên từ members.json
+const membersRes = await fetch(
+  `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/members.json`
+);
+const members = await membersRes.json();
+const idToName = Object.fromEntries(Object.entries(members).map(([n, id]) => [id, n]));
+const memberName = idToName[userId] || userId;
+
+const fileContent = JSON.stringify({ userId, memberName, tasks, submittedAt }, null, 2);
 
     try {
       // Ghi file vào GitHub
