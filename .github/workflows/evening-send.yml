@@ -84,7 +84,7 @@ jobs:
                 "header": {
                   "title": {
                     "tag": "plain_text",
-                    "content": f"🌙 Update tình hình — {day_name} {today}"
+                    "content": f"🌙 Update nốt rùi về nhé hihi — {day_name} {today}"
                   },
                   "template": "indigo"
                 },
@@ -93,7 +93,7 @@ jobs:
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
-                      "content": f"Xin chào **{name}**! Hôm nay bạn có **{task_count} task** cần update:"
+                      "content": f"Xin chào **{name}**! Nay em làm task này **{task_count} task** cần update:"
                     }
                   },
                   {
@@ -116,7 +116,7 @@ jobs:
                         "tag": "button",
                         "text": {
                           "tag": "plain_text",
-                          "content": "🖊 Điền Daily Report"
+                          "content": "🖊 Điền nốt nhá"
                         },
                         "type": "primary",
                         "url": link
@@ -128,7 +128,7 @@ jobs:
                     "elements": [
                       {
                         "tag": "plain_text",
-                        "content": "Form sẽ tự điền task của bạn. Chỉ cần chọn progress và submit 🚀"
+                        "content": "Form sẽ tự điền task của em. Chỉ cần chọn progress và submit 🚀"
                       }
                     ]
                   }
