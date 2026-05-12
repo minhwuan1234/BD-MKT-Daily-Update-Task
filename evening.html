@@ -221,7 +221,36 @@ const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
 document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
-document.getElementById('hero-gif').style.backgroundImage = `url('${IMAGES[dayIdx]}')`;
+
+// ── Set hero: support ảnh, gif, video ──
+const src = IMAGES[dayIdx];
+const heroEl = document.getElementById('hero-gif');
+if (src.endsWith('.mp4') || src.endsWith('.webm')) {
+  heroEl.style.backgroundImage = '';
+  heroEl.innerHTML = `<video id="hero-video" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
+  heroEl.insertAdjacentHTML('afterend', `
+    <button id="btn-mute" onclick="
+      const v=document.getElementById('hero-video');
+      v.muted=!v.muted;
+      this.textContent=v.muted?'🔇':'🔊';
+    " style="
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      z-index:20;
+      background:rgba(0,0,0,0.45);
+      border:none;
+      color:white;
+      border-radius:99px;
+      padding:6px 14px;
+      cursor:pointer;
+      font-size:16px;
+      backdrop-filter:blur(4px);
+    ">🔇</button>
+  `);
+} else {
+  heroEl.style.backgroundImage = `url('${src}')`;
+}
 
 function getDateStr(d) {
   const y = d.getFullYear();
