@@ -3,20 +3,22 @@
   "tasks": [
     {
       "title": "Task A",
-      "progress": "100%",
-      "timeSpent": "4h"
+      "progress": "50%",
+      "timeSpent": "—"
     },
     {
       "title": "Task B",
-      "progress": "90%",
-      "timeSpent": "5h"
+      "progress": "50%",
+      "timeSpent": "3.5h"
     },
     {
       "title": "Task C",
       "subtask": true,
-      "progress": "80",
-      "timeSpent": "3h"
+      "progress": "50",
+      "timeSpent": "4.5h"
     }
   ],
-  "submittedAt": "2026-05-12T09:52:13.959Z"
+  "blockers": "KO",
+  "tomorrowPlan": "KO",
+  "submittedAt": "2026-05-12T09:58:04.142Z"
 }
