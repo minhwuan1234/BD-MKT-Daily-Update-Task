@@ -1,109 +1,212 @@
-name: Morning Send
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khởi động mornin☀️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="card">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="hero-gif" id="hero-gif"></div>
+      <div class="hero-blur"></div>
+      <div class="quote-overlay">
+        <span class="quote-mark">"</span>
+        <p class="quote-text" id="daily-quote"></p>
+        <p class="quote-author" id="quote-author"></p>
+      </div>
+    </div>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <!-- STATE: Loading -->
+      <div id="state-loading" class="state-box">
+        <div class="spinner"></div>
+        <p>Đang tải...</p>
+      </div>
+      <!-- STATE: Error -->
+      <div id="state-error" class="state-box" style="display:none;">
+        <p class="state-icon">⚠️</p>
+        <p id="error-msg">Link không hợp lệ.</p>
+        <p class="state-sub">Vui lòng dùng link được gửi qua Lark.</p>
+      </div>
+      <!-- STATE: Success -->
+      <div id="state-success" class="state-box" style="display:none;">
+        <p class="state-icon">✅</p>
+        <p>Thank kiuuuuuu☀️</p>
+        <p class="state-sub">Làm việc lăng xuất e nhé 🚀</p>
+      </div>
+      <!-- STATE: Form -->
+      <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
+        <div class="form-header">
+          <div class="title-row">
+            <div class="gap-8">
+              <h1 class="form-title">Khởi động mornin<span class="spark">✦</span></h1>
+              <p class="form-subtitle">Update nhẹ nhàng tý  — <span id="today-label"></span></p>
+            </div>
+            <div class="rocket-icon">☀️</div>
+          </div>
+        </div>
+        <div class="form-body">
+          <!-- Task 1 -->
+          <div class="field-group">
+            <label class="field-label">Task 1</label>
+            <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
+          </div>
+          <!-- Task 2 -->
+          <div class="field-group">
+            <label class="field-label">Task 2 <span class="optional">(optional)</span></label>
+            <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
+          </div>
+          <!-- Task phụ -->
+          <div class="field-group">
+            <label class="field-label">Task phụ <span class="optional">(optional)</span></label>
+            <textarea class="field-textarea" id="task-extra" placeholder="Có task ngoài kế hoạch không? Note lại nhé..."></textarea>
+          </div>
+          <button class="submit-btn" id="submit-btn" type="button">Chạm nhẹ ☀️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 
-on:
-  schedule:
-    - cron: '30 1 * * 1-5'
-  workflow_dispatch: {}
+const QUOTES = [
+  { text: "It takes a great deal of courage to stand alone even if you believe in something very strongly.", author: "— Dumbledore" },
+  { text: "I think I have this thing where everybody has to think I'm the greatest.And if they aren't completely knocked out and dazzled and slightly intimidated by me, I don't feel good about myself.", author: "— Mr.Fox" },
+  { text: "At the end of the day, it's not about what you have or even what you've accomplished. It's about who you've lifted up, who you've made better.", author: "— Barack Obama" },
+  { text: "Some people can't believe in themselves until someone else believes in them first.", author: "— Good Will Hunting" },
+  { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space.", author: "— Interstellar" },
+  { text: "Not anyone can become a great artist, but a great artist can come from anywhere.", author: "— Ratatouille" },
+];
 
-jobs:
-  send-morning-links:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+const IMAGES = [
+  'assets/hero-1.png',
+  'assets/hero-2.png',   // Thứ 3 — dùng video hôm nay
+  'assets/hero-3.png',
+  'assets/hero-4.png',
+  'assets/hero-5.png',
+  'assets/hero-6.png',
+];
 
-      - name: Send morning links via Lark
-        env:
-          LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
-          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
-          MEMBER_IDS:      ${{ secrets.MEMBER_IDS }}
-        run: |
-          python3 - <<'PYEOF'
-          import json, urllib.request, os, datetime
+const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
+const vnDay  = vnDate.getDay();
+const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
-          APP_ID     = os.environ['LARK_APP_ID']
-          APP_SECRET = os.environ['LARK_APP_SECRET']
-          BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
-          MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
+document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
+document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
+const src = IMAGES[dayIdx];
+const heroEl = document.getElementById('hero-gif');
+if (src.endsWith('.mp4') || src.endsWith('.webm')) {
+  heroEl.style.backgroundImage = '';
+  heroEl.innerHTML = `<video id="hero-video" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
+  heroEl.insertAdjacentHTML('afterend', `
+    <button id="btn-mute" onclick="
+      const v=document.getElementById('hero-video');
+      v.muted=!v.muted;
+      this.textContent=v.muted?'🔇':'🔊';
+    " style="
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      z-index:20;
+      background:rgba(0,0,0,0.45);
+      border:none;
+      color:white;
+      border-radius:99px;
+      padding:6px 14px;
+      cursor:pointer;
+      font-size:16px;
+      backdrop-filter:blur(4px);
+    ">🔇</button>
+  `);
+} else {
+  heroEl.style.backgroundImage = `url('${src}')`;
+}
 
-          def lark_post(url, payload, token=None):
-              data = json.dumps(payload).encode()
-              headers = {'Content-Type': 'application/json'}
-              if token:
-                  headers['Authorization'] = f'Bearer {token}'
-              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
-              with urllib.request.urlopen(req) as r:
-                  return json.loads(r.read())
+function getDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
 
-          auth  = lark_post(
-              'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
-              {'app_id': APP_ID, 'app_secret': APP_SECRET}
-          )
-          token = auth['tenant_access_token']
-          print(f'Got token: {token[:8]}...')
+function todayLabel() {
+  return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+}
 
-          with open('members.json') as f:
-              members = json.load(f)
-          id_to_name = {v: k for k, v in members.items()}
+function showState(name) {
+  ['loading', 'error', 'success', 'form'].forEach(s => {
+    const el = document.getElementById(`state-${s}`);
+    if (!el) return;
+    el.style.display = (s === name) ? 'flex' : 'none';
+  });
+}
 
-          tz_offset = datetime.timezone(datetime.timedelta(hours=7))
-          now       = datetime.datetime.now(tz_offset)
-          today     = now.strftime('%d/%m/%Y')
-          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          day_name  = day_vn.get(now.weekday(), '')
+const userId = new URLSearchParams(location.search).get('userId');
+if (!userId) {
+  showState('error');
+  document.getElementById('error-msg').textContent = '❌ Link không hợp lệ — thiếu userId.';
+} else {
+  showState('form');
+  document.getElementById('today-label').textContent = todayLabel();
+}
 
-          for open_id in MEMBER_IDS:
-              name = id_to_name.get(open_id, open_id)
-              link = f'{BASE_URL}/morning.html?userId={open_id}'
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const task1     = document.getElementById('task1').value.trim();
+  const task2     = document.getElementById('task2').value.trim();
+  const taskExtra = document.getElementById('task-extra').value.trim();
 
-              card = {
-                "header": {
-                  "title": {
-                    "tag": "plain_text",
-                    "content": f"☀️ Kế hoạch sáng — {day_name} {today}"
-                  },
-                  "template": "green"
-                },
-                "elements": [
-                  {
-                    "tag": "div",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": f"Chào **{name}**! Hôm nay bạn plan làm gì?\nĐiền nhanh để team cùng nắm nhé 🚀"
-                    }
-                  },
-                  {"tag": "hr"},
-                  {
-                    "tag": "action",
-                    "actions": [
-                      {
-                        "tag": "button",
-                        "text": {"tag": "plain_text", "content": "📝 Điền báo cáo sáng"},
-                        "type": "primary",
-                        "url": link
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "note",
-                    "elements": [
-                      {"tag": "plain_text", "content": "Form sẽ lưu lại task của bạn. Buổi chiều mình sẽ hỏi tiến độ nhé 🌙"}
-                    ]
-                  }
-                ]
-              }
+  if (!task1) {
+    const inp = document.getElementById('task1');
+    inp.classList.add('field-error');
+    inp.focus();
+    setTimeout(() => inp.classList.remove('field-error'), 1500);
+    const btn = document.getElementById('submit-btn');
+    btn.classList.add('shake');
+    btn.addEventListener('animationend', () => btn.classList.remove('shake'), { once: true });
+    return;
+  }
 
-              result = lark_post(
-                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-                  {
-                      'receive_id': open_id,
-                      'msg_type':   'interactive',
-                      'content':    json.dumps(card),
-                  },
-                  token=token
-              )
-              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi...';
 
-          print('Morning send done.')
-          PYEOF
+  const tasks = [{ title: task1 }];
+  if (task2) tasks.push({ title: task2 });
+  if (taskExtra) tasks.push({ subtask: taskExtra });
+
+  const payload = {
+    type: 'morning',
+    userId,
+    date: getDateStr(vnDate),
+    tasks,
+    submittedAt: new Date().toISOString(),
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Server error ${res.status}`);
+    }
+    showState('success');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Chạm nhẹ ☀️';
+    alert(`❌ Gửi thất bại: ${e.message}`);
+  }
+});
+</script>
+</body>
+</html>
