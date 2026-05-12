@@ -1,0 +1,16 @@
+{
+  "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
+  "tasks": [
+    {
+      "title": "A",
+      "progress": "100%",
+      "timeSpent": "3.5h"
+    },
+    {
+      "title": "B",
+      "progress": "30%",
+      "timeSpent": "1h"
+    }
+  ],
+  "submittedAt": "2026-05-12T04:27:16.171Z"
+}
