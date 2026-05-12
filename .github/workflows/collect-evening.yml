@@ -42,11 +42,16 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth  = lark_post(
+          # ── Get token ──
+          auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
-          token = auth['tenant_access_token']
+          print(f'Auth response: {auth}')
+          token = auth.get('tenant_access_token')
+          if not token:
+              print(f'ERROR: Cannot get token. Response: {auth}')
+              exit(1)
 
           with open('members.json') as f:
               members = json.load(f)
@@ -76,7 +81,7 @@ jobs:
           except:
               date_str = DATE
 
-          # Build task content
+          # Build task elements
           tasks = report.get('tasks', [])
           task_elements = []
           extra_lines = []
@@ -120,6 +125,7 @@ jobs:
 
           elements += task_elements
 
+          # Task phát sinh
           if extra_lines:
               elements.append({
                 "tag": "div",
@@ -130,6 +136,31 @@ jobs:
               })
               elements.append({"tag": "hr"})
 
+          # Khó khăn
+          blockers = report.get('blockers')
+          if blockers:
+              elements.append({
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"🚧 **Khó khăn:**\n{blockers}"
+                }
+              })
+              elements.append({"tag": "hr"})
+
+          # Plan ngày mai
+          tomorrow_plan = report.get('tomorrowPlan')
+          if tomorrow_plan:
+              elements.append({
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"📋 **Plan ngày mai:**\n{tomorrow_plan}"
+                }
+              })
+              elements.append({"tag": "hr"})
+
+          # Footer
           elements.append({
             "tag": "note",
             "elements": [
@@ -161,5 +192,5 @@ jobs:
                   },
                   token=token
               )
-              print(f'Notified PM {pm_id}: code={result.get("code","?")}')
+              print(f'Notified PM {pm_id}: code={result.get("code","?")} msg={result.get("msg","")}')
           PYEOF
