@@ -2,7 +2,6 @@ name: Evening Send
 
 on:
   schedule:
-    # 5:00 CH GMT+7 = 10:00 UTC, T2-T6
     - cron: '0 10 * * 1-5'
   workflow_dispatch: {}
 
@@ -26,7 +25,6 @@ jobs:
           APP_SECRET = os.environ['LARK_APP_SECRET']
           BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
 
-          # ── 1. tenant_access_token ────────────────────────────────────────
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
               headers = {'Content-Type': 'application/json'}
@@ -42,39 +40,33 @@ jobs:
           )
           token = auth['tenant_access_token']
 
-          # ── 2. Today ──────────────────────────────────────────────────────
           tz_offset = datetime.timezone(datetime.timedelta(hours=7))
-          today     = datetime.datetime.now(tz_offset).strftime('%Y-%m-%d')
+          now       = datetime.datetime.now(tz_offset)
+          today_key = now.strftime('%Y-%m-%d')
+          today     = now.strftime('%d/%m/%Y')
+          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
+          day_name  = day_vn.get(now.weekday(), '')
 
-          # ── 3. Scan morning reports → who has submitted? ──────────────────
-          morning_dir = pathlib.Path(f'reports/{today}/morning')
+          morning_dir = pathlib.Path(f'reports/{today_key}/morning')
           if not morning_dir.exists():
-              print(f'No morning reports found for {today}, skipping.')
+              print(f'No morning reports found for {today_key}, skipping.')
               exit(0)
 
           submitted_ids = [p.stem for p in morning_dir.glob('*.json')]
-          print(f'Morning submitters today: {submitted_ids}')
-
           if not submitted_ids:
               print('Nobody submitted morning report yet.')
               exit(0)
 
-          # ── 4. Load members to get name for greeting ──────────────────────
           with open('members.json') as f:
               members = json.load(f)
           id_to_name = {v: k for k, v in members.items()}
 
-          day_vn = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          weekday  = datetime.datetime.now(tz_offset).weekday()
-          day_name = day_vn.get(weekday, '')
-
-          # ── 5. Send DM only to those who submitted morning ────────────────
           for open_id in submitted_ids:
               name = id_to_name.get(open_id, open_id)
               link = f'{BASE_URL}/evening.html?userId={open_id}'
-              text = (
-                  f"🌙 Chào {name}!\n"
-                  f"Cuối ngày {day_name} ({today}) rồi — điền báo cáo chiều nha!\n"
+              msg  = (
+                  f"🌙 Báo cáo chiều — {day_name} {today}\n\n"
+                  f"Chào {name}! Cuối ngày rồi, update tiến độ nhanh nhé 👇\n\n"
                   f"👉 {link}"
               )
               result = lark_post(
@@ -82,11 +74,11 @@ jobs:
                   {
                       'receive_id': open_id,
                       'msg_type':   'text',
-                      'content':    json.dumps({'text': text}),
+                      'content':    json.dumps({'text': msg}),
                   },
                   token=token
               )
-              print(f'Sent to {name} ({open_id}): code={result.get("code", "?")}')
+              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
 
           print('Evening send done.')
           PYEOF
