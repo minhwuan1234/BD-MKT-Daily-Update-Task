@@ -36,11 +36,16 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth  = lark_post(
+          # ── Get token ──
+          auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
-          token = auth['tenant_access_token']
+          print(f'Auth response: {auth}')
+          token = auth.get('tenant_access_token')
+          if not token:
+              print(f'ERROR: Cannot get token. Response: {auth}')
+              exit(1)
           print(f'Got token: {token[:8]}...')
 
           with open('members.json') as f:
@@ -61,7 +66,7 @@ jobs:
                 "header": {
                   "title": {
                     "tag": "plain_text",
-                    "content": f"☀️ Kế hoạch sáng — {day_name} {today}"
+                    "content": f"☀️ Good morning e — {day_name} {today}"
                   },
                   "template": "green"
                 },
@@ -70,7 +75,7 @@ jobs:
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
-                      "content": f"Chào **{name}**! Hôm nay bạn plan làm gì?\nĐiền nhanh để team cùng nắm nhé 🚀"
+                      "content": f"Chào **{name}**! Nay định xử lý việc gì e nhỉ\nĐiền nhanh để team cùng nắm nhé 🚀"
                     }
                   },
                   {"tag": "hr"},
@@ -79,7 +84,7 @@ jobs:
                     "actions": [
                       {
                         "tag": "button",
-                        "text": {"tag": "plain_text", "content": "📝 Điền báo cáo sáng"},
+                        "text": {"tag": "plain_text", "content": "📝 Fill giúp chị nhé hihi"},
                         "type": "primary",
                         "url": link
                       }
@@ -88,7 +93,7 @@ jobs:
                   {
                     "tag": "note",
                     "elements": [
-                      {"tag": "plain_text", "content": "Form sẽ lưu lại task của bạn. Buổi chiều mình sẽ hỏi tiến độ nhé 🌙"}
+                      {"tag": "plain_text", "content": "Form sẽ lưu lại task của em. Buổi chiều report típ nhé hihi 🌙"}
                     ]
                   }
                 ]
@@ -103,7 +108,7 @@ jobs:
                   },
                   token=token
               )
-              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
+              print(f'Sent to {name} ({open_id}): code={result.get("code","?")} msg={result.get("msg","")}')
 
           print('Morning send done.')
           PYEOF
