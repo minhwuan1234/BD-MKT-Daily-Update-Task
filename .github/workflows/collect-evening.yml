@@ -23,15 +23,15 @@ jobs:
           PM_IDS:          ${{ secrets.PM_IDS }}
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, os
+          import json, urllib.request, os, datetime, pathlib
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
           PM_IDS     = json.loads(os.environ['PM_IDS'])
 
-          USER_ID  = '${{ github.event.client_payload.userId }}'
-          DATE     = '${{ github.event.client_payload.date }}'
-          FILE     = '${{ github.event.client_payload.filePath }}'
+          USER_ID = '${{ github.event.client_payload.userId }}'
+          DATE    = '${{ github.event.client_payload.date }}'
+          FILE    = '${{ github.event.client_payload.filePath }}'
 
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
@@ -48,11 +48,13 @@ jobs:
           )
           token = auth['tenant_access_token']
 
+          # Lookup tên thật từ members.json
           with open('members.json') as f:
               members = json.load(f)
           id_to_name = {v: k for k, v in members.items()}
           name = id_to_name.get(USER_ID, USER_ID)
 
+          # Load report
           try:
               with open(FILE) as f:
                   report = json.load(f)
@@ -60,21 +62,57 @@ jobs:
               print(f'Could not read {FILE}: {e}')
               exit(1)
 
+          # Format thời gian VN
+          submitted_at = report.get('submittedAt', '')
+          try:
+              dt = datetime.datetime.fromisoformat(submitted_at.replace('Z', '+00:00'))
+              dt_vn = dt + datetime.timedelta(hours=7)
+              time_str = dt_vn.strftime('%d/%m/%Y %H:%M (GMT+7)')
+          except:
+              time_str = submitted_at
+
+          # Format date hiển thị
+          try:
+              d = datetime.datetime.strptime(DATE, '%Y-%m-%d')
+              date_str = d.strftime('%d/%m/%Y')
+          except:
+              date_str = DATE
+
+          # Build task lines
           tasks = report.get('tasks', [])
           task_lines = []
+          extra_lines = []
           for i, t in enumerate(tasks, 1):
-              title    = t.get('title', '?')
-              progress = t.get('progress', '—')
-              time_s   = t.get('timeSpent', '—')
-              task_lines.append(f"  Task {i}: {title}\n    ↳ Tiến độ: {progress}  |  Thời gian: {time_s}")
-          tasks_text = '\n'.join(task_lines) if task_lines else '  (không có task)'
+              if t.get('subtask'):
+                  extra_lines.append(
+                      f"🆕 Task phát sinh: {t.get('title','?')}"
+                      + (f" ({t.get('timeSpent','—')})" if t.get('timeSpent','—') != '—' else '')
+                  )
+              else:
+                  title    = t.get('title', '?')
+                  progress = t.get('progress', '—')
+                  time_s   = t.get('timeSpent', '—')
+                  task_lines.append(
+                      f"{title}\n"
+                      f"   📈 Progress: {progress}\n"
+                      f"   ⏱ Thời gian: {time_s}"
+                  )
 
-          submitted_at = report.get('submittedAt', '')
+          tasks_text = '\n\n'.join(task_lines) if task_lines else '(không có task)'
+          extra_text = '\n\n' + '\n'.join(extra_lines) if extra_lines else ''
+
+          # Đếm số người đã submit chiều hôm nay
+          evening_dir = pathlib.Path(f'reports/{DATE}/evening')
+          submitted_count = len(list(evening_dir.glob('*.json'))) if evening_dir.exists() else 1
+          total = len(members)
 
           msg = (
-              f"🌙 *Báo cáo chiều mới* — {name}\n"
-              f"📅 {DATE}  🕐 {submitted_at[11:16]} (VN)\n\n"
-              f"*Tiến độ hôm nay:*\n{tasks_text}"
+              f"🌿 Update tình hình — {date_str}\n\n"
+              f"👤 {name} vừa submit\n"
+              f"📅 {time_str}\n\n"
+              f"{tasks_text}"
+              f"{extra_text}\n\n"
+              f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
           )
 
           for pm_id in PM_IDS:
