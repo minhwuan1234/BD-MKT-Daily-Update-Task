@@ -34,22 +34,22 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth = lark_post(
+          auth  = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
           token = auth['tenant_access_token']
 
-          tz_offset = datetime.timezone(datetime.timedelta(hours=7))
-          now       = datetime.datetime.now(tz_offset)
-          today_key = now.strftime('%Y-%m-%d')
-          today     = now.strftime('%d/%m/%Y')
-          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          day_name  = day_vn.get(now.weekday(), '')
+          tz_offset   = datetime.timezone(datetime.timedelta(hours=7))
+          now         = datetime.datetime.now(tz_offset)
+          today_key   = now.strftime('%Y-%m-%d')
+          today       = now.strftime('%d/%m/%Y')
+          day_vn      = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
+          day_name    = day_vn.get(now.weekday(), '')
 
           morning_dir = pathlib.Path(f'reports/{today_key}/morning')
           if not morning_dir.exists():
-              print(f'No morning reports found for {today_key}, skipping.')
+              print(f'No morning reports for {today_key}, skipping.')
               exit(0)
 
           submitted_ids = [p.stem for p in morning_dir.glob('*.json')]
@@ -64,17 +64,83 @@ jobs:
           for open_id in submitted_ids:
               name = id_to_name.get(open_id, open_id)
               link = f'{BASE_URL}/evening.html?userId={open_id}'
-              msg  = (
-                  f"🌙 Báo cáo chiều — {day_name} {today}\n\n"
-                  f"Chào {name}! Cuối ngày rồi, update tiến độ nhanh nhé 👇\n\n"
-                  f"👉 {link}"
-              )
+
+              # Load morning report để hiện task list
+              morning_file = morning_dir / f'{open_id}.json'
+              task_lines = []
+              try:
+                  with open(morning_file) as f:
+                      morning = json.load(f)
+                  main_tasks = [t for t in morning.get('tasks', []) if 'title' in t]
+                  for i, t in enumerate(main_tasks, 1):
+                      task_lines.append(f"{i}. {t['title']}")
+              except:
+                  pass
+
+              tasks_text = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
+              task_count = len(task_lines)
+
+              card = {
+                "header": {
+                  "title": {
+                    "tag": "plain_text",
+                    "content": f"🌙 Update tình hình — {day_name} {today}"
+                  },
+                  "template": "indigo"
+                },
+                "elements": [
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": f"Xin chào **{name}**! Hôm nay bạn có **{task_count} task** cần update:"
+                    }
+                  },
+                  {
+                    "tag": "hr"
+                  },
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": tasks_text
+                    }
+                  },
+                  {
+                    "tag": "hr"
+                  },
+                  {
+                    "tag": "action",
+                    "actions": [
+                      {
+                        "tag": "button",
+                        "text": {
+                          "tag": "plain_text",
+                          "content": "🖊 Điền Daily Report"
+                        },
+                        "type": "primary",
+                        "url": link
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "note",
+                    "elements": [
+                      {
+                        "tag": "plain_text",
+                        "content": "Form sẽ tự điền task của bạn. Chỉ cần chọn progress và submit 🚀"
+                      }
+                    ]
+                  }
+                ]
+              }
+
               result = lark_post(
                   'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
                   {
                       'receive_id': open_id,
-                      'msg_type':   'text',
-                      'content':    json.dumps({'text': msg}),
+                      'msg_type':   'interactive',
+                      'content':    json.dumps(card),
                   },
                   token=token
               )
