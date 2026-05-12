@@ -61,6 +61,7 @@
           </div>
         </div>
         <div class="form-body">
+
           <!-- ── TASK 1 ── -->
           <div class="field-group">
             <label class="field-label">Task 1</label>
@@ -103,6 +104,7 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
+
           <!-- ── TASK 2 ── -->
           <div class="field-group" id="group-task2" style="display:none;">
             <label class="field-label">Task 2</label>
@@ -145,6 +147,7 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
+
           <!-- ── TASK PHỤ ── -->
           <div class="field-group" id="group-extra" style="display:none;">
             <label class="field-label">Task phụ <span class="label-hint">— không có thì bỏ qua</span></label>
@@ -187,7 +190,21 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
+
+          <!-- ── KHÓ KHĂN ── -->
+          <div class="field-group">
+            <label class="field-label">Khó khăn gặp phải <span class="optional">(optional)</span></label>
+            <textarea class="field-textarea" id="blockers" placeholder="Hôm nay có vướng mắc gì không? Note lại để team hỗ trợ nhé..."></textarea>
+          </div>
+
+          <!-- ── TASK NGÀY MAI ── -->
+          <div class="field-group">
+            <label class="field-label">Plan ngày mai <span class="optional">(optional)</span></label>
+            <textarea class="field-textarea" id="tomorrow-plan" placeholder="Ngày mai định xử lý task gì? Ghi sơ để nhớ nhé..."></textarea>
+          </div>
+
           <button class="submit-btn" id="submit-btn" type="button">Submit 🌙</button>
+
         </div>
       </div>
     </div>
@@ -222,7 +239,6 @@ const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
 document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
 
-// ── Set hero: support ảnh, gif, video ──
 const src = IMAGES[dayIdx];
 const heroEl = document.getElementById('hero-gif');
 if (src.endsWith('.mp4') || src.endsWith('.webm')) {
@@ -234,18 +250,10 @@ if (src.endsWith('.mp4') || src.endsWith('.webm')) {
       v.muted=!v.muted;
       this.textContent=v.muted?'🔇':'🔊';
     " style="
-      position:absolute;
-      bottom:16px;
-      right:16px;
-      z-index:20;
-      background:rgba(0,0,0,0.45);
-      border:none;
-      color:white;
-      border-radius:99px;
-      padding:6px 14px;
-      cursor:pointer;
-      font-size:16px;
-      backdrop-filter:blur(4px);
+      position:absolute;bottom:16px;right:16px;z-index:20;
+      background:rgba(0,0,0,0.45);border:none;color:white;
+      border-radius:99px;padding:6px 14px;cursor:pointer;
+      font-size:16px;backdrop-filter:blur(4px);
     ">🔇</button>
   `);
 } else {
@@ -365,6 +373,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   const time2     = hasTwoTasks ? document.getElementById('time-select2').value : null;
   const progExtra = hasExtra ? document.getElementById('picker-extra').dataset.value : null;
   const timeExtra = hasExtra ? document.getElementById('time-select-extra').value : null;
+  const blockers      = document.getElementById('blockers').value.trim();
+  const tomorrowPlan  = document.getElementById('tomorrow-plan').value.trim();
 
   if (!prog1) { highlightPicker('picker1'); return; }
   if (hasTwoTasks && !prog2) { highlightPicker('picker2'); return; }
@@ -397,6 +407,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     userId,
     date: getDateStr(vnDate),
     tasks,
+    blockers:     blockers || null,
+    tomorrowPlan: tomorrowPlan || null,
     submittedAt: new Date().toISOString(),
   };
 
