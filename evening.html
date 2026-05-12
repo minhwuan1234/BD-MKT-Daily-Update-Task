@@ -18,10 +18,8 @@
   </style>
 </head>
 <body>
-
 <div class="page-wrapper">
   <div class="card">
-
     <!-- LEFT PANEL -->
     <div class="left-panel">
       <div class="hero-gif" id="hero-gif"></div>
@@ -32,51 +30,42 @@
         <p class="quote-author" id="quote-author"></p>
       </div>
     </div>
-
     <!-- RIGHT PANEL -->
     <div class="right-panel">
-
       <!-- STATE: Loading -->
       <div id="state-loading" class="state-box">
         <div class="spinner"></div>
         <p>Đang tải báo cáo sáng của bạn...</p>
       </div>
-
       <!-- STATE: Error -->
       <div id="state-error" class="state-box" style="display:none;">
         <p class="state-icon">⚠️</p>
         <p id="error-msg">Không tìm thấy báo cáo sáng.</p>
         <p class="state-sub">Bạn cần điền báo cáo sáng trước nhé!</p>
       </div>
-
       <!-- STATE: Success -->
       <div id="state-success" class="state-box" style="display:none;">
         <p class="state-icon">🌙</p>
         <p>Báo cáo chiều của bạn đã được ghi nhận! 🌙</p>
         <p class="state-sub">Cảm ơn bạn, chúc buổi tối vui vẻ! 🎉</p>
       </div>
-
       <!-- STATE: Form -->
       <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
-
         <div class="form-header">
           <div class="title-row">
             <div class="gap-8">
               <h1 class="form-title">Report nốt chiều nhé<span class="spark">✦</span></h1>
-              <p class="form-subtitle">Update Update  — <span id="today-label"></span></p>
+              <p class="form-subtitle">Update tiến độ — <span id="today-label"></span></p>
             </div>
             <div class="rocket-icon">🌙</div>
           </div>
         </div>
-
         <div class="form-body">
-
           <!-- ── TASK 1 ── -->
           <div class="field-group">
             <label class="field-label">Task 1</label>
             <input class="field-input is-autofilled" type="text" id="task1-title" readonly />
           </div>
-
           <div class="field-group">
             <label class="field-label">Task 1 — Tiến độ</label>
             <div class="progress-picker" id="picker1" data-value="">
@@ -97,7 +86,6 @@
               <span class="progress-value-label" id="label1">—</span>
             </div>
           </div>
-
           <div class="field-group">
             <label class="field-label">Task 1 — Thời gian thực tế</label>
             <div class="select-wrapper">
@@ -115,13 +103,11 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
-
           <!-- ── TASK 2 ── -->
           <div class="field-group" id="group-task2" style="display:none;">
             <label class="field-label">Task 2</label>
             <input class="field-input is-autofilled" type="text" id="task2-title" readonly />
           </div>
-
           <div class="field-group" id="group-prog2" style="display:none;">
             <label class="field-label">Task 2 — Tiến độ</label>
             <div class="progress-picker" id="picker2" data-value="">
@@ -142,7 +128,6 @@
               <span class="progress-value-label" id="label2">—</span>
             </div>
           </div>
-
           <div class="field-group" id="group-time2" style="display:none;">
             <label class="field-label">Task 2 — Thời gian thực tế</label>
             <div class="select-wrapper">
@@ -160,13 +145,11 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
-
           <!-- ── TASK PHỤ ── -->
           <div class="field-group" id="group-extra" style="display:none;">
             <label class="field-label">Task phụ <span class="label-hint">— không có thì bỏ qua</span></label>
             <input class="field-input is-autofilled" type="text" id="extra-title" readonly />
           </div>
-
           <div class="field-group" id="group-extra-prog" style="display:none;">
             <label class="field-label">Task phụ — Tiến độ <span class="label-hint">— không có thì bỏ qua</span></label>
             <div class="progress-picker" id="picker-extra" data-value="">
@@ -187,7 +170,6 @@
               <span class="progress-value-label" id="label-extra">—</span>
             </div>
           </div>
-
           <div class="field-group" id="group-extra-time" style="display:none;">
             <label class="field-label">Task phụ — Thời gian thực tế</label>
             <div class="select-wrapper">
@@ -205,27 +187,23 @@
               <span class="select-arrow">&#8964;</span>
             </div>
           </div>
-
           <button class="submit-btn" id="submit-btn" type="button">Submit 🌙</button>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
 <script>
 const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
 const QUOTES = [
-  { text: "It takes a great deal of courage to stand alone...", author: "— Dumbledore" },
-  { text: "I think I have this thing where everybody...", author: "— Kanye West" },
-  { text: "At the end of the day, it's not about what you have...", author: "— Barack Obama" },
-  { text: "Some people can't believe in themselves...", author: "— Good Will Hunting" },
-  { text: "Love is the one thing we're capable of perceiving...", author: "— Interstellar" },
-  { text: "Not anyone can become a great artist...", author: "— Ratatouille" },
+  { text: "It takes a great deal of courage to stand alone even if you believe in something very strongly.", author: "— Dumbledore" },
+  { text: "I think I have this thing where everybody has to think I'm the greatest. And if they aren't completely knocked out and dazzled and slightly intimidated by me, I don't feel good about myself.", author: "— Kanye West" },
+  { text: "At the end of the day, it's not about what you have or even what you've accomplished. It's about who you've lifted up, who you've made better.", author: "— Barack Obama" },
+  { text: "Some people can't believe in themselves until someone else believes in them first.", author: "— Good Will Hunting" },
+  { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space.", author: "— Interstellar" },
+  { text: "Not anyone can become a great artist, but a great artist can come from anywhere.", author: "— Ratatouille" },
 ];
 
 const IMAGES = [
@@ -241,7 +219,8 @@ const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_
 const vnDay  = vnDate.getDay();
 const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
-document.getElementById('daily-quote').textContent = QUOTES[dayIdx];
+document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
+document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
 document.getElementById('hero-gif').style.backgroundImage = `url('${IMAGES[dayIdx]}')`;
 
 function getDateStr(d) {
@@ -329,7 +308,6 @@ async function init() {
       document.getElementById('group-time2').style.display = 'flex';
     }
 
-    // Hiện task phụ nếu có subtask
     const subtask = (data.tasks || []).find(t => t.subtask);
     if (subtask) {
       document.getElementById('extra-title').value = subtask.subtask;
@@ -352,10 +330,10 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   const hasTwoTasks = document.getElementById('group-task2').style.display !== 'none';
   const hasExtra    = document.getElementById('group-extra').style.display !== 'none';
 
-  const prog1 = document.getElementById('picker1').dataset.value;
-  const prog2 = hasTwoTasks ? document.getElementById('picker2').dataset.value : null;
-  const time1 = document.getElementById('time-select1').value;
-  const time2 = hasTwoTasks ? document.getElementById('time-select2').value : null;
+  const prog1     = document.getElementById('picker1').dataset.value;
+  const prog2     = hasTwoTasks ? document.getElementById('picker2').dataset.value : null;
+  const time1     = document.getElementById('time-select1').value;
+  const time2     = hasTwoTasks ? document.getElementById('time-select2').value : null;
   const progExtra = hasExtra ? document.getElementById('picker-extra').dataset.value : null;
   const timeExtra = hasExtra ? document.getElementById('time-select-extra').value : null;
 
@@ -411,6 +389,5 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   }
 });
 </script>
-
 </body>
 </html>
