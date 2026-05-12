@@ -8,6 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .progress-btn {
+      padding: 6px 2px;
+      min-width: 0;
+      font-size: 11px;
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
 
@@ -107,7 +115,7 @@
             </div>
           </div>
 
-          <!-- ── TASK 2 (hiện nếu morning có task2) ── -->
+          <!-- ── TASK 2 ── -->
           <div class="field-group" id="group-task2" style="display:none;">
             <label class="field-label">Task 2</label>
             <input class="field-input is-autofilled" type="text" id="task2-title" readonly />
@@ -138,6 +146,51 @@
             <label class="field-label">Task 2 — Thời gian thực tế</label>
             <div class="select-wrapper">
               <select class="field-select" id="time-select2">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="0.5">0.5h</option><option value="1">1h</option>
+                <option value="1.5">1.5h</option><option value="2">2h</option>
+                <option value="2.5">2.5h</option><option value="3">3h</option>
+                <option value="3.5">3.5h</option><option value="4">4h</option>
+                <option value="4.5">4.5h</option><option value="5">5h</option>
+                <option value="5.5">5.5h</option><option value="6">6h</option>
+                <option value="6.5">6.5h</option><option value="7">7h</option>
+                <option value="7.5">7.5h</option><option value="8">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
+            </div>
+          </div>
+
+          <!-- ── TASK PHỤ ── -->
+          <div class="field-group" id="group-extra" style="display:none;">
+            <label class="field-label">Task phụ <span class="label-hint">— không có thì bỏ qua</span></label>
+            <input class="field-input is-autofilled" type="text" id="extra-title" readonly />
+          </div>
+
+          <div class="field-group" id="group-extra-prog" style="display:none;">
+            <label class="field-label">Task phụ — Tiến độ <span class="label-hint">— không có thì bỏ qua</span></label>
+            <div class="progress-picker" id="picker-extra" data-value="">
+              <button class="progress-btn" data-val="0">0%</button>
+              <button class="progress-btn" data-val="10">10%</button>
+              <button class="progress-btn" data-val="20">20%</button>
+              <button class="progress-btn" data-val="30">30%</button>
+              <button class="progress-btn" data-val="40">40%</button>
+              <button class="progress-btn" data-val="50">50%</button>
+              <button class="progress-btn" data-val="60">60%</button>
+              <button class="progress-btn" data-val="70">70%</button>
+              <button class="progress-btn" data-val="80">80%</button>
+              <button class="progress-btn" data-val="90">90%</button>
+              <button class="progress-btn is-done" data-val="100">100%</button>
+            </div>
+            <div class="progress-track-wrap">
+              <div class="progress-track"><div class="progress-fill" id="fill-extra"></div></div>
+              <span class="progress-value-label" id="label-extra">—</span>
+            </div>
+          </div>
+
+          <div class="field-group" id="group-extra-time" style="display:none;">
+            <label class="field-label">Task phụ — Thời gian thực tế</label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time-select-extra">
                 <option value="">-- Chọn thời gian --</option>
                 <option value="0.5">0.5h</option><option value="1">1h</option>
                 <option value="1.5">1.5h</option><option value="2">2h</option>
@@ -209,12 +262,10 @@ function showState(name) {
   });
 }
 
-// ── Progress pickers ──
 function initPicker(pickerId, fillId, labelId) {
   const picker = document.getElementById(pickerId);
   const fill   = document.getElementById(fillId);
   const label  = document.getElementById(labelId);
-
   picker.querySelectorAll('.progress-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       picker.querySelectorAll('.progress-btn').forEach(b => b.classList.remove('active'));
@@ -239,6 +290,7 @@ function initPicker(pickerId, fillId, labelId) {
 
 initPicker('picker1', 'fill1', 'label1');
 initPicker('picker2', 'fill2', 'label2');
+initPicker('picker-extra', 'fill-extra', 'label-extra');
 
 function highlightPicker(pickerId) {
   const el = document.getElementById(pickerId);
@@ -246,7 +298,6 @@ function highlightPicker(pickerId) {
   el.addEventListener('animationend', () => el.classList.remove('picker-error'), { once: true });
 }
 
-// ── Init: fetch morning report ──
 const userId = new URLSearchParams(location.search).get('userId');
 
 async function init() {
@@ -264,21 +315,26 @@ async function init() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    // Lấy tasks chính (có .title, không phải subtask)
     const mainTasks = (data.tasks || []).filter(t => t.title);
-
     if (!mainTasks.length) throw new Error('Không có task nào trong báo cáo sáng.');
 
-    // Autofill task 1
     document.getElementById('task1-title').value = mainTasks[0].title;
     window._morningTasks = mainTasks;
 
-    // Hiện task 2 nếu có
     if (mainTasks.length >= 2) {
       document.getElementById('task2-title').value = mainTasks[1].title;
       document.getElementById('group-task2').style.display = 'flex';
-      document.getElementById('group-prog2').style.display  = 'flex';
-      document.getElementById('group-time2').style.display  = 'flex';
+      document.getElementById('group-prog2').style.display = 'flex';
+      document.getElementById('group-time2').style.display = 'flex';
+    }
+
+    // Hiện task phụ nếu có subtask
+    const subtask = (data.tasks || []).find(t => t.subtask);
+    if (subtask) {
+      document.getElementById('extra-title').value = subtask.subtask;
+      document.getElementById('group-extra').style.display      = 'flex';
+      document.getElementById('group-extra-prog').style.display = 'flex';
+      document.getElementById('group-extra-time').style.display = 'flex';
     }
 
     document.getElementById('today-label').textContent = todayLabel();
@@ -291,15 +347,17 @@ async function init() {
 
 init();
 
-// ── Submit ──
 document.getElementById('submit-btn').addEventListener('click', async () => {
   const hasTwoTasks = document.getElementById('group-task2').style.display !== 'none';
+  const hasExtra    = document.getElementById('group-extra').style.display !== 'none';
+
   const prog1 = document.getElementById('picker1').dataset.value;
   const prog2 = hasTwoTasks ? document.getElementById('picker2').dataset.value : null;
   const time1 = document.getElementById('time-select1').value;
   const time2 = hasTwoTasks ? document.getElementById('time-select2').value : null;
+  const progExtra = hasExtra ? document.getElementById('picker-extra').dataset.value : null;
+  const timeExtra = hasExtra ? document.getElementById('time-select-extra').value : null;
 
-  // Validate
   if (!prog1) { highlightPicker('picker1'); return; }
   if (hasTwoTasks && !prog2) { highlightPicker('picker2'); return; }
 
@@ -317,7 +375,13 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
       title: window._morningTasks[1]?.title,
       progress: prog2 + '%',
       timeSpent: time2 ? time2 + 'h' : '—',
-    }] : [])
+    }] : []),
+    ...(hasExtra ? [{
+      title: document.getElementById('extra-title').value,
+      subtask: true,
+      progress: progExtra || '—',
+      timeSpent: timeExtra ? timeExtra + 'h' : '—',
+    }] : []),
   ];
 
   const payload = {
