@@ -21,9 +21,9 @@ jobs:
           python3 - <<'PYEOF'
           import json, urllib.request, os, datetime
 
-          APP_ID     = os.environ['LARK_APP_ID']
+          APP_ID   = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
-          BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
+          BASE_URL = os.environ['PAGES_BASE_URL'].rstrip('/')
 
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
@@ -34,12 +34,11 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth = lark_post(
+          auth  = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
           token = auth['tenant_access_token']
-          print(f'Got token: {token[:8]}...')
 
           with open('members.json') as f:
               members = json.load(f)
@@ -55,18 +54,61 @@ jobs:
           test_id   = 'ou_e491a7e6fc6b633334f51d6ad9702aa9'
 
           link = f'{BASE_URL}/morning.html?userId={test_id}'
-          msg  = (
-              f"☀️ Báo cáo sáng — {day_name} {today}\n\n"
-              f"Chào {test_name}! Hôm nay bạn plan làm gì?\n"
-              f"Điền nhanh để team cùng nắm nhé 👇\n\n"
-              f"👉 {link}"
-          )
+
+          card = {
+            "msg_type": "interactive",
+            "card": {
+              "header": {
+                "title": {
+                  "tag": "plain_text",
+                  "content": f"☀️ Kế hoạch sáng — {day_name} {today}"
+                },
+                "template": "green"
+              },
+              "elements": [
+                {
+                  "tag": "div",
+                  "text": {
+                    "tag": "lark_md",
+                    "content": f"Chào **{test_name}**! Hôm nay bạn plan làm gì?\nĐiền nhanh để team cùng nắm nhé 🚀"
+                  }
+                },
+                {
+                  "tag": "hr"
+                },
+                {
+                  "tag": "action",
+                  "actions": [
+                    {
+                      "tag": "button",
+                      "text": {
+                        "tag": "plain_text",
+                        "content": "📝 Điền báo cáo sáng"
+                      },
+                      "type": "primary",
+                      "url": link
+                    }
+                  ]
+                },
+                {
+                  "tag": "note",
+                  "elements": [
+                    {
+                      "tag": "plain_text",
+                      "content": "Form sẽ lưu lại task của bạn. Buổi chiều mình sẽ hỏi tiến độ nhé 🌙"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+
           result = lark_post(
               'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
               {
                   'receive_id': test_id,
-                  'msg_type':   'text',
-                  'content':    json.dumps({'text': msg}),
+                  'msg_type':   'interactive',
+                  'content':    json.dumps(card['card']),
               },
               token=token
           )
