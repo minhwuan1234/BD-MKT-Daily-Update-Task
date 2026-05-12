@@ -2,7 +2,7 @@ name: Morning Send
 
 on:
   schedule:
-    - cron: '30 8 * * *'
+    - cron: '30 1 * * 1-5'
   workflow_dispatch: {}
 
 jobs:
@@ -17,13 +17,15 @@ jobs:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
           PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
+          MEMBER_IDS:      ${{ secrets.MEMBER_IDS }}
         run: |
           python3 - <<'PYEOF'
           import json, urllib.request, os, datetime
 
-          APP_ID   = os.environ['LARK_APP_ID']
+          APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
-          BASE_URL = os.environ['PAGES_BASE_URL'].rstrip('/')
+          BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
+          MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
 
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
@@ -39,9 +41,11 @@ jobs:
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
           token = auth['tenant_access_token']
+          print(f'Got token: {token[:8]}...')
 
           with open('members.json') as f:
               members = json.load(f)
+          id_to_name = {v: k for k, v in members.items()}
 
           tz_offset = datetime.timezone(datetime.timedelta(hours=7))
           now       = datetime.datetime.now(tz_offset)
@@ -49,69 +53,57 @@ jobs:
           day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
           day_name  = day_vn.get(now.weekday(), '')
 
-          # Chỉ gửi cho Minh Quân để test
-          test_name = 'Minh Quân'
-          test_id   = 'ou_e491a7e6fc6b633334f51d6ad9702aa9'
+          for open_id in MEMBER_IDS:
+              name = id_to_name.get(open_id, open_id)
+              link = f'{BASE_URL}/morning.html?userId={open_id}'
 
-          link = f'{BASE_URL}/morning.html?userId={test_id}'
-
-          card = {
-            "msg_type": "interactive",
-            "card": {
-              "header": {
-                "title": {
-                  "tag": "plain_text",
-                  "content": f"☀️ Good morning e — {day_name} {today}"
+              card = {
+                "header": {
+                  "title": {
+                    "tag": "plain_text",
+                    "content": f"☀️ Kế hoạch sáng — {day_name} {today}"
+                  },
+                  "template": "green"
                 },
-                "template": "green"
-              },
-              "elements": [
-                {
-                  "tag": "div",
-                  "text": {
-                    "tag": "lark_md",
-                    "content": f"Chào **{test_name}**! Nay định xử lý việc gì e nhỉ\nĐiền nhanh để team cùng nắm nhé 🚀"
+                "elements": [
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": f"Chào **{name}**! Hôm nay bạn plan làm gì?\nĐiền nhanh để team cùng nắm nhé 🚀"
+                    }
+                  },
+                  {"tag": "hr"},
+                  {
+                    "tag": "action",
+                    "actions": [
+                      {
+                        "tag": "button",
+                        "text": {"tag": "plain_text", "content": "📝 Điền báo cáo sáng"},
+                        "type": "primary",
+                        "url": link
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "note",
+                    "elements": [
+                      {"tag": "plain_text", "content": "Form sẽ lưu lại task của bạn. Buổi chiều mình sẽ hỏi tiến độ nhé 🌙"}
+                    ]
                   }
-                },
-                {
-                  "tag": "hr"
-                },
-                {
-                  "tag": "action",
-                  "actions": [
-                    {
-                      "tag": "button",
-                      "text": {
-                        "tag": "plain_text",
-                        "content": "📝 Fill giúp chị nhé hihi"
-                      },
-                      "type": "primary",
-                      "url": link
-                    }
-                  ]
-                },
-                {
-                  "tag": "note",
-                  "elements": [
-                    {
-                      "tag": "plain_text",
-                      "content": "Form sẽ lưu lại task của em. Buổi chiều report típ nhé hihi 🌙"
-                    }
-                  ]
-                }
-              ]
-            }
-          }
+                ]
+              }
 
-          result = lark_post(
-              'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-              {
-                  'receive_id': test_id,
-                  'msg_type':   'interactive',
-                  'content':    json.dumps(card['card']),
-              },
-              token=token
-          )
-          print(f'Sent to {test_name}: code={result.get("code","?")}')
+              result = lark_post(
+                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+                  {
+                      'receive_id': open_id,
+                      'msg_type':   'interactive',
+                      'content':    json.dumps(card),
+                  },
+                  token=token
+              )
+              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
+
           print('Morning send done.')
           PYEOF
