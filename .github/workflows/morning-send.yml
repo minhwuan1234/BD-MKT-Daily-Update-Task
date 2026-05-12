@@ -19,7 +19,7 @@ jobs:
           PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, urllib.error, os, datetime
+          import json, urllib.request, os, datetime
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
@@ -41,20 +41,24 @@ jobs:
           token = auth['tenant_access_token']
           print(f'Got token: {token[:8]}...')
 
+          with open('members.json') as f:
+              members = json.load(f)
+
           tz_offset = datetime.timezone(datetime.timedelta(hours=7))
-          today = datetime.datetime.now(tz_offset).strftime('%Y-%m-%d')
-          day_vn = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          weekday = datetime.datetime.now(tz_offset).weekday()
-          day_name = day_vn.get(weekday, '')
+          now       = datetime.datetime.now(tz_offset)
+          today     = now.strftime('%d/%m/%Y')
+          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
+          day_name  = day_vn.get(now.weekday(), '')
 
           # Chỉ gửi cho Minh Quân để test
           test_name = 'Minh Quân'
           test_id   = 'ou_e491a7e6fc6b633334f51d6ad9702aa9'
 
           link = f'{BASE_URL}/morning.html?userId={test_id}'
-          text = (
-              f"☀️ Chào {test_name}!\n"
-              f"{day_name} hôm nay ({today}) — đừng quên điền báo cáo sáng nhé!\n"
+          msg  = (
+              f"☀️ Báo cáo sáng — {day_name} {today}\n\n"
+              f"Chào {test_name}! Hôm nay bạn plan làm gì?\n"
+              f"Điền nhanh để team cùng nắm nhé 👇\n\n"
               f"👉 {link}"
           )
           result = lark_post(
@@ -62,10 +66,10 @@ jobs:
               {
                   'receive_id': test_id,
                   'msg_type':   'text',
-                  'content':    json.dumps({'text': text}),
+                  'content':    json.dumps({'text': msg}),
               },
               token=token
           )
-          print(f'Sent to {test_name}: code={result.get("code", "?")}')
+          print(f'Sent to {test_name}: code={result.get("code","?")}')
           print('Morning send done.')
           PYEOF
