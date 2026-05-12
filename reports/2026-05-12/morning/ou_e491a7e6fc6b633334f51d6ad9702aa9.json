@@ -2,14 +2,12 @@
   "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
   "tasks": [
     {
-      "title": "Task A"
+      "title": "A"
     },
     {
-      "title": "Task B"
-    },
-    {
-      "subtask": "Task C"
+      "title": "B"
     }
   ],
-  "submittedAt": "2026-05-12T09:18:40.606Z"
+  "blockers": "C",
+  "submittedAt": "2026-05-12T10:11:06.961Z"
 }
