@@ -2,9 +2,8 @@ name: Morning Send
 
 on:
   schedule:
-    # 8:00 SA GMT+7 = 1:00 UTC, T2-T6
     - cron: '0 1 * * 1-5'
-  workflow_dispatch: {}   # cho phép chạy tay
+  workflow_dispatch: {}
 
 jobs:
   send-morning-links:
@@ -17,7 +16,7 @@ jobs:
         env:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}   # e.g. https://minhwuan1234.github.io/daily-report
+          PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
         run: |
           python3 - <<'PYEOF'
           import json, urllib.request, urllib.error, os, datetime
@@ -26,7 +25,6 @@ jobs:
           APP_SECRET = os.environ['LARK_APP_SECRET']
           BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
 
-          # ── 1. Get tenant_access_token ────────────────────────────────────
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
               headers = {'Content-Type': 'application/json'}
@@ -43,36 +41,31 @@ jobs:
           token = auth['tenant_access_token']
           print(f'Got token: {token[:8]}...')
 
-          # ── 2. Load members ───────────────────────────────────────────────
-          with open('members.json') as f:
-              members = json.load(f)
-
-          # ── 3. Build today date string ────────────────────────────────────
           tz_offset = datetime.timezone(datetime.timedelta(hours=7))
           today = datetime.datetime.now(tz_offset).strftime('%Y-%m-%d')
           day_vn = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
           weekday = datetime.datetime.now(tz_offset).weekday()
           day_name = day_vn.get(weekday, '')
 
-          # ── 4. Send DM to each member ─────────────────────────────────────
-          for name, open_id in members.items():
-              link = f'{BASE_URL}/morning.html?userId={open_id}'
-              text = (
-                  f"☀️ Chào {name}!\n"
-                  f"{day_name} hôm nay ({today}) — đừng quên điền báo cáo sáng nhé!\n"
-                  f"👉 {link}"
-              )
-              result = lark_post(
-                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-                  {
-                      'receive_id': open_id,
-                      'msg_type':   'text',
-                      'content':    json.dumps({'text': text}),
-                  },
-                  token=token
-              )
-              status = result.get('code', '?')
-              print(f'Sent to {name} ({open_id}): code={status}')
+          # Chỉ gửi cho Minh Quân để test
+          test_name = 'Minh Quân'
+          test_id   = 'ou_e491a7e6fc6b633334f51d6ad9702aa9'
 
+          link = f'{BASE_URL}/morning.html?userId={test_id}'
+          text = (
+              f"☀️ Chào {test_name}!\n"
+              f"{day_name} hôm nay ({today}) — đừng quên điền báo cáo sáng nhé!\n"
+              f"👉 {link}"
+          )
+          result = lark_post(
+              'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+              {
+                  'receive_id': test_id,
+                  'msg_type':   'text',
+                  'content':    json.dumps({'text': text}),
+              },
+              token=token
+          )
+          print(f'Sent to {test_name}: code={result.get("code", "?")}')
           print('Morning send done.')
           PYEOF
