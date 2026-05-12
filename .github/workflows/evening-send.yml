@@ -2,7 +2,7 @@ name: Evening Send
 
 on:
   schedule:
-    - cron: '45 17 * * *'
+    - cron: '45 10 * * 1-5'
   workflow_dispatch: {}
 
 jobs:
@@ -17,6 +17,7 @@ jobs:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
           PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
+          MEMBER_IDS:      ${{ secrets.MEMBER_IDS }}
         run: |
           python3 - <<'PYEOF'
           import json, urllib.request, os, datetime, pathlib
@@ -24,6 +25,7 @@ jobs:
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
           BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
+          MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
 
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
@@ -52,20 +54,23 @@ jobs:
               print(f'No morning reports for {today_key}, skipping.')
               exit(0)
 
+          # Chỉ gửi cho người vừa submit sáng VÀ có trong MEMBER_IDS
           submitted_ids = [p.stem for p in morning_dir.glob('*.json')]
-          if not submitted_ids:
-              print('Nobody submitted morning report yet.')
+          target_ids    = [i for i in submitted_ids if i in MEMBER_IDS]
+
+          if not target_ids:
+              print('Nobody in MEMBER_IDS submitted morning report.')
               exit(0)
 
           with open('members.json') as f:
               members = json.load(f)
           id_to_name = {v: k for k, v in members.items()}
 
-          for open_id in submitted_ids:
+          for open_id in target_ids:
               name = id_to_name.get(open_id, open_id)
               link = f'{BASE_URL}/evening.html?userId={open_id}'
 
-              # Load morning report để hiện task list
+              # Load morning tasks để hiện trong card
               morning_file = morning_dir / f'{open_id}.json'
               task_lines = []
               try:
@@ -77,14 +82,14 @@ jobs:
               except:
                   pass
 
-              tasks_text = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
-              task_count = len(task_lines)
+              tasks_text  = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
+              task_count  = len(task_lines)
 
               card = {
                 "header": {
                   "title": {
                     "tag": "plain_text",
-                    "content": f"🌙 Update nốt rùi về nhé hihi — {day_name} {today}"
+                    "content": f"🌙 Update tình hình — {day_name} {today}"
                   },
                   "template": "indigo"
                 },
@@ -93,31 +98,21 @@ jobs:
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
-                      "content": f"Xin chào **{name}**! Nay em làm task này **{task_count} task** cần update:"
+                      "content": f"Xin chào **{name}**! Hôm nay bạn có **{task_count} task** cần update:"
                     }
                   },
-                  {
-                    "tag": "hr"
-                  },
+                  {"tag": "hr"},
                   {
                     "tag": "div",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": tasks_text
-                    }
+                    "text": {"tag": "lark_md", "content": tasks_text}
                   },
-                  {
-                    "tag": "hr"
-                  },
+                  {"tag": "hr"},
                   {
                     "tag": "action",
                     "actions": [
                       {
                         "tag": "button",
-                        "text": {
-                          "tag": "plain_text",
-                          "content": "🖊 Điền nốt nhá"
-                        },
+                        "text": {"tag": "plain_text", "content": "🖊 Điền Daily Report"},
                         "type": "primary",
                         "url": link
                       }
@@ -126,10 +121,7 @@ jobs:
                   {
                     "tag": "note",
                     "elements": [
-                      {
-                        "tag": "plain_text",
-                        "content": "Form sẽ tự điền task của em. Chỉ cần chọn progress và submit 🚀"
-                      }
+                      {"tag": "plain_text", "content": "Form sẽ tự điền task của bạn. Chỉ cần chọn progress và submit 🚀"}
                     ]
                   }
                 ]
