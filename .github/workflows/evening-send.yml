@@ -36,11 +36,17 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth  = lark_post(
+          # ── Get token ──
+          auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
-          token = auth['tenant_access_token']
+          print(f'Auth response: {auth}')
+          token = auth.get('tenant_access_token')
+          if not token:
+              print(f'ERROR: Cannot get token. Response: {auth}')
+              exit(1)
+          print(f'Got token: {token[:8]}...')
 
           tz_offset   = datetime.timezone(datetime.timedelta(hours=7))
           now         = datetime.datetime.now(tz_offset)
@@ -82,8 +88,8 @@ jobs:
               except:
                   pass
 
-              tasks_text  = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
-              task_count  = len(task_lines)
+              tasks_text = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
+              task_count = len(task_lines)
 
               card = {
                 "header": {
@@ -136,7 +142,7 @@ jobs:
                   },
                   token=token
               )
-              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
+              print(f'Sent to {name} ({open_id}): code={result.get("code","?")} msg={result.get("msg","")}')
 
           print('Evening send done.')
           PYEOF
