@@ -42,11 +42,16 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          auth  = lark_post(
+          # ── Get token ──
+          auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
-          token = auth['tenant_access_token']
+          print(f'Auth response: {auth}')
+          token = auth.get('tenant_access_token')
+          if not token:
+              print(f'ERROR: Cannot get token. Response: {auth}')
+              exit(1)
 
           with open('members.json') as f:
               members = json.load(f)
@@ -76,18 +81,17 @@ jobs:
           except:
               date_str = DATE
 
-          # Build task content
+          # Build task lines
           tasks = report.get('tasks', [])
           task_lines = []
-          extra_lines = []
           for t in tasks:
               if 'title' in t:
                   task_lines.append(f"📌 {t['title']}")
-              elif 'subtask' in t:
-                  extra_lines.append(f"📎 Task phụ: {t['subtask']}")
 
           tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
-          extra_md = '\n'.join(extra_lines) if extra_lines else None
+
+          # Blockers
+          blockers = report.get('blockers')
 
           # Đếm submit
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
@@ -113,14 +117,14 @@ jobs:
               }
           ]
 
-          if extra_md:
+          if blockers:
               elements += [
                   {"tag": "hr"},
                   {
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
-                      "content": extra_md
+                      "content": f"🚧 **Khó khăn:**\n{blockers}"
                     }
                   }
               ]
@@ -159,5 +163,5 @@ jobs:
                   },
                   token=token
               )
-              print(f'Notified PM {pm_id}: code={result.get("code","?")}')
+              print(f'Notified PM {pm_id}: code={result.get("code","?")} msg={result.get("msg","")}')
           PYEOF
