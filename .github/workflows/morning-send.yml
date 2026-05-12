@@ -61,7 +61,7 @@ jobs:
               "header": {
                 "title": {
                   "tag": "plain_text",
-                  "content": f"☀️ Kế hoạch sáng — {day_name} {today}"
+                  "content": f"☀️ Good morning e — {day_name} {today}"
                 },
                 "template": "green"
               },
@@ -70,7 +70,7 @@ jobs:
                   "tag": "div",
                   "text": {
                     "tag": "lark_md",
-                    "content": f"Chào **{test_name}**! Hôm nay bạn plan làm gì?\nĐiền nhanh để team cùng nắm nhé 🚀"
+                    "content": f"Chào **{test_name}**! Nay định xử lý việc gì e nhỉ\nĐiền nhanh để team cùng nắm nhé 🚀"
                   }
                 },
                 {
@@ -83,7 +83,7 @@ jobs:
                       "tag": "button",
                       "text": {
                         "tag": "plain_text",
-                        "content": "📝 Điền báo cáo sáng"
+                        "content": "📝 Fill giúp chị nhé hihi"
                       },
                       "type": "primary",
                       "url": link
@@ -95,7 +95,7 @@ jobs:
                   "elements": [
                     {
                       "tag": "plain_text",
-                      "content": "Form sẽ lưu lại task của bạn. Buổi chiều mình sẽ hỏi tiến độ nhé 🌙"
+                      "content": "Form sẽ lưu lại task của em. Buổi chiều report típ nhé hihi 🌙"
                     }
                   ]
                 }
