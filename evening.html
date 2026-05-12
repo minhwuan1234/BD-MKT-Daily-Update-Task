@@ -1,142 +1,422 @@
-name: Evening Send
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Report 🌙</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .progress-btn {
+      padding: 6px 2px;
+      min-width: 0;
+      font-size: 11px;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="card">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="hero-gif" id="hero-gif"></div>
+      <div class="hero-blur"></div>
+      <div class="quote-overlay">
+        <span class="quote-mark">"</span>
+        <p class="quote-text" id="daily-quote"></p>
+        <p class="quote-author" id="quote-author"></p>
+      </div>
+    </div>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <!-- STATE: Loading -->
+      <div id="state-loading" class="state-box">
+        <div class="spinner"></div>
+        <p>Đang tải báo cáo sáng của bạn...</p>
+      </div>
+      <!-- STATE: Error -->
+      <div id="state-error" class="state-box" style="display:none;">
+        <p class="state-icon">⚠️</p>
+        <p id="error-msg">Không tìm thấy báo cáo sáng.</p>
+        <p class="state-sub">Bạn cần điền báo cáo sáng trước nhé!</p>
+      </div>
+      <!-- STATE: Success -->
+      <div id="state-success" class="state-box" style="display:none;">
+        <p class="state-icon">🌙</p>
+        <p>Báo cáo chiều của bạn đã được ghi nhận! 🌙</p>
+        <p class="state-sub">Cảm ơn bạn, chúc buổi tối vui vẻ! 🎉</p>
+      </div>
+      <!-- STATE: Form -->
+      <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
+        <div class="form-header">
+          <div class="title-row">
+            <div class="gap-8">
+              <h1 class="form-title">Report nốt chiều nhé<span class="spark">✦</span></h1>
+              <p class="form-subtitle">Update tiến độ — <span id="today-label"></span></p>
+            </div>
+            <div class="rocket-icon">🌙</div>
+          </div>
+        </div>
+        <div class="form-body">
+          <!-- ── TASK 1 ── -->
+          <div class="field-group">
+            <label class="field-label">Task 1</label>
+            <input class="field-input is-autofilled" type="text" id="task1-title" readonly />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Task 1 — Tiến độ</label>
+            <div class="progress-picker" id="picker1" data-value="">
+              <button class="progress-btn" data-val="0">0%</button>
+              <button class="progress-btn" data-val="10">10%</button>
+              <button class="progress-btn" data-val="20">20%</button>
+              <button class="progress-btn" data-val="30">30%</button>
+              <button class="progress-btn" data-val="40">40%</button>
+              <button class="progress-btn" data-val="50">50%</button>
+              <button class="progress-btn" data-val="60">60%</button>
+              <button class="progress-btn" data-val="70">70%</button>
+              <button class="progress-btn" data-val="80">80%</button>
+              <button class="progress-btn" data-val="90">90%</button>
+              <button class="progress-btn is-done" data-val="100">100%</button>
+            </div>
+            <div class="progress-track-wrap">
+              <div class="progress-track"><div class="progress-fill" id="fill1"></div></div>
+              <span class="progress-value-label" id="label1">—</span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Task 1 — Thời gian thực tế</label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time-select1">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="0.5">0.5h</option><option value="1">1h</option>
+                <option value="1.5">1.5h</option><option value="2">2h</option>
+                <option value="2.5">2.5h</option><option value="3">3h</option>
+                <option value="3.5">3.5h</option><option value="4">4h</option>
+                <option value="4.5">4.5h</option><option value="5">5h</option>
+                <option value="5.5">5.5h</option><option value="6">6h</option>
+                <option value="6.5">6.5h</option><option value="7">7h</option>
+                <option value="7.5">7.5h</option><option value="8">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
+            </div>
+          </div>
+          <!-- ── TASK 2 ── -->
+          <div class="field-group" id="group-task2" style="display:none;">
+            <label class="field-label">Task 2</label>
+            <input class="field-input is-autofilled" type="text" id="task2-title" readonly />
+          </div>
+          <div class="field-group" id="group-prog2" style="display:none;">
+            <label class="field-label">Task 2 — Tiến độ</label>
+            <div class="progress-picker" id="picker2" data-value="">
+              <button class="progress-btn" data-val="0">0%</button>
+              <button class="progress-btn" data-val="10">10%</button>
+              <button class="progress-btn" data-val="20">20%</button>
+              <button class="progress-btn" data-val="30">30%</button>
+              <button class="progress-btn" data-val="40">40%</button>
+              <button class="progress-btn" data-val="50">50%</button>
+              <button class="progress-btn" data-val="60">60%</button>
+              <button class="progress-btn" data-val="70">70%</button>
+              <button class="progress-btn" data-val="80">80%</button>
+              <button class="progress-btn" data-val="90">90%</button>
+              <button class="progress-btn is-done" data-val="100">100%</button>
+            </div>
+            <div class="progress-track-wrap">
+              <div class="progress-track"><div class="progress-fill" id="fill2"></div></div>
+              <span class="progress-value-label" id="label2">—</span>
+            </div>
+          </div>
+          <div class="field-group" id="group-time2" style="display:none;">
+            <label class="field-label">Task 2 — Thời gian thực tế</label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time-select2">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="0.5">0.5h</option><option value="1">1h</option>
+                <option value="1.5">1.5h</option><option value="2">2h</option>
+                <option value="2.5">2.5h</option><option value="3">3h</option>
+                <option value="3.5">3.5h</option><option value="4">4h</option>
+                <option value="4.5">4.5h</option><option value="5">5h</option>
+                <option value="5.5">5.5h</option><option value="6">6h</option>
+                <option value="6.5">6.5h</option><option value="7">7h</option>
+                <option value="7.5">7.5h</option><option value="8">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
+            </div>
+          </div>
+          <!-- ── TASK PHỤ ── -->
+          <div class="field-group" id="group-extra" style="display:none;">
+            <label class="field-label">Task phụ <span class="label-hint">— không có thì bỏ qua</span></label>
+            <input class="field-input is-autofilled" type="text" id="extra-title" readonly />
+          </div>
+          <div class="field-group" id="group-extra-prog" style="display:none;">
+            <label class="field-label">Task phụ — Tiến độ <span class="label-hint">— không có thì bỏ qua</span></label>
+            <div class="progress-picker" id="picker-extra" data-value="">
+              <button class="progress-btn" data-val="0">0%</button>
+              <button class="progress-btn" data-val="10">10%</button>
+              <button class="progress-btn" data-val="20">20%</button>
+              <button class="progress-btn" data-val="30">30%</button>
+              <button class="progress-btn" data-val="40">40%</button>
+              <button class="progress-btn" data-val="50">50%</button>
+              <button class="progress-btn" data-val="60">60%</button>
+              <button class="progress-btn" data-val="70">70%</button>
+              <button class="progress-btn" data-val="80">80%</button>
+              <button class="progress-btn" data-val="90">90%</button>
+              <button class="progress-btn is-done" data-val="100">100%</button>
+            </div>
+            <div class="progress-track-wrap">
+              <div class="progress-track"><div class="progress-fill" id="fill-extra"></div></div>
+              <span class="progress-value-label" id="label-extra">—</span>
+            </div>
+          </div>
+          <div class="field-group" id="group-extra-time" style="display:none;">
+            <label class="field-label">Task phụ — Thời gian thực tế</label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time-select-extra">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="0.5">0.5h</option><option value="1">1h</option>
+                <option value="1.5">1.5h</option><option value="2">2h</option>
+                <option value="2.5">2.5h</option><option value="3">3h</option>
+                <option value="3.5">3.5h</option><option value="4">4h</option>
+                <option value="4.5">4.5h</option><option value="5">5h</option>
+                <option value="5.5">5.5h</option><option value="6">6h</option>
+                <option value="6.5">6.5h</option><option value="7">7h</option>
+                <option value="7.5">7.5h</option><option value="8">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
+            </div>
+          </div>
+          <button class="submit-btn" id="submit-btn" type="button">Submit 🌙</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
+const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
-on:
-  schedule:
-    - cron: '45 10 * * 1-5'
-  workflow_dispatch: {}
+const QUOTES = [
+  { text: "It takes a great deal of courage to stand alone even if you believe in something very strongly.", author: "— Dumbledore" },
+  { text: "I think I have this thing where everybody has to think I'm the greatest. And if they aren't completely knocked out and dazzled and slightly intimidated by me, I don't feel good about myself.", author: "— Mr.Fox" },
+  { text: "At the end of the day, it's not about what you have or even what you've accomplished. It's about who you've lifted up, who you've made better.", author: "— Barack Obama" },
+  { text: "Some people can't believe in themselves until someone else believes in them first.", author: "— Good Will Hunting" },
+  { text: "Love is the one thing we're capable of perceiving that transcends dimensions of time and space.", author: "— Interstellar" },
+  { text: "Not anyone can become a great artist, but a great artist can come from anywhere.", author: "— Ratatouille" },
+];
 
-jobs:
-  send-evening-links:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+const IMAGES = [
+  'assets/hero-1.png',
+  'assets/hero-2.png',
+  'assets/hero-3.png',
+  'assets/hero-4.png',
+  'assets/hero-5.png',
+  'assets/hero-6.png',
+];
 
-      - name: Send evening links via Lark
-        env:
-          LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
-          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
-          MEMBER_IDS:      ${{ secrets.MEMBER_IDS }}
-        run: |
-          python3 - <<'PYEOF'
-          import json, urllib.request, os, datetime, pathlib
+const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
+const vnDay  = vnDate.getDay();
+const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
-          APP_ID     = os.environ['LARK_APP_ID']
-          APP_SECRET = os.environ['LARK_APP_SECRET']
-          BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
-          MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
+document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
+document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
 
-          def lark_post(url, payload, token=None):
-              data = json.dumps(payload).encode()
-              headers = {'Content-Type': 'application/json'}
-              if token:
-                  headers['Authorization'] = f'Bearer {token}'
-              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
-              with urllib.request.urlopen(req) as r:
-                  return json.loads(r.read())
+// ── Set hero: support ảnh, gif, video ──
+const src = IMAGES[dayIdx];
+const heroEl = document.getElementById('hero-gif');
+if (src.endsWith('.mp4') || src.endsWith('.webm')) {
+  heroEl.style.backgroundImage = '';
+  heroEl.innerHTML = `<video id="hero-video" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
+  heroEl.insertAdjacentHTML('afterend', `
+    <button id="btn-mute" onclick="
+      const v=document.getElementById('hero-video');
+      v.muted=!v.muted;
+      this.textContent=v.muted?'🔇':'🔊';
+    " style="
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      z-index:20;
+      background:rgba(0,0,0,0.45);
+      border:none;
+      color:white;
+      border-radius:99px;
+      padding:6px 14px;
+      cursor:pointer;
+      font-size:16px;
+      backdrop-filter:blur(4px);
+    ">🔇</button>
+  `);
+} else {
+  heroEl.style.backgroundImage = `url('${src}')`;
+}
 
-          auth  = lark_post(
-              'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
-              {'app_id': APP_ID, 'app_secret': APP_SECRET}
-          )
-          token = auth['tenant_access_token']
+function getDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
 
-          tz_offset   = datetime.timezone(datetime.timedelta(hours=7))
-          now         = datetime.datetime.now(tz_offset)
-          today_key   = now.strftime('%Y-%m-%d')
-          today       = now.strftime('%d/%m/%Y')
-          day_vn      = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          day_name    = day_vn.get(now.weekday(), '')
+function todayLabel() {
+  return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+}
 
-          morning_dir = pathlib.Path(f'reports/{today_key}/morning')
-          if not morning_dir.exists():
-              print(f'No morning reports for {today_key}, skipping.')
-              exit(0)
+function showState(name) {
+  ['loading', 'error', 'success', 'form'].forEach(s => {
+    const el = document.getElementById(`state-${s}`);
+    if (!el) return;
+    el.style.display = (s === name) ? 'flex' : 'none';
+  });
+}
 
-          # Chỉ gửi cho người vừa submit sáng VÀ có trong MEMBER_IDS
-          submitted_ids = [p.stem for p in morning_dir.glob('*.json')]
-          target_ids    = [i for i in submitted_ids if i in MEMBER_IDS]
+function initPicker(pickerId, fillId, labelId) {
+  const picker = document.getElementById(pickerId);
+  const fill   = document.getElementById(fillId);
+  const label  = document.getElementById(labelId);
+  picker.querySelectorAll('.progress-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      picker.querySelectorAll('.progress-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const val = btn.dataset.val;
+      picker.dataset.value = val;
+      fill.style.width = val + '%';
+      label.textContent = val + '%';
+      if (val == 100) {
+        fill.style.background = 'linear-gradient(90deg, #4caf50, #81c784)';
+        label.style.color = '#4caf50';
+      } else if (val >= 60) {
+        fill.style.background = 'linear-gradient(90deg, #FF9333, #ffb347)';
+        label.style.color = '#FF9333';
+      } else {
+        fill.style.background = 'linear-gradient(90deg, #FE8A22, #ffb347)';
+        label.style.color = '#FE8A22';
+      }
+    });
+  });
+}
 
-          if not target_ids:
-              print('Nobody in MEMBER_IDS submitted morning report.')
-              exit(0)
+initPicker('picker1', 'fill1', 'label1');
+initPicker('picker2', 'fill2', 'label2');
+initPicker('picker-extra', 'fill-extra', 'label-extra');
 
-          with open('members.json') as f:
-              members = json.load(f)
-          id_to_name = {v: k for k, v in members.items()}
+function highlightPicker(pickerId) {
+  const el = document.getElementById(pickerId);
+  el.classList.add('picker-error');
+  el.addEventListener('animationend', () => el.classList.remove('picker-error'), { once: true });
+}
 
-          for open_id in target_ids:
-              name = id_to_name.get(open_id, open_id)
-              link = f'{BASE_URL}/evening.html?userId={open_id}'
+const userId = new URLSearchParams(location.search).get('userId');
 
-              # Load morning tasks để hiện trong card
-              morning_file = morning_dir / f'{open_id}.json'
-              task_lines = []
-              try:
-                  with open(morning_file) as f:
-                      morning = json.load(f)
-                  main_tasks = [t for t in morning.get('tasks', []) if 'title' in t]
-                  for i, t in enumerate(main_tasks, 1):
-                      task_lines.append(f"{i}. {t['title']}")
-              except:
-                  pass
+async function init() {
+  if (!userId) {
+    showState('error');
+    document.getElementById('error-msg').textContent = '❌ Link không hợp lệ — thiếu userId.';
+    return;
+  }
 
-              tasks_text  = '\n'.join(task_lines) if task_lines else 'Xem lại trong form nhé'
-              task_count  = len(task_lines)
+  const dateStr = getDateStr(vnDate);
+  const url = `${GITHUB_RAW}/reports/${dateStr}/morning/${userId}.json?t=${Date.now()}`;
 
-              card = {
-                "header": {
-                  "title": {
-                    "tag": "plain_text",
-                    "content": f"🌙 Update tình hình — {day_name} {today}"
-                  },
-                  "template": "indigo"
-                },
-                "elements": [
-                  {
-                    "tag": "div",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": f"Xin chào **{name}**! Hôm nay bạn có **{task_count} task** cần update:"
-                    }
-                  },
-                  {"tag": "hr"},
-                  {
-                    "tag": "div",
-                    "text": {"tag": "lark_md", "content": tasks_text}
-                  },
-                  {"tag": "hr"},
-                  {
-                    "tag": "action",
-                    "actions": [
-                      {
-                        "tag": "button",
-                        "text": {"tag": "plain_text", "content": "🖊 Điền Daily Report"},
-                        "type": "primary",
-                        "url": link
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "note",
-                    "elements": [
-                      {"tag": "plain_text", "content": "Form sẽ tự điền task của bạn. Chỉ cần chọn progress và submit 🚀"}
-                    ]
-                  }
-                ]
-              }
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
 
-              result = lark_post(
-                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-                  {
-                      'receive_id': open_id,
-                      'msg_type':   'interactive',
-                      'content':    json.dumps(card),
-                  },
-                  token=token
-              )
-              print(f'Sent to {name} ({open_id}): code={result.get("code","?")}')
+    const mainTasks = (data.tasks || []).filter(t => t.title);
+    if (!mainTasks.length) throw new Error('Không có task nào trong báo cáo sáng.');
 
-          print('Evening send done.')
-          PYEOF
+    document.getElementById('task1-title').value = mainTasks[0].title;
+    window._morningTasks = mainTasks;
+
+    if (mainTasks.length >= 2) {
+      document.getElementById('task2-title').value = mainTasks[1].title;
+      document.getElementById('group-task2').style.display = 'flex';
+      document.getElementById('group-prog2').style.display = 'flex';
+      document.getElementById('group-time2').style.display = 'flex';
+    }
+
+    const subtask = (data.tasks || []).find(t => t.subtask);
+    if (subtask) {
+      document.getElementById('extra-title').value = subtask.subtask;
+      document.getElementById('group-extra').style.display      = 'flex';
+      document.getElementById('group-extra-prog').style.display = 'flex';
+      document.getElementById('group-extra-time').style.display = 'flex';
+    }
+
+    document.getElementById('today-label').textContent = todayLabel();
+    showState('form');
+  } catch (e) {
+    showState('error');
+    document.getElementById('error-msg').textContent = `❌ ${e.message}`;
+  }
+}
+
+init();
+
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const hasTwoTasks = document.getElementById('group-task2').style.display !== 'none';
+  const hasExtra    = document.getElementById('group-extra').style.display !== 'none';
+
+  const prog1     = document.getElementById('picker1').dataset.value;
+  const prog2     = hasTwoTasks ? document.getElementById('picker2').dataset.value : null;
+  const time1     = document.getElementById('time-select1').value;
+  const time2     = hasTwoTasks ? document.getElementById('time-select2').value : null;
+  const progExtra = hasExtra ? document.getElementById('picker-extra').dataset.value : null;
+  const timeExtra = hasExtra ? document.getElementById('time-select-extra').value : null;
+
+  if (!prog1) { highlightPicker('picker1'); return; }
+  if (hasTwoTasks && !prog2) { highlightPicker('picker2'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Đang gửi...';
+
+  const tasks = [
+    {
+      title: window._morningTasks[0]?.title,
+      progress: prog1 + '%',
+      timeSpent: time1 ? time1 + 'h' : '—',
+    },
+    ...(hasTwoTasks ? [{
+      title: window._morningTasks[1]?.title,
+      progress: prog2 + '%',
+      timeSpent: time2 ? time2 + 'h' : '—',
+    }] : []),
+    ...(hasExtra ? [{
+      title: document.getElementById('extra-title').value,
+      subtask: true,
+      progress: progExtra || '—',
+      timeSpent: timeExtra ? timeExtra + 'h' : '—',
+    }] : []),
+  ];
+
+  const payload = {
+    type: 'evening',
+    userId,
+    date: getDateStr(vnDate),
+    tasks,
+    submittedAt: new Date().toISOString(),
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `Server error ${res.status}`);
+    }
+    showState('success');
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Submit 🌙';
+    alert(`❌ Gửi thất bại: ${e.message}`);
+  }
+});
+</script>
+</body>
+</html>
