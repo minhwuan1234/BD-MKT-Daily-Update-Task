@@ -13,7 +13,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Pull latest (worker vừa commit file)
       - name: Pull latest
         run: git pull --rebase origin main
 
@@ -21,19 +20,18 @@ jobs:
         env:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          PM_IDS:          ${{ secrets.PM_IDS }}    # JSON array: ["ou_xxx","ou_yyy",...]
+          PM_IDS:          ${{ secrets.PM_IDS }}
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, os
+          import json, urllib.request, os, datetime
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
           PM_IDS     = json.loads(os.environ['PM_IDS'])
 
-          # Payload từ repository_dispatch
-          USER_ID  = '${{ github.event.client_payload.userId }}'
-          DATE     = '${{ github.event.client_payload.date }}'
-          FILE     = '${{ github.event.client_payload.filePath }}'
+          USER_ID = '${{ github.event.client_payload.userId }}'
+          DATE    = '${{ github.event.client_payload.date }}'
+          FILE    = '${{ github.event.client_payload.filePath }}'
 
           def lark_post(url, payload, token=None):
               data = json.dumps(payload).encode()
@@ -44,20 +42,19 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          # tenant_access_token
           auth  = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
           token = auth['tenant_access_token']
 
-          # Load members để lookup tên
+          # Lookup tên thật từ members.json
           with open('members.json') as f:
               members = json.load(f)
           id_to_name = {v: k for k, v in members.items()}
           name = id_to_name.get(USER_ID, USER_ID)
 
-          # Load report file
+          # Load report
           try:
               with open(FILE) as f:
                   report = json.load(f)
@@ -65,21 +62,48 @@ jobs:
               print(f'Could not read {FILE}: {e}')
               exit(1)
 
+          # Format thời gian VN
+          submitted_at = report.get('submittedAt', '')
+          try:
+              dt = datetime.datetime.fromisoformat(submitted_at.replace('Z', '+00:00'))
+              dt_vn = dt + datetime.timedelta(hours=7)
+              time_str = dt_vn.strftime('%d/%m/%Y %H:%M (GMT+7)')
+          except:
+              time_str = submitted_at
+
+          # Format date hiển thị
+          try:
+              d = datetime.datetime.strptime(DATE, '%Y-%m-%d')
+              date_str = d.strftime('%d/%m/%Y')
+          except:
+              date_str = DATE
+
+          # Build task lines
           tasks = report.get('tasks', [])
           task_lines = []
+          extra_lines = []
           for t in tasks:
               if 'title' in t:
-                  task_lines.append(f"  • {t['title']}")
+                  task_lines.append(f"📌 {t['title']}")
               elif 'subtask' in t:
-                  task_lines.append(f"  📎 Task phụ: {t['subtask']}")
-          tasks_text = '\n'.join(task_lines) if task_lines else '  (không có task)'
+                  extra_lines.append(f"📎 Task phụ: {t['subtask']}")
 
-          submitted_at = report.get('submittedAt', '')
+          tasks_text = '\n'.join(task_lines) if task_lines else '(không có task)'
+          extra_text = '\n' + '\n'.join(extra_lines) if extra_lines else ''
+
+          # Đếm số người đã submit hôm nay
+          import pathlib
+          morning_dir = pathlib.Path(f'reports/{DATE}/morning')
+          submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
+          total = len(members)
 
           msg = (
-              f"☀️ *Báo cáo sáng mới* — {name}\n"
-              f"📅 {DATE}  🕐 {submitted_at[11:16]} (VN)\n\n"
-              f"*Tasks hôm nay:*\n{tasks_text}"
+              f"🌿 Kế hoạch hôm nay — {date_str}\n\n"
+              f"👤 {name} vừa submit\n"
+              f"📅 {time_str}\n\n"
+              f"{tasks_text}"
+              f"{extra_text}\n\n"
+              f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
           )
 
           for pm_id in PM_IDS:
