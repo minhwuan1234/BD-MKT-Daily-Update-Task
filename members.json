@@ -1,9 +1,9 @@
 {
-  "Minh Quân":  "ou_e491a7e6fc6b633334f51d6ad9702aa9",
-  "Hạnh": "ou_ae5bfe6dd4d55321fce2bd4421b1e8c6",
-  "Huyền Linh":  "ou_27ad3300213a60de469cebc4366387c7",
-  "Nga Linh":  "ou_8e3e0a2b7df46f9350bf4f8e2b3a29f2",
-  "Giang":   "ou_2c810d3f773898a7d8736b566421436c",
-  "Trang Liu": "ou_97358e73bef63428d793017ffccba74a",
-  "Chi": "ou_ccc72b630abf63157d9526cdf135ad8c"
+  "Minh Quân": { "id": "ou_e491a7e6fc6b633334f51d6ad9702aa9", "pm": "ou_97358e73bef63428d793017ffccba74a" },
+  "Hạnh":      { "id": "ou_ae5bfe6dd4d55321fce2bd4421b1e8c6", "pm": null },
+  "Huyền Linh":{ "id": "ou_27ad3300213a60de469cebc4366387c7", "pm": "ou_ae5bfe6dd4d55321fce2bd4421b1e8c6" },
+  "Nga Linh":  { "id": "ou_8e3e0a2b7df46f9350bf4f8e2b3a29f2", "pm": "ou_ae5bfe6dd4d55321fce2bd4421b1e8c6" },
+  "Giang":     { "id": "ou_2c810d3f773898a7d8736b566421436c", "pm": "ou_ae5bfe6dd4d55321fce2bd4421b1e8c6" },
+  "Trang Liu": { "id": "ou_97358e73bef63428d793017ffccba74a", "pm": null },
+  "Chi":       { "id": "ou_ccc72b630abf63157d9526cdf135ad8c", "pm": "ou_97358e73bef63428d793017ffccba74a" }
 }
