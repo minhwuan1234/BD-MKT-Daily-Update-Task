@@ -34,7 +34,6 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          # ── Get token ──
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
@@ -46,19 +45,18 @@ jobs:
               exit(1)
           print(f'Got token: {token[:8]}...')
 
-          tz_offset   = datetime.timezone(datetime.timedelta(hours=7))
-          now         = datetime.datetime.now(tz_offset)
-          today_key   = now.strftime('%Y-%m-%d')
-          today       = now.strftime('%d/%m/%Y')
-          day_vn      = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
-          day_name    = day_vn.get(now.weekday(), '')
+          tz_offset = datetime.timezone(datetime.timedelta(hours=7))
+          now       = datetime.datetime.now(tz_offset)
+          today_key = now.strftime('%Y-%m-%d')
+          today     = now.strftime('%d/%m/%Y')
+          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
+          day_name  = day_vn.get(now.weekday(), '')
 
           morning_dir = pathlib.Path(f'reports/{today_key}/morning')
           if not morning_dir.exists():
               print(f'No morning reports for {today_key}, skipping.')
               exit(0)
 
-          # Chỉ gửi cho người vừa submit sáng VÀ có trong MEMBER_IDS
           submitted_ids = [p.stem for p in morning_dir.glob('*.json')]
           target_ids    = [i for i in submitted_ids if i in MEMBER_IDS]
 
@@ -68,14 +66,13 @@ jobs:
 
           with open('members.json') as f:
               members = json.load(f)
-          id_to_name = {v: k for k, v in members.items()}
+          id_to_name = {v['id']: k for k, v in members.items()}
 
           for open_id in target_ids:
               name = id_to_name.get(open_id, open_id)
               ts   = int(time.time())
               link = f'{BASE_URL}/evening.html?userId={open_id}&t={ts}'
 
-              # Load morning tasks để hiện trong card
               morning_file = morning_dir / f'{open_id}.json'
               task_lines = []
               try:
