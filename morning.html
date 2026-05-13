@@ -8,14 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .progress-btn {
-      padding: 6px 2px;
-      min-width: 0;
-      font-size: 11px;
-      flex: 1;
-    }
-  </style>
 </head>
 <body>
 <div class="page-wrapper">
@@ -64,59 +56,55 @@
 
           <!-- Task 1 -->
           <div class="field-group">
-            <label class="field-label">Task 1 - Output Task 1</label>
+            <label class="field-label">Task 1 — Output Task 1</label>
             <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay và output của task này nhó..." />
           </div>
           <div class="field-group">
-            <label class="field-label">Task 1 — Tiến độ dự kiến</label>
-            <div class="progress-picker" id="picker1" data-value="">
-              <button class="progress-btn" data-val="0">0%</button>
-              <button class="progress-btn" data-val="10">10%</button>
-              <button class="progress-btn" data-val="20">20%</button>
-              <button class="progress-btn" data-val="30">30%</button>
-              <button class="progress-btn" data-val="40">40%</button>
-              <button class="progress-btn" data-val="50">50%</button>
-              <button class="progress-btn" data-val="60">60%</button>
-              <button class="progress-btn" data-val="70">70%</button>
-              <button class="progress-btn" data-val="80">80%</button>
-              <button class="progress-btn" data-val="90">90%</button>
-              <button class="progress-btn is-done" data-val="100">100%</button>
-            </div>
-            <div class="progress-track-wrap">
-              <div class="progress-track"><div class="progress-fill" id="fill1"></div></div>
-              <span class="progress-value-label" id="label1">—</span>
+            <label class="field-label">Task 1 — Thời gian dự kiến hoàn thành</label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time1">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="30P">30 phút</option>
+                <option value="1h">1h</option>
+                <option value="2h">2h</option>
+                <option value="3h">3h</option>
+                <option value="4h">4h</option>
+                <option value="5h">5h</option>
+                <option value="6h">6h</option>
+                <option value="7h">7h</option>
+                <option value="8h">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
             </div>
           </div>
 
           <!-- Task 2 -->
           <div class="field-group">
-            <label class="field-label">Task 2 <span class="optional">Có task này thì cũng ghi cho chị output luôn nhé</span></label>
+            <label class="field-label">Task 2 <span class="optional">— Có task này thì cũng ghi output luôn nhé</span></label>
             <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
           </div>
           <div class="field-group">
-            <label class="field-label">Task 2 — Tiến độ dự kiến <span class="optional"></span></label>
-            <div class="progress-picker" id="picker2" data-value="">
-              <button class="progress-btn" data-val="0">0%</button>
-              <button class="progress-btn" data-val="10">10%</button>
-              <button class="progress-btn" data-val="20">20%</button>
-              <button class="progress-btn" data-val="30">30%</button>
-              <button class="progress-btn" data-val="40">40%</button>
-              <button class="progress-btn" data-val="50">50%</button>
-              <button class="progress-btn" data-val="60">60%</button>
-              <button class="progress-btn" data-val="70">70%</button>
-              <button class="progress-btn" data-val="80">80%</button>
-              <button class="progress-btn" data-val="90">90%</button>
-              <button class="progress-btn is-done" data-val="100">100%</button>
-            </div>
-            <div class="progress-track-wrap">
-              <div class="progress-track"><div class="progress-fill" id="fill2"></div></div>
-              <span class="progress-value-label" id="label2">—</span>
+            <label class="field-label">Task 2 — Thời gian dự kiến hoàn thành <span class="optional">(optional)</span></label>
+            <div class="select-wrapper">
+              <select class="field-select" id="time2">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="30P">30 phút</option>
+                <option value="1h">1h</option>
+                <option value="2h">2h</option>
+                <option value="3h">3h</option>
+                <option value="4h">4h</option>
+                <option value="5h">5h</option>
+                <option value="6h">6h</option>
+                <option value="7h">7h</option>
+                <option value="8h">8h</option>
+              </select>
+              <span class="select-arrow">&#8964;</span>
             </div>
           </div>
 
           <!-- Khó khăn -->
           <div class="field-group">
-            <label class="field-label">Có task nào cần hỗ trợ không nhỉ ? Cứ raise lên nhó để mọi người cùng support<span class="optional"></span></label>
+            <label class="field-label">Có task nào cần hỗ trợ không nhỉ? <span class="optional">— Cứ raise lên nhó để mọi người cùng support</span></label>
             <textarea class="field-textarea" id="blockers" placeholder="Đang bị stuck ở đâu không? Note lại để team support nhé..."></textarea>
           </div>
 
@@ -195,35 +183,6 @@ function showState(name) {
   });
 }
 
-function initPicker(pickerId, fillId, labelId) {
-  const picker = document.getElementById(pickerId);
-  const fill   = document.getElementById(fillId);
-  const label  = document.getElementById(labelId);
-  picker.querySelectorAll('.progress-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      picker.querySelectorAll('.progress-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const val = btn.dataset.val;
-      picker.dataset.value = val;
-      fill.style.width = val + '%';
-      label.textContent = val + '%';
-      if (val == 100) {
-        fill.style.background = 'linear-gradient(90deg, #4caf50, #81c784)';
-        label.style.color = '#4caf50';
-      } else if (val >= 60) {
-        fill.style.background = 'linear-gradient(90deg, #FF9333, #ffb347)';
-        label.style.color = '#FF9333';
-      } else {
-        fill.style.background = 'linear-gradient(90deg, #FE8A22, #ffb347)';
-        label.style.color = '#FE8A22';
-      }
-    });
-  });
-}
-
-initPicker('picker1', 'fill1', 'label1');
-initPicker('picker2', 'fill2', 'label2');
-
 const userId = new URLSearchParams(location.search).get('userId');
 if (!userId) {
   showState('error');
@@ -237,8 +196,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   const task1    = document.getElementById('task1').value.trim();
   const task2    = document.getElementById('task2').value.trim();
   const blockers = document.getElementById('blockers').value.trim();
-  const prog1    = document.getElementById('picker1').dataset.value;
-  const prog2    = document.getElementById('picker2').dataset.value;
+  const time1    = document.getElementById('time1').value;
+  const time2    = document.getElementById('time2').value;
 
   if (!task1) {
     const inp = document.getElementById('task1');
@@ -257,11 +216,11 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
 
   const tasks = [{
     title: task1,
-    expectedProgress: prog1 ? prog1 + '%' : '—',
+    expectedTime: time1 || '—',
   }];
   if (task2) tasks.push({
     title: task2,
-    expectedProgress: prog2 ? prog2 + '%' : '—',
+    expectedTime: time2 || '—',
   });
 
   const payload = {
