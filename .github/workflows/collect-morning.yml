@@ -20,14 +20,12 @@ jobs:
         env:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
-          PM_IDS:          ${{ secrets.PM_IDS }}
         run: |
           python3 - <<'PYEOF'
           import json, urllib.request, os, datetime, pathlib
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
-          PM_IDS     = json.loads(os.environ['PM_IDS'])
 
           USER_ID = '${{ github.event.client_payload.userId }}'
           DATE    = '${{ github.event.client_payload.date }}'
@@ -42,7 +40,6 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          # ── Get token ──
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
@@ -55,8 +52,17 @@ jobs:
 
           with open('members.json') as f:
               members = json.load(f)
-          id_to_name = {v: k for k, v in members.items()}
-          name = id_to_name.get(USER_ID, USER_ID)
+
+          # Lookup tên và PM của user
+          id_to_name = {v['id']: k for k, v in members.items()}
+          id_to_pm   = {v['id']: v.get('pm') for k, v in members.items()}
+
+          name    = id_to_name.get(USER_ID, USER_ID)
+          pm_id   = id_to_pm.get(USER_ID)
+
+          if not pm_id:
+              print(f'{name} has no PM assigned, skipping.')
+              exit(0)
 
           try:
               with open(FILE) as f:
@@ -65,7 +71,6 @@ jobs:
               print(f'Could not read {FILE}: {e}')
               exit(1)
 
-          # Format thời gian VN
           submitted_at = report.get('submittedAt', '')
           try:
               dt = datetime.datetime.fromisoformat(submitted_at.replace('Z', '+00:00'))
@@ -74,14 +79,12 @@ jobs:
           except:
               time_str = submitted_at
 
-          # Format date
           try:
               d = datetime.datetime.strptime(DATE, '%Y-%m-%d')
               date_str = d.strftime('%d/%m/%Y')
           except:
               date_str = DATE
 
-          # Build task lines
           tasks = report.get('tasks', [])
           task_lines = []
           for t in tasks:
@@ -89,16 +92,12 @@ jobs:
                   task_lines.append(f"📌 {t['title']}")
 
           tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
-
-          # Blockers
           blockers = report.get('blockers')
 
-          # Đếm submit
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
           submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
-          total = len(members)
+          total = len([v for v in members.values() if v.get('pm') == pm_id])
 
-          # Build card elements
           elements = [
               {
                 "tag": "div",
@@ -110,10 +109,7 @@ jobs:
               {"tag": "hr"},
               {
                 "tag": "div",
-                "text": {
-                  "tag": "lark_md",
-                  "content": tasks_md
-                }
+                "text": {"tag": "lark_md", "content": tasks_md}
               }
           ]
 
@@ -153,15 +149,14 @@ jobs:
             "elements": elements
           }
 
-          for pm_id in PM_IDS:
-              result = lark_post(
-                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-                  {
-                      'receive_id': pm_id,
-                      'msg_type':   'interactive',
-                      'content':    json.dumps(card),
-                  },
-                  token=token
-              )
-              print(f'Notified PM {pm_id}: code={result.get("code","?")} msg={result.get("msg","")}')
+          result = lark_post(
+              'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+              {
+                  'receive_id': pm_id,
+                  'msg_type':   'interactive',
+                  'content':    json.dumps(card),
+              },
+              token=token
+          )
+          print(f'Notified PM {pm_id} for {name}: code={result.get("code","?")} msg={result.get("msg","")}')
           PYEOF
