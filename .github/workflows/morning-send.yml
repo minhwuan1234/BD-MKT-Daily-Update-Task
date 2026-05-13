@@ -58,7 +58,9 @@ jobs:
 
           for open_id in MEMBER_IDS:
               name = id_to_name.get(open_id, open_id)
-              link = f'{BASE_URL}/morning.html?userId={open_id}'
+               import time
+               ts = int(time.time())
+               link = f'{BASE_URL}/morning.html?userId={open_id}&t={ts}'
 
               card = {
                 "header": {
