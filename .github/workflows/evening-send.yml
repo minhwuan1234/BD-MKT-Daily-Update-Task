@@ -18,7 +18,7 @@ jobs:
           MEMBER_IDS:      ${{ secrets.MEMBER_IDS }}
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, os, datetime, pathlib, time
+          import json, urllib.request, urllib.error, os, datetime, pathlib, time
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
@@ -26,18 +26,18 @@ jobs:
           MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
 
           def lark_post(url, payload, token=None):
-          data = json.dumps(payload).encode()
-          headers = {'Content-Type': 'application/json'}
-          if token:
-          headers['Authorization'] = f'Bearer {token}'
-          req = urllib.request.Request(url, data=data, headers=headers, method='POST')
-          try:
-          with urllib.request.urlopen(req) as r:
-            return json.loads(r.read())
-          except urllib.error.HTTPError as e:
-          body = e.read().decode()
-          print(f'HTTP Error {e.code} for {url}: {body}')
-          raise
+              data = json.dumps(payload).encode()
+              headers = {'Content-Type': 'application/json'}
+              if token:
+                  headers['Authorization'] = f'Bearer {token}'
+              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+              try:
+                  with urllib.request.urlopen(req) as r:
+                      return json.loads(r.read())
+              except urllib.error.HTTPError as e:
+                  body = e.read().decode()
+                  print(f'HTTP Error {e.code} for {url}: {body}')
+                  raise
 
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
@@ -134,16 +134,19 @@ jobs:
                 ]
               }
 
-              result = lark_post(
-                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-                  {
-                      'receive_id': open_id,
-                      'msg_type':   'interactive',
-                      'content':    json.dumps(card),
-                  },
-                  token=token
-              )
-              print(f'Sent to {name} ({open_id}): code={result.get("code","?")} msg={result.get("msg","")}')
+              try:
+                  result = lark_post(
+                      'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+                      {
+                          'receive_id': open_id,
+                          'msg_type':   'interactive',
+                          'content':    json.dumps(card),
+                      },
+                      token=token
+                  )
+                  print(f'Sent to {name} ({open_id}): code={result.get("code","?")} msg={result.get("msg","")}')
+              except Exception as e:
+                  print(f'Failed to send to {name} ({open_id}): {e}')
 
           print('Evening send done.')
           PYEOF
