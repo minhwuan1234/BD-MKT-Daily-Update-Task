@@ -88,8 +88,10 @@ jobs:
           tasks = report.get('tasks', [])
           task_lines = []
           for t in tasks:
-              if 'title' in t:
-                  task_lines.append(f"📌 {t['title']}")
+          if 'title' in t:
+          ep = t.get('expectedProgress', '')
+          ep_str = f" _(dự kiến {ep})_" if ep and ep != '—' else ''
+          task_lines.append(f"📌 {t['title']}{ep_str}")
 
           tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
           blockers = report.get('blockers')
