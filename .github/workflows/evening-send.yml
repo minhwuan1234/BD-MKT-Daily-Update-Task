@@ -26,13 +26,18 @@ jobs:
           MEMBER_IDS = json.loads(os.environ['MEMBER_IDS'])
 
           def lark_post(url, payload, token=None):
-              data = json.dumps(payload).encode()
-              headers = {'Content-Type': 'application/json'}
-              if token:
-                  headers['Authorization'] = f'Bearer {token}'
-              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
-              with urllib.request.urlopen(req) as r:
-                  return json.loads(r.read())
+          data = json.dumps(payload).encode()
+          headers = {'Content-Type': 'application/json'}
+          if token:
+          headers['Authorization'] = f'Bearer {token}'
+          req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+          try:
+          with urllib.request.urlopen(req) as r:
+            return json.loads(r.read())
+          except urllib.error.HTTPError as e:
+          body = e.read().decode()
+          print(f'HTTP Error {e.code} for {url}: {body}')
+          raise
 
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
