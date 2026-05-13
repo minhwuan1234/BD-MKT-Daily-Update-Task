@@ -34,7 +34,6 @@ jobs:
               with urllib.request.urlopen(req) as r:
                   return json.loads(r.read())
 
-          # ── Get token ──
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
@@ -48,7 +47,9 @@ jobs:
 
           with open('members.json') as f:
               members = json.load(f)
-          id_to_name = {v: k for k, v in members.items()}
+
+          # Build id -> name, id -> pm
+          id_to_name = {v['id']: k for k, v in members.items()}
 
           tz_offset = datetime.timezone(datetime.timedelta(hours=7))
           now       = datetime.datetime.now(tz_offset)
