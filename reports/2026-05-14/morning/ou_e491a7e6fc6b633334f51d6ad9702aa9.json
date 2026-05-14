@@ -2,14 +2,14 @@
   "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
   "tasks": [
     {
-      "title": "Execute Illus Suggestion Tool live",
+      "title": "Execute Illus Tool - Bản Draft hoặc update trạng thái cuối ngày",
       "expectedTime": "7h"
     },
     {
-      "title": "Fix bug, update các workflow cũ",
+      "title": "Fix Bug và Update các tool cũ",
       "expectedTime": "1h"
     }
   ],
   "blockers": null,
-  "submittedAt": "2026-05-14T02:02:21.375Z"
+  "submittedAt": "2026-05-14T02:06:15.257Z"
 }
