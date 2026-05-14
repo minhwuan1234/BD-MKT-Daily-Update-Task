@@ -1,0 +1,15 @@
+{
+  "userId": "ou_27ad3300213a60de469cebc4366387c7",
+  "tasks": [
+    {
+      "title": "present case study của BD và thảo luận (theo lịch trước đó) và rút ra được learning về objections của khách khi tìm hiểu về dịch vụ của mình -> output là meeting minutes và insights để apply đi outreach cho tệp health nonprofits",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "ấn connect và nhắn linkedin outreach tới tệp video production agencies tiếp (aim ấn dc 200 và nhắn dc min 20 mess) + chỉnh lại mail follow up hiện tại và add thêm data mới vào flow mail đã set up (aim send dc min 100 mail) + review offer cho tệp publisher (output là full các mail từ first đến followup) + tìm thêm những bên tương tự như các case study đang làm (aim min 10 bên lookalike)",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": "task 1 có c giang làm cùng em rùi ak",
+  "submittedAt": "2026-05-14T02:40:16.494Z"
+}
