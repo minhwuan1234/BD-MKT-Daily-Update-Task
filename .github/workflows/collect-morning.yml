@@ -53,12 +53,11 @@ jobs:
           with open('members.json') as f:
               members = json.load(f)
 
-          # Lookup tên và PM của user
           id_to_name = {v['id']: k for k, v in members.items()}
           id_to_pm   = {v['id']: v.get('pm') for k, v in members.items()}
 
-          name    = id_to_name.get(USER_ID, USER_ID)
-          pm_id   = id_to_pm.get(USER_ID)
+          name  = id_to_name.get(USER_ID, USER_ID)
+          pm_id = id_to_pm.get(USER_ID)
 
           if not pm_id:
               print(f'{name} has no PM assigned, skipping.')
@@ -88,10 +87,10 @@ jobs:
           tasks = report.get('tasks', [])
           task_lines = []
           for t in tasks:
-          if 'title' in t:
-          et = t.get('expectedTime', '')
-          et_str = f" ⏱ _{et}_" if et and et != '—' else ''
-          task_lines.append(f"📌 {t['title']}{et_str}")
+              if 'title' in t:
+                  et = t.get('expectedTime', '')
+                  et_str = f" ⏱ _{et}_" if et and et != '—' else ''
+                  task_lines.append(f"📌 {t['title']}{et_str}")
 
           tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
           blockers = report.get('blockers')
