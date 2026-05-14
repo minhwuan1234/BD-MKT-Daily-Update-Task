@@ -1,0 +1,18 @@
+{
+  "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
+  "tasks": [
+    {
+      "title": "Execute Illus Tool - Bản Draft hoặc update trạng thái cuối ngày",
+      "progress": "90%",
+      "timeSpent": "4h"
+    },
+    {
+      "title": "Fix Bug và Update các tool cũ",
+      "progress": "100%",
+      "timeSpent": "1.5h"
+    }
+  ],
+  "blockers": "- Đang gặp vấn đề với việc tạo hunting framework vì đang nhiều judgement cá nhân quá",
+  "tomorrowPlan": "- Update tool BD Hypothesis, design hunting framework",
+  "submittedAt": "2026-05-14T10:49:52.540Z"
+}
