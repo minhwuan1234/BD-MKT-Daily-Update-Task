@@ -1,0 +1,15 @@
+{
+  "userId": "ou_8e3e0a2b7df46f9350bf4f8e2b3a29f2",
+  "tasks": [
+    {
+      "title": "- Writing process -> article tốt + insightful -> improve writing skill => (bước đầu thực hiện task này) -> output đưa chị Liu: (1) Research về các method viết bài article: (a) thông qua research trên internet nói chung (b) thông qua đối thủ  (2) Định nghĩa như thế nào là \"1 bài viết insightful\": có bao nhiêu yếu tố để đảm bảo 1 bài viết là insightful",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "2.1. Audit + tối ưu CTA: 2 bài SEO articles -> output: 2 bài SEO auditted ; 2.2. Link nút trang concept -> output:  Trang CO đã có link đầy đủ tại các nút CTA ; 2.3: update content 1 new case study -> output: case study đã được add oncept ownership",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": "dạ hem ạ",
+  "submittedAt": "2026-05-14T02:09:39.149Z"
+}
