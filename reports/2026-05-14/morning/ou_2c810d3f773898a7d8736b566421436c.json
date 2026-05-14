@@ -1,0 +1,15 @@
+{
+  "userId": "ou_2c810d3f773898a7d8736b566421436c",
+  "tasks": [
+    {
+      "title": "Account BD sheet - làm lại phần thông tin về cách gọi product (scan & tìm keyword qua SR, meeting, scoail của khách 2023-2026)",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "BD-Lên lịch làm việc team BD",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": "Không phải cần hỗ trợ, hết chỗ nên e viết xuống đây thôi ạ:\nTask 3: BD Personalized Outreach - connect tệp medical non-profit giống AMD (20 contacts) (tìm account + connect) (1h)\nTask 4: ref 18 SN flashcards (30p)\nCòn thời gian thì e làm nốt SOUK interactive :v",
+  "submittedAt": "2026-05-14T02:06:03.914Z"
+}
