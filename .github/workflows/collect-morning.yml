@@ -87,10 +87,12 @@ jobs:
           tasks = report.get('tasks', [])
           task_lines = []
           for t in tasks:
-              if 'title' in t:
-                  et = t.get('expectedTime', '')
-                  et_str = f" ⏱ _{et}_" if et and et != '—' else ''
-                  task_lines.append(f"📌 {t['title']}{et_str}")
+          if 'title' in t:
+          et = t.get('expectedTime', '')
+          output = t.get('output', '')
+          et_str = f" ⏱ _{et}_" if et and et != '—' else ''
+          output_str = f"\n  └ Output: {output}" if output and output != '—' else ''
+          task_lines.append(f"📌 {t['title']}{et_str}{output_str}")
 
           tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
           blockers = report.get('blockers')
