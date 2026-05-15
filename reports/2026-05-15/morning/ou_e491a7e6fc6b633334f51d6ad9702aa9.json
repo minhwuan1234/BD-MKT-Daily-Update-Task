@@ -1,0 +1,15 @@
+{
+  "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
+  "tasks": [
+    {
+      "title": "Update tool BD Hypothesis - Huyền Linh sử dụng hoàn chỉnh",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "Define Hunting Framework - Cái này chắc team ngồi lại để clear hơn ạ",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": "- Nay update fb của team BD về tool daily report và sửa UI 1 chút trông cho nó gọn gàng",
+  "submittedAt": "2026-05-15T02:05:42.142Z"
+}
