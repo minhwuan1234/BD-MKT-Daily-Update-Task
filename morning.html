@@ -24,24 +24,20 @@
     </div>
     <!-- RIGHT PANEL -->
     <div class="right-panel">
-      <!-- STATE: Loading -->
       <div id="state-loading" class="state-box">
         <div class="spinner"></div>
         <p>Đang tải...</p>
       </div>
-      <!-- STATE: Error -->
       <div id="state-error" class="state-box" style="display:none;">
         <p class="state-icon">⚠️</p>
         <p id="error-msg">Link không hợp lệ.</p>
         <p class="state-sub">Vui lòng dùng link được gửi qua Lark.</p>
       </div>
-      <!-- STATE: Success -->
       <div id="state-success" class="state-box" style="display:none;">
         <p class="state-icon">✅</p>
         <p>Thank kiuuuuuu☀️</p>
         <p class="state-sub">Làm việc lăng xuất e nhé 🚀</p>
       </div>
-      <!-- STATE: Form -->
       <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
         <div class="form-header">
           <div class="title-row">
@@ -56,8 +52,12 @@
 
           <!-- Task 1 -->
           <div class="field-group">
-            <label class="field-label">Task 1 — Output Task 1</label>
-            <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay và output của task này nhó..." />
+            <label class="field-label">Task 1</label>
+            <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Task 1 — Output dự kiến</label>
+            <input class="field-input" type="text" id="output1" placeholder="Output/kết quả mong đợi của task này..." />
           </div>
           <div class="field-group">
             <label class="field-label">Task 1 — Thời gian dự kiến hoàn thành</label>
@@ -82,6 +82,10 @@
           <div class="field-group">
             <label class="field-label">Task 2 <span class="optional">— Có task này thì cũng ghi output luôn nhé</span></label>
             <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Task 2 — Output dự kiến <span class="optional">(optional)</span></label>
+            <input class="field-input" type="text" id="output2" placeholder="Output/kết quả mong đợi của task này..." />
           </div>
           <div class="field-group">
             <label class="field-label">Task 2 — Thời gian dự kiến hoàn thành <span class="optional">(optional)</span></label>
@@ -194,10 +198,12 @@ if (!userId) {
 
 document.getElementById('submit-btn').addEventListener('click', async () => {
   const task1    = document.getElementById('task1').value.trim();
-  const task2    = document.getElementById('task2').value.trim();
-  const blockers = document.getElementById('blockers').value.trim();
+  const output1  = document.getElementById('output1').value.trim();
   const time1    = document.getElementById('time1').value;
+  const task2    = document.getElementById('task2').value.trim();
+  const output2  = document.getElementById('output2').value.trim();
   const time2    = document.getElementById('time2').value;
+  const blockers = document.getElementById('blockers').value.trim();
 
   if (!task1) {
     const inp = document.getElementById('task1');
@@ -216,10 +222,12 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
 
   const tasks = [{
     title: task1,
+    output: output1 || '—',
     expectedTime: time1 || '—',
   }];
   if (task2) tasks.push({
     title: task2,
+    output: output2 || '—',
     expectedTime: time2 || '—',
   });
 
