@@ -1,0 +1,15 @@
+{
+  "userId": "ou_2c810d3f773898a7d8736b566421436c",
+  "tasks": [
+    {
+      "title": "Account BD sheet - làm lại phần thông tin về cách gọi product (scan & tìm keyword qua SR, meeting, scoail của khách 2023-2026)",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Product_SOUK interactive nốt",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": "Task 3: RFP cho WWF\nTask 4: Ref 6 cards SN\nVà họp hành các kiểu ạ",
+  "submittedAt": "2026-05-15T02:02:23.242Z"
+}
