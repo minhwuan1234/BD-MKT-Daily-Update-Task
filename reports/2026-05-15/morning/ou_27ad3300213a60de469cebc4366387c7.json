@@ -1,0 +1,15 @@
+{
+  "userId": "ou_27ad3300213a60de469cebc4366387c7",
+  "tasks": [
+    {
+      "title": "report số tuần vừa r + build report team BD + mail và tìm lookalike cho các case personalised",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "nhắn linkedin tiếp (20 mess) + hoàn thành nốt task tìm thêm contact cho flow mail sẵn có từ hôm qua (100 contact) + build list mass mail cho tuần sau",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": "mấy cái case personalised kia được feedback nhìu nên sửa lại nhìu lần mãi chưa done thui ạ còn lại ksao ạ",
+  "submittedAt": "2026-05-15T03:12:04.667Z"
+}
