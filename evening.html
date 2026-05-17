@@ -32,24 +32,20 @@
     </div>
     <!-- RIGHT PANEL -->
     <div class="right-panel">
-      <!-- STATE: Loading -->
       <div id="state-loading" class="state-box">
         <div class="spinner"></div>
         <p>Đang tải báo cáo sáng của bạn...</p>
       </div>
-      <!-- STATE: Error -->
       <div id="state-error" class="state-box" style="display:none;">
         <p class="state-icon">⚠️</p>
         <p id="error-msg">Không tìm thấy báo cáo sáng.</p>
         <p class="state-sub">Bạn cần điền báo cáo sáng trước nhé!</p>
       </div>
-      <!-- STATE: Success -->
       <div id="state-success" class="state-box" style="display:none;">
         <p class="state-icon">🌙</p>
         <p>Báo cáo chiều của bạn đã được ghi nhận! 🌙</p>
         <p class="state-sub">Cảm ơn bạn, chúc buổi tối vui vẻ! 🎉</p>
       </div>
-      <!-- STATE: Form -->
       <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
         <div class="form-header">
           <div class="title-row">
@@ -61,6 +57,12 @@
           </div>
         </div>
         <div class="form-body">
+
+          <!-- ── WEEKLY GOAL ── -->
+          <div class="field-group" id="group-weekly-goal" style="display:none;">
+            <label class="field-label">🎯 Goal của tuần</label>
+            <textarea class="field-textarea is-autofilled" id="weekly-goal" readonly></textarea>
+          </div>
 
           <!-- ── TASK 1 ── -->
           <div class="field-group">
@@ -267,6 +269,15 @@ function getDateStr(d) {
   return `${y}-${m}-${day}`;
 }
 
+// Lấy ngày thứ 2 của tuần hiện tại (VN)
+function getMondayStr(d) {
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const mon = new Date(d);
+  mon.setDate(d.getDate() + diff);
+  return getDateStr(mon);
+}
+
 function todayLabel() {
   return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
 }
@@ -316,6 +327,23 @@ function highlightPicker(pickerId) {
 }
 
 const userId = new URLSearchParams(location.search).get('userId');
+const mondayStr = getMondayStr(vnDate);
+
+async function loadWeeklyGoal() {
+  try {
+    const url = `${GITHUB_RAW}/reports/${mondayStr}/morning/${userId}.json?t=${Date.now()}`;
+    const res = await fetch(url);
+    if (!res.ok) return;
+    const data = await res.json();
+    const goal = data.weeklyGoal;
+    if (goal) {
+      document.getElementById('weekly-goal').value = goal;
+      document.getElementById('group-weekly-goal').style.display = 'flex';
+    }
+  } catch {
+    // không có goal thì không hiện
+  }
+}
 
 async function init() {
   if (!userId) {
@@ -354,6 +382,10 @@ async function init() {
     }
 
     document.getElementById('today-label').textContent = todayLabel();
+
+    // Load weekly goal từ thứ 2
+    await loadWeeklyGoal();
+
     showState('form');
   } catch (e) {
     showState('error');
@@ -373,8 +405,8 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   const time2     = hasTwoTasks ? document.getElementById('time-select2').value : null;
   const progExtra = hasExtra ? document.getElementById('picker-extra').dataset.value : null;
   const timeExtra = hasExtra ? document.getElementById('time-select-extra').value : null;
-  const blockers      = document.getElementById('blockers').value.trim();
-  const tomorrowPlan  = document.getElementById('tomorrow-plan').value.trim();
+  const blockers     = document.getElementById('blockers').value.trim();
+  const tomorrowPlan = document.getElementById('tomorrow-plan').value.trim();
 
   if (!prog1) { highlightPicker('picker1'); return; }
   if (hasTwoTasks && !prog2) { highlightPicker('picker2'); return; }
@@ -425,7 +457,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     showState('success');
   } catch (e) {
     btn.disabled = false;
-    btn.textContent = 'Submit 🌙';
+    btn.textContent = 'Chạm';
     alert(`❌ Gửi thất bại: ${e.message}`);
   }
 });
