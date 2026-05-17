@@ -87,20 +87,22 @@ jobs:
           tasks = report.get('tasks', [])
           task_lines = []
           for t in tasks:
-          if 'title' in t:
-          et = t.get('expectedTime', '')
-          output = t.get('output', '')
-          et_str = f" ⏱ _{et}_" if et and et != '—' else ''
-          output_str = f"\n  └ Output: {output}" if output and output != '—' else ''
-          task_lines.append(f"📌 {t['title']}{et_str}{output_str}")
+              if 'title' in t:
+                  et = t.get('expectedTime', '')
+                  output = t.get('output', '')
+                  et_str = f" ⏱ _{et}_" if et and et != '—' else ''
+                  output_str = f"\n  └ Output: {output}" if output and output != '—' else ''
+                  task_lines.append(f"📌 {t['title']}{et_str}{output_str}")
 
-          tasks_md = '\n'.join(task_lines) if task_lines else '(không có task)'
-          blockers = report.get('blockers')
+          tasks_md     = '\n'.join(task_lines) if task_lines else '(không có task)'
+          blockers     = report.get('blockers')
+          weekly_goal  = report.get('weeklyGoal')
 
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
           submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
           total = len([v for v in members.values() if v.get('pm') == pm_id])
 
+          # Build card elements
           elements = [
               {
                 "tag": "div",
@@ -116,6 +118,7 @@ jobs:
               }
           ]
 
+          # Khó khăn
           if blockers:
               elements += [
                   {"tag": "hr"},
@@ -124,6 +127,19 @@ jobs:
                     "text": {
                       "tag": "lark_md",
                       "content": f"🚧 **Khó khăn:**\n{blockers}"
+                    }
+                  }
+              ]
+
+          # Weekly goal (chỉ hiện nếu có)
+          if weekly_goal:
+              elements += [
+                  {"tag": "hr"},
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"
                     }
                   }
               ]
