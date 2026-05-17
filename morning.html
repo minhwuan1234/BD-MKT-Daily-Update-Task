@@ -50,6 +50,12 @@
         </div>
         <div class="form-body">
 
+          <!-- WEEKLY GOAL -->
+          <div class="field-group" id="group-weekly-goal">
+            <label class="field-label" id="weekly-goal-label">🎯 Goal của tuần</label>
+            <textarea class="field-textarea" id="weekly-goal" placeholder="Tuần này bạn muốn đạt được gì? Ghi rõ để cả team cùng biết nhé..."></textarea>
+          </div>
+
           <!-- Task 1 -->
           <div class="field-group">
             <label class="field-label">Task 1</label>
@@ -121,6 +127,7 @@
 </div>
 <script>
 const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
+const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
 const QUOTES = [
   { text: "It takes a great deal of courage to stand alone even if you believe in something very strongly.", author: "— Dumbledore" },
@@ -141,7 +148,7 @@ const IMAGES = [
 ];
 
 const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
-const vnDay  = vnDate.getDay();
+const vnDay  = vnDate.getDay(); // 0=CN, 1=T2...6=T7
 const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
@@ -175,6 +182,15 @@ function getDateStr(d) {
   return `${y}-${m}-${day}`;
 }
 
+// Lấy ngày thứ 2 của tuần hiện tại (VN)
+function getMondayStr(d) {
+  const day = d.getDay(); // 0=CN
+  const diff = day === 0 ? -6 : 1 - day;
+  const mon = new Date(d);
+  mon.setDate(d.getDate() + diff);
+  return getDateStr(mon);
+}
+
 function todayLabel() {
   return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
 }
@@ -188,22 +204,61 @@ function showState(name) {
 }
 
 const userId = new URLSearchParams(location.search).get('userId');
+const isMonday = vnDay === 1;
+const mondayStr = getMondayStr(vnDate);
+
+async function initWeeklyGoal() {
+  const goalEl    = document.getElementById('weekly-goal');
+  const labelEl   = document.getElementById('weekly-goal-label');
+
+  if (isMonday) {
+    // Thứ 2 → cho điền mới
+    goalEl.readOnly = false;
+    goalEl.classList.remove('is-autofilled');
+    labelEl.textContent = '🎯 Goal của tuần — Hôm nay là thứ 2, đặt goal cho tuần này nhé!';
+  } else {
+    // T3-T6 → fetch goal từ thứ 2
+    try {
+      const url = `${GITHUB_RAW}/reports/${mondayStr}/morning/${userId}.json?t=${Date.now()}`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        const goal = data.weeklyGoal;
+        if (goal) {
+          goalEl.value = goal;
+          goalEl.readOnly = true;
+          goalEl.classList.add('is-autofilled');
+          labelEl.textContent = '🎯 Goal của tuần';
+        } else {
+          document.getElementById('group-weekly-goal').style.display = 'none';
+        }
+      } else {
+        document.getElementById('group-weekly-goal').style.display = 'none';
+      }
+    } catch {
+      document.getElementById('group-weekly-goal').style.display = 'none';
+    }
+  }
+}
+
 if (!userId) {
   showState('error');
   document.getElementById('error-msg').textContent = '❌ Link không hợp lệ — thiếu userId.';
 } else {
   showState('form');
   document.getElementById('today-label').textContent = todayLabel();
+  initWeeklyGoal();
 }
 
 document.getElementById('submit-btn').addEventListener('click', async () => {
-  const task1    = document.getElementById('task1').value.trim();
-  const output1  = document.getElementById('output1').value.trim();
-  const time1    = document.getElementById('time1').value;
-  const task2    = document.getElementById('task2').value.trim();
-  const output2  = document.getElementById('output2').value.trim();
-  const time2    = document.getElementById('time2').value;
-  const blockers = document.getElementById('blockers').value.trim();
+  const task1      = document.getElementById('task1').value.trim();
+  const output1    = document.getElementById('output1').value.trim();
+  const time1      = document.getElementById('time1').value;
+  const task2      = document.getElementById('task2').value.trim();
+  const output2    = document.getElementById('output2').value.trim();
+  const time2      = document.getElementById('time2').value;
+  const blockers   = document.getElementById('blockers').value.trim();
+  const weeklyGoal = isMonday ? document.getElementById('weekly-goal').value.trim() : null;
 
   if (!task1) {
     const inp = document.getElementById('task1');
@@ -237,6 +292,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     date: getDateStr(vnDate),
     tasks,
     blockers: blockers || null,
+    weeklyGoal: weeklyGoal || null,
     submittedAt: new Date().toISOString(),
   };
 
