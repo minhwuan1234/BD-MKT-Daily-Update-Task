@@ -84,6 +84,24 @@ jobs:
           except:
               date_str = DATE
 
+          # Lấy weekly goal từ morning report thứ 2 của tuần
+          def get_monday_str(date_str):
+              d = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+              diff = -6 if d.weekday() == 6 else (0 - d.weekday())
+              mon = d + datetime.timedelta(days=diff)
+              return mon.strftime('%Y-%m-%d')
+
+          weekly_goal = None
+          try:
+              monday_str = get_monday_str(DATE)
+              monday_file = pathlib.Path(f'reports/{monday_str}/morning/{USER_ID}.json')
+              if monday_file.exists():
+                  with open(monday_file) as f:
+                      monday_report = json.load(f)
+                  weekly_goal = monday_report.get('weeklyGoal')
+          except:
+              pass
+
           tasks = report.get('tasks', [])
           task_elements = []
           extra_lines = []
@@ -145,6 +163,13 @@ jobs:
               elements.append({
                 "tag": "div",
                 "text": {"tag": "lark_md", "content": f"📋 **Plan ngày mai:**\n{tomorrow_plan}"}
+              })
+              elements.append({"tag": "hr"})
+
+          if weekly_goal:
+              elements.append({
+                "tag": "div",
+                "text": {"tag": "lark_md", "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"}
               })
               elements.append({"tag": "hr"})
 
