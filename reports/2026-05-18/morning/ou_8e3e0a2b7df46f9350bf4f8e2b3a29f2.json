@@ -1,0 +1,17 @@
+{
+  "userId": "ou_8e3e0a2b7df46f9350bf4f8e2b3a29f2",
+  "tasks": [
+    {
+      "title": "- Sửa + tiếp tục discuss với c Liu về writing process + improve writing skills",
+      "output": "- 1 file docs define rõ concept ownership thể hiện ở mức độ nào thông qua 5 dạng bài F thường viết (F sẽ thể hiện góc độ hiểu về learning đến mức nào, có principle ra sao --> comm với audience thì thể hiện thông qua cái gì?) + 1 bài đã audit theo checklist \"thế nào là 1 bài viết insightful\" + tiếp tục discuss nếu có feedback",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "- viết case study cho 2 use cases + personal branding",
+      "output": "- viết xong case study cho 2 use cases + schedule 6 posts cho 3 mems",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "submittedAt": "2026-05-18T02:46:32.724Z"
+}
