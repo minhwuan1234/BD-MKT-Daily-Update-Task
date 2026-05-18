@@ -1,0 +1,18 @@
+{
+  "userId": "ou_27ad3300213a60de469cebc4366387c7",
+  "tasks": [
+    {
+      "title": "enrich data tệp museum bằng AI, apollo và thủ công",
+      "progress": "100%",
+      "timeSpent": "5h"
+    },
+    {
+      "title": "build list các NGO dựa trên list client của mình + nhắn tiếp linkedin cho tệp agency + gửi mail cho các tệp đang chạy",
+      "progress": "60%",
+      "timeSpent": "2.5h"
+    }
+  ],
+  "blockers": "e chưa build xong full list NGO do chưa xác định dc chi nhánh global của vài bên",
+  "tomorrowPlan": "mai e làm tiếp task nè + draft offer cho bên museum ạ",
+  "submittedAt": "2026-05-18T11:22:58.400Z"
+}
