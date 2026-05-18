@@ -1,0 +1,18 @@
+{
+  "userId": "ou_ccc72b630abf63157d9526cdf135ad8c",
+  "tasks": [
+    {
+      "title": "Questionnaire chị Liu",
+      "output": "Questionnaire",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "dig problems từ Questionnaire + Interview Mochi + Questionnaire BD + File log BD",
+      "output": "~50 problems",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": "hiện tại chưa ạ",
+  "weeklyGoal": "Goal tuần này:\n- Hoàn thành các task được giao đúng deadline. Nếu trễ thì chỉ trễ 10% thui\n- Đảm bảo chất lượng output\n- Zui zẻ",
+  "submittedAt": "2026-05-18T04:45:48.320Z"
+}
