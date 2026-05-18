@@ -2,16 +2,17 @@
   "userId": "ou_e491a7e6fc6b633334f51d6ad9702aa9",
   "tasks": [
     {
-      "title": "test",
-      "output": "test",
-      "expectedTime": "8h"
+      "title": "task",
+      "output": "task",
+      "expectedTime": "5h"
     },
     {
-      "title": "test",
-      "output": "test",
-      "expectedTime": "5h"
+      "title": "task",
+      "output": "task",
+      "expectedTime": "4h"
     }
   ],
   "blockers": "test",
-  "submittedAt": "2026-05-18T02:35:58.161Z"
+  "weeklyGoal": "goal",
+  "submittedAt": "2026-05-18T03:04:27.690Z"
 }
