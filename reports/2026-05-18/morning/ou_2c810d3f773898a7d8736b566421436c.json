@@ -1,0 +1,17 @@
+{
+  "userId": "ou_2c810d3f773898a7d8736b566421436c",
+  "tasks": [
+    {
+      "title": "Production_RFP WWF Solution",
+      "output": "File doc chi tiết solution cho WWF",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "BD_BD Plan format (bao gồm những gì và trình bày như thế nào)",
+      "output": "file excel khung plan",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": "Task 3: Ref 30 SN flashcards (1h)\nTask 4: báo giá 2 new SRs",
+  "submittedAt": "2026-05-18T02:58:19.942Z"
+}
