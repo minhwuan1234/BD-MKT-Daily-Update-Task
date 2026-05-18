@@ -1,0 +1,18 @@
+{
+  "userId": "ou_2c810d3f773898a7d8736b566421436c",
+  "tasks": [
+    {
+      "title": "Production_RFP WWF Solution",
+      "progress": "80%",
+      "timeSpent": "4h"
+    },
+    {
+      "title": "BD_BD Plan format (bao gồm những gì và trình bày như thế nào)",
+      "progress": "50%",
+      "timeSpent": "0.5h"
+    }
+  ],
+  "blockers": "2 trúc trắc today:\n- Lâu không làm lại proposal nên lại bị bí. E mất thời gian ở 2 chỗ:\n+ Tìm inspo: bản thân không quá creative nên luôn bắt đầu bằng việc đi tìm một ref đủ wow/hài lòng để dựa :v Mò kim đáy bể, lâu vãi chưởng\n+ Viết lách: vẽ ra solution để bản thân mình tự buy in khá khó ạ. E bảo AI đẻ ra một standard flow cho proposal không lâu, vì mình có sẵn flow đủ tốt từ những dự án cũ. Nhưng mà idea của nó chán òm, vẫn phải là mình có idea rồi ném vào cho nó fit the idea in the flow thì mới tạm ổn.",
+  "tomorrowPlan": "Em làm nốt proposal WWF này, làm tiếp proposal cho ISTOS nữa, và BD Plan",
+  "submittedAt": "2026-05-18T11:04:22.771Z"
+}
