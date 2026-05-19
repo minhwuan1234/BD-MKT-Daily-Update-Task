@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "enrich data tệp museum tiếp + draft offer cho tệp nè",
+      "output": "100 contact + offer gửi c giang review",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "nhắn tiếp linkedin + gửi mail cho flow cũ",
+      "output": "goal: 20 mess linkedin + 100 mail daily",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-19T09:43:33.702Z"
+}
