@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "enrich data tệp museum tiếp + draft offer cho tệp nè",
+      "progress": "80%",
+      "timeSpent": "6h"
+    },
+    {
+      "title": "nhắn tiếp linkedin + gửi mail cho flow cũ",
+      "progress": "100%",
+      "timeSpent": "2h"
+    }
+  ],
+  "blockers": "e mới draft dc offer sơ bộ thui chưa vt thành mail vì tgian enrich data hơi lâu",
+  "tomorrowPlan": "mai sẽ cố xong dc offer này và làm nốt task personalised outreach NGO từ hôm trc ạ",
+  "submittedAt": "2026-05-19T11:26:07.346Z"
+}
