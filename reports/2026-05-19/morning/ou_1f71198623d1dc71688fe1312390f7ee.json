@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Sửa + tiếp tục discuss với c Liu về writing process + improve writing skills",
+      "output": "Draft 1 của QC checklist + content guideline",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Update new case study cho các use cases còn thiếu + Social/ Personal Branding posts upload",
+      "output": "Hoàn thiện case study cho toàn bộ use cases còn thiếu trên website + schedule 3 posts cho social pages + 3 posts cho mem",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-19T10:55:17.295Z"
+}
