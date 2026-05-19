@@ -1,0 +1,18 @@
+{
+  "userId": "ou_2c810d3f773898a7d8736b566421436c",
+  "tasks": [
+    {
+      "title": "Production_2 chiếc proposal",
+      "output": "File doc chi tiết solution cho WWF + ISTOS",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "BD_BD Plan",
+      "output": "Draft plan",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": "Ref card SN nữa ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-19T03:16:58.020Z"
+}
