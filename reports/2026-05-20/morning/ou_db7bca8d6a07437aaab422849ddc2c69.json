@@ -1,0 +1,18 @@
+{
+  "userId": "ou_db7bca8d6a07437aaab422849ddc2c69",
+  "tasks": [
+    {
+      "title": "Phân loại A/B/C raw signals",
+      "output": "Version đầu của problem tiers",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "Support knowledge/material analysis",
+      "output": "Tách input thành course cũ có structure vs raw material chưa có structure.",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": "task phân loại ABC sau khi e đã có 67 surface problems em đang chưa biết move forward như nào và đã cầu cíu sự hỗ trợ từ c Liu ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-20T02:27:16.599Z"
+}
