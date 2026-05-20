@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Final Content guidline + QC checklist for future \"insightful\" content",
+      "output": "1 bản content guidline + 1 bản QC checklist",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Update content case study for 2 use cases + Sử dụng tool anh M và content guideline mới để audit 3 bài SEO",
+      "output": "- viết xong case study cho 2 use cases + 3 bài SEO auditted (đạt các tiêu chí của AI + có concept ownership + insightful)",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-20T02:11:45.425Z"
+}
