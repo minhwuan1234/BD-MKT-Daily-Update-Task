@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "enrich data tệp museum tiếp + finalise mail cho tệp này",
+      "output": "send mail dc cho min 150ng",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "nhắn tiếp linkedin + xong list và draft offer cho các chi nhánh khác của NGO client mình",
+      "output": "goal: 20 mess linkedin + offer cho các bên NGO gửi c giang review",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-20T03:12:39.887Z"
+}
