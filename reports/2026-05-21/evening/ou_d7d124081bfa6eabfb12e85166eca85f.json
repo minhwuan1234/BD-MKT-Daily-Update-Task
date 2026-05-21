@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "BD Plan",
+      "progress": "60%",
+      "timeSpent": "5h"
+    },
+    {
+      "title": "Proposal ISTOS",
+      "progress": "50%",
+      "timeSpent": "1h"
+    }
+  ],
+  "blockers": "e làm plan BD quá lâu ạ",
+  "tomorrowPlan": "nốt những thứ dở dang ạ, chưa gì 100%",
+  "submittedAt": "2026-05-21T11:45:47.015Z"
+}
