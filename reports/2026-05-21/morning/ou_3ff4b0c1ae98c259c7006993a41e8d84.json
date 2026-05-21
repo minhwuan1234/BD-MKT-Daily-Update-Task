@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "draft lại offer cho tệp museum theo framework của a Tùng + chỉnh lại mail follow up",
+      "output": "email để gửi cho data museum đã enrich + set up xong flow mail follow up mới",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "filter lại contact list của NGO theo contact point trước của client mình + nhắn linkedin",
+      "output": "done list cho c giang hỏi team account về refer trước khi outreach + 10 mess",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": "chưa cần ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-21T02:22:45.440Z"
+}
