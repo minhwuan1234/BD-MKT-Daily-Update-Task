@@ -1,0 +1,18 @@
+{
+  "userId": "ou_db7bca8d6a07437aaab422849ddc2c69",
+  "tasks": [
+    {
+      "title": "Clean up documentation.",
+      "progress": "100%",
+      "timeSpent": "2h"
+    },
+    {
+      "title": "Support knowledge/material analysis.",
+      "progress": "30%",
+      "timeSpent": "2h"
+    }
+  ],
+  "blockers": "em thấy tự nhiên cầm nhiều việc quá mà việc nào cũng progress đang ngổn ngang nên e bị OCD\nerm,.... task team prod e đang cố nghĩ ra 1 option solution thứ 2, nhưng có vẻ đến hiện tại chưa có idea gì khác ạ, e sẽ cố nghĩ thêm",
+  "tomorrowPlan": null,
+  "submittedAt": "2026-05-21T14:56:41.823Z"
+}
