@@ -1,0 +1,13 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit SEO articles dựa vào content guideline mới đã chốt với team LnD + tool a M + concept ownership guideline",
+      "output": "6 bài SEO auditted",
+      "expectedTime": "7h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-21T03:37:47.850Z"
+}
