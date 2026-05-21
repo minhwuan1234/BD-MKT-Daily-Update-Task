@@ -1,0 +1,18 @@
+{
+  "userId": "ou_db7bca8d6a07437aaab422849ddc2c69",
+  "tasks": [
+    {
+      "title": "Clean up documentation.",
+      "output": "Output: Hunting methodology doc + signal sheet + A/B/C tiering ready for review.",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "Support knowledge/material analysis.",
+      "output": "Output: Tách input thành course cũ có structure (thực hành vs lý thuyết) cho team LnD và ACC",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": "hiện tại là chưa ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-21T07:39:23.174Z"
+}
