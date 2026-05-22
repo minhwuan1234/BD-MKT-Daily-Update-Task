@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "report số tuần vừa r + finalise mail cho tệp museum",
+      "progress": "90%",
+      "timeSpent": "5h"
+    },
+    {
+      "title": "nhắn linkedin + lọc thử data tệp agency theo 4 signal c giang đưa",
+      "progress": "70%",
+      "timeSpent": "2.5h"
+    }
+  ],
+  "blockers": "task lọc data e lọc dc = AI nhưng tốc độ khá chậm nên dg hỏi a quân xem có tool nào k ạ",
+  "tomorrowPlan": "mai e draft offer cho các ng làm role tương tự của WWF, animals asia với compassion international nhưng ở nước khác",
+  "submittedAt": "2026-05-22T11:24:29.553Z"
+}
