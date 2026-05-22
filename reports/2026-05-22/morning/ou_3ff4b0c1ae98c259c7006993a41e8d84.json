@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "report số tuần vừa r + finalise mail cho tệp museum",
+      "output": "weekly report + mail theo hướng offer educational series",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "nhắn linkedin + lọc thử data tệp agency theo 4 signal c giang đưa",
+      "output": "10 mess + lọc xong min 50 contact",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": "hôm qua e research tệp mới nên tạm dừng chưa xong dc offer cho tệp museum ạ, nay e mới làm tiếp",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-22T07:35:39.034Z"
+}
