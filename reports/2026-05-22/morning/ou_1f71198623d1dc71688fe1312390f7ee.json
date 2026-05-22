@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit SEO articles",
+      "output": "4 seo article auditted (có concept ownership + CTA tối ưu + GEO checklist followed + new content guideline followed)",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Social post upload + Discuss with c Liu về career path",
+      "output": "3 posts social về prj 3D chim ruồi của F",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-22T02:17:44.878Z"
+}
