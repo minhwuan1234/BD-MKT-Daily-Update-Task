@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "BD Plan",
+      "progress": "90%",
+      "timeSpent": "2.5h"
+    },
+    {
+      "title": "ISTOS + WWF Proposal finalize",
+      "progress": "80%",
+      "timeSpent": "4h"
+    }
+  ],
+  "blockers": "Đúm nhau tiếp với team về WWF thôi ạ, đúm nhau để chốt chứ không có gì",
+  "tomorrowPlan": "Mai e dép cạc SN + ngâm cứu việc đẩy medical asset library lên website để flex với AI ạ =))))))",
+  "submittedAt": "2026-05-22T10:53:46.546Z"
+}
