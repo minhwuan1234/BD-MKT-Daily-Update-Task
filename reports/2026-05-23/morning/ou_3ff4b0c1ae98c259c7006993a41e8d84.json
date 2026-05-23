@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "list ra quy trình các bước viết mail hiện tại gửi c giang và c hạnh",
+      "output": "docs quy trình",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "draft offer cho wwf",
+      "output": "offer gửi c giang",
+      "expectedTime": "30P"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-23T03:09:38.160Z"
+}
