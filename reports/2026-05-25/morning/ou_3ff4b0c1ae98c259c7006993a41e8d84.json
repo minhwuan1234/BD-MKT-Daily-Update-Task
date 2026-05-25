@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "đưa ra criteria và test tool verify signal tệp video agency a quân gửi + optimise",
+      "output": "finalise dc tool và test thử với contact list hiện tại",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "finalise mail cho chi nhánh khác của wwf + chỉnh lại message linkedin",
+      "output": "xong mail và message gửi c giang",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "focus outreach tệp NGO và media agency",
+  "submittedAt": "2026-05-25T04:26:17.744Z"
+}
