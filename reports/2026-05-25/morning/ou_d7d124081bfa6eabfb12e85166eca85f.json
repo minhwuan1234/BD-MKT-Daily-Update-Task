@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "MKT_Product naming + healthcare library format",
+      "output": "Rules về cách đặt tên video khi upload lên youtube (market category keyword để tối ưu tìm kiếm & AI scanning) + cấu trúc healthcare library",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Ref SN Cards (60 cards)",
+      "output": "—",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "BD: Plan tháng 6\nMarketing: lên format healthcare library cho website\nProduction: AI workflow for building proposal",
+  "submittedAt": "2026-05-25T03:28:07.593Z"
+}
