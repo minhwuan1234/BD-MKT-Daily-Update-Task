@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Final QC checklist: 1.1. creative thinking process + concept ownership coverage; 1.2. SEO/GEO checklist",
+      "output": "QC checklist: 1.1. creative thinking process + concept ownership coverage; 1.2. SEO/GEO checklist để add vòa Claude Skills",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "Social post upload + Audit/bổ sung content các page lớn theo ưu tiên + Audit/ tối ưu CTA SEO articles",
+      "output": "3 posts social + Homepage auditted + 2 SEO article auditted",
+      "expectedTime": "6h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "1. QC checklist: 1.1. creative thinking process + concept ownership coverage; 1.2. SEO/GEO checklist\n2. Social May Report\n3. Audit + bổ sung content các page lớn theo ưu tiên",
+  "submittedAt": "2026-05-25T02:47:41.166Z"
+}
