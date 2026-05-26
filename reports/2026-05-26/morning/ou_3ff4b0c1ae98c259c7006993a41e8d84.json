@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "research về team content/marketing của compassion international để brainstorm lại offer với c giang",
+      "output": "done offer cho bên này",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "ấn connect tệp video production agencies tiếp + đưa ra các option chỉnh tin nhắn linkedin",
+      "output": "connect 100 bên x 4 acc + min 3 option tin nhắn",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-26T03:17:56.062Z"
+}
