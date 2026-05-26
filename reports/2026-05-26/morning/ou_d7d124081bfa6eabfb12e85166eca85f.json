@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "MKT_Healthcare library",
+      "output": "Folder asset",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Production_Process to build solutions in proposal",
+      "output": "Draft Process",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-26T01:59:50.675Z"
+}
