@@ -1,0 +1,13 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit + bổ sung content các page lớn theo ưu tiên: service pages; solution pages & use cases; about us",
+      "output": "Các pages lớn có nội dung đã được audit + FAQ chi tiết hơn cho các trang",
+      "expectedTime": "7h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-26T02:25:34.342Z"
+}
