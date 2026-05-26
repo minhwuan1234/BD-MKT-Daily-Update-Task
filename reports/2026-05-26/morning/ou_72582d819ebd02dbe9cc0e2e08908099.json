@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "Hoàn thành bản vẽ + triển khai tool website signals cho BD",
+      "output": "1 bản blueprint hoàn chỉnh gồm 2 cách triển khai trở lên + %hoàn thành tool",
+      "expectedTime": "7h"
+    },
+    {
+      "title": "Update, maintain các tool cũ - cviec ngoài nếu được nhờ",
+      "output": "Các tool cũ  hoạt động ổn định",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-26T02:00:57.224Z"
+}
