@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "Hoàn thiện version 1 của Tool Website-Signal cho BD",
+      "output": "1 Tool chạy hoàn chỉnh, user có thể test luôn",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "Hoàn thiện bản vẽ tool số 2 cho BD - Linkendin potential client through linkendin posts signals",
+      "output": "2 options giải pháp cho bản vẽ",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-27T01:48:31.293Z"
+}
