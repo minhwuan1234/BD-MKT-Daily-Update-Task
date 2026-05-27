@@ -1,0 +1,13 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit + bổ sung content các page lớn theo ưu tiên: service pages; solution pages & use case pages ; visualize complexity (structure draft)",
+      "output": "Structure draft của vizualize complexity page + content auditted của service pages; solution pages & use case pages",
+      "expectedTime": "6h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-27T03:53:55.217Z"
+}
