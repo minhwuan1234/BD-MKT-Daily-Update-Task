@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "BD: Plan tháng 6",
+      "output": "Plan cụ thể",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Heocare library",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": "Cái healthcare library phải chọn lọc asset và đặt tên hơi thủ công, không khó, hơi mất thời gian thôi ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-27T01:48:51.077Z"
+}
