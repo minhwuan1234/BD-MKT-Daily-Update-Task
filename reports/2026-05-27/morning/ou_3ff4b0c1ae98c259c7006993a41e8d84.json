@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "finalise mail cho compassion international + viết mail cho wwf gửi c giang",
+      "output": "sent 5 personalised mail",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "add tiếp và nhắn linkedin + chỉnh lại flow mail follow up cho tệp transformation managers",
+      "output": "ấn add 50 x 4 acc + 20 mess",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-27T03:04:17.632Z"
+}
