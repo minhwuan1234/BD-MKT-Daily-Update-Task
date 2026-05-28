@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "sửa lại mail compassion international + finalise mail wwf",
+      "output": "send 50 mails cho wwf",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "làm case study tự sửa mail mình đã viết để mai discuss với a tùng + nhắn linkedin tiếp",
+      "output": "5 case mail + 20 mess",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": "sáng e quên fill mất ạ",
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-28T06:44:48.767Z"
+}
