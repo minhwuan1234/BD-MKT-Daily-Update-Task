@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit content (1) homepage & service pages (2) solution pages & use cases",
+      "output": "(1) homepage & service pages (2) solution pages & use cases content auditted",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Chỉnh sửa + final visualize complexity structure theo feedback",
+      "output": "Structure outline visualize complexity hoàn chỉnh để viết nội dung",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-28T02:16:53.504Z"
+}
