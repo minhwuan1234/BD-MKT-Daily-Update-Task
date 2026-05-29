@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "BD Segment Analysis",
+      "output": "—",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Email focus mô tả sản phẩm",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-29T01:54:58.949Z"
+}
