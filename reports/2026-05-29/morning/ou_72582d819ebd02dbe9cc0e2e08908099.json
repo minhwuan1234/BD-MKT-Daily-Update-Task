@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "Update hệ thống tracking và Admin Console",
+      "output": "1 hệ thống đo lường được tần suất của người sử dụng và chỉnh sửa được UI",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Research Scrom File",
+      "output": "1 bản document cho Illus về việc bàn giao file AI như thế nào",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-05-29T01:51:03.477Z"
+}
