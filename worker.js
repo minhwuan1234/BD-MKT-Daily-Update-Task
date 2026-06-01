@@ -13,9 +13,12 @@
  *   GITHUB_REPO  = "daily-report"
  */
 
-const GITHUB_OWNER = 'minhwuan1234';
-const GITHUB_REPO  = 'daily-report';
-const GITHUB_API   = 'https://api.github.com';
+const GITHUB_OWNER    = 'minhwuan1234';
+const GITHUB_REPO     = 'daily-report';
+const GITHUB_API      = 'https://api.github.com';
+
+// Paste Web app URL tu Apps Script vao day
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/1j-18C2hBM8Lvxz-sgDtLQ8KSeFTjxAyJ1CUGXiOcvvQ/exec';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin':  '*',
@@ -69,6 +72,13 @@ const fileContent = JSON.stringify({ userId, memberName, tasks, submittedAt }, n
 
       // Trigger repository_dispatch → GitHub Actions collect workflow
       await triggerDispatch(env.GITHUB_PAT, type, { userId, date, filePath });
+
+      // Ghi vao Google Sheets (non-blocking — loi khong anh huong den response)
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, memberName }),
+      }).catch(function(e) { console.error('Sheets error:', e); });
 
       return json({ ok: true, path: filePath });
     } catch (err) {
