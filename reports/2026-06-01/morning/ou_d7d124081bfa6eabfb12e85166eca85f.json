@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "BD_Research + Plan cho tệp Elearning Agencies",
+      "output": "Thêm một tệp trong sheet Main Pan của BD Plan :v",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Thư viện Heocare",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-01T02:05:54.972Z"
+}
