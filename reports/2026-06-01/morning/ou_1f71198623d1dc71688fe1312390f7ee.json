@@ -1,0 +1,13 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Visualize complexity writing content + about us content + 3D page content",
+      "output": "Nội dung đầy đủ của 3 trang: Visualize complexity + about us + 3D anim",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "1. Hoàn thiện audit content các trang: (3) about us (4) 1 số mini-use cases chính (5) visualize complexity  (6) comparation pages\n2. Social + PB June Plan\n3. May Report\n4. Audit 5 bài SEO có AI traffic",
+  "submittedAt": "2026-06-01T02:50:48.040Z"
+}
