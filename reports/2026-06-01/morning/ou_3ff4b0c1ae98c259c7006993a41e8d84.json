@@ -1,0 +1,18 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "list nốt các đầu việc và tool để training cho c hân + plan test nhắn agency",
+      "output": "docs các đầu việc",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "build và segment list NGO theo idea của c giang + format lại meeting notes hôm trc",
+      "output": "contact list NGO",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "mail trở lại cho tệp agency + nhắn linkedin\nbuild contact list cho large NGOs\nlàm thêm case study mỗi ngày",
+  "submittedAt": "2026-06-01T02:40:10.309Z"
+}
