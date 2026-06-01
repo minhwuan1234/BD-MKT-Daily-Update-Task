@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "xây 3 hệ thống cho 3 tool đã triển khai",
+      "output": "Website tracking tổng hợp các tool đã xây",
+      "expectedTime": "7h"
+    },
+    {
+      "title": "Define Criteria của 1 tool tốt",
+      "output": "Checklist những requirement 1 tool tốt nên có",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "Xây được hệ thống tracking và feedback cho tất cả các tool đã live, chuẩn bị được 1 hệ thống automate process làm việc, triển khai tool từ các problem digging được trong tuần này",
+  "submittedAt": "2026-06-01T01:52:13.318Z"
+}
