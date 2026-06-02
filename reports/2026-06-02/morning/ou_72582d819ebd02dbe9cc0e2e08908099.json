@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "Update note hệ thống tracking cho tool cv scoring",
+      "output": "Admin dashboard có tool tracking cho cv scoring",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Alert Brief Bot",
+      "output": "Bản Document trả lời 4 câu hỏi trong brief",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-02T01:53:11.432Z"
+}
