@@ -1,0 +1,18 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "tasks": [
+    {
+      "title": "Update note hệ thống tracking cho tool cv scoring",
+      "progress": "100%",
+      "timeSpent": "2.5h"
+    },
+    {
+      "title": "Alert Brief Bot",
+      "progress": "30%",
+      "timeSpent": "2.5h"
+    }
+  ],
+  "blockers": null,
+  "tomorrowPlan": null,
+  "submittedAt": "2026-06-02T10:46:03.666Z"
+}
