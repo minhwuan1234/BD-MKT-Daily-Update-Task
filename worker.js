@@ -61,7 +61,9 @@ const membersRes = await fetch(
   `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/members.json`
 );
 const members = await membersRes.json();
-const idToName = Object.fromEntries(Object.entries(members).map(([n, id]) => [id, n]));
+const idToName = Object.fromEntries(
+  Object.entries(members).map(([name, obj]) => [obj.id, name])
+);
 const memberName = idToName[userId] || userId;
 
 const fileContent = JSON.stringify({ userId, memberName, tasks, submittedAt }, null, 2);
