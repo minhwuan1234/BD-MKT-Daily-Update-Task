@@ -1,0 +1,18 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "tasks": [
+    {
+      "title": "Audit content các page theo thứ tự ưu tiên",
+      "output": "Hoàn thiện content 3D anim + use cases",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Hoàn thiện Social + PB June Plan",
+      "output": "Social + PB June Plan",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-02T02:32:26.587Z"
+}
