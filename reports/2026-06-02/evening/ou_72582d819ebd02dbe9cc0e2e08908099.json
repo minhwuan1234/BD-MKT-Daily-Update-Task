@@ -3,16 +3,16 @@
   "tasks": [
     {
       "title": "Update note hệ thống tracking cho tool cv scoring",
-      "progress": "100%",
-      "timeSpent": "2.5h"
+      "progress": "0%",
+      "timeSpent": "0.5h"
     },
     {
       "title": "Alert Brief Bot",
-      "progress": "30%",
-      "timeSpent": "2.5h"
+      "progress": "0%",
+      "timeSpent": "1h"
     }
   ],
   "blockers": null,
   "tomorrowPlan": null,
-  "submittedAt": "2026-06-02T10:46:03.666Z"
+  "submittedAt": "2026-06-02T11:40:51.212Z"
 }
