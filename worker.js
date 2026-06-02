@@ -18,7 +18,7 @@ const GITHUB_REPO     = 'daily-report';
 const GITHUB_API      = 'https://api.github.com';
 
 // Paste Web app URL tu Apps Script vao day
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzOJMLNU6TjsWgM2tWnLRkDkMaxh0cIZFIA8a0RzWONN-Ny6LrrhobVQrraOoCmn3BFw/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_rgl_l8o0T5Z-MLp9rVYOdSt_SuRei583lePM6e12THVOc76dd2EYuz10MLKntcPpWQ/exec';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin':  '*',
