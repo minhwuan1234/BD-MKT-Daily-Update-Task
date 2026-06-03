@@ -3,17 +3,17 @@
   "memberName": "Minh Quân",
   "tasks": [
     {
-      "title": "testte",
+      "title": "test",
       "output": "test",
-      "expectedTime": "3h"
+      "expectedTime": "4h"
     },
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "5h"
+      "expectedTime": "4h"
     }
   ],
   "blockers": null,
   "weeklyGoal": null,
-  "submittedAt": "2026-06-03T02:41:16.047Z"
+  "submittedAt": "2026-06-03T02:49:27.885Z"
 }
