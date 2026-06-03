@@ -5,15 +5,15 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "4h"
+      "expectedTime": "6h"
     },
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "4h"
+      "expectedTime": "3h"
     }
   ],
   "blockers": null,
   "weeklyGoal": null,
-  "submittedAt": "2026-06-03T02:49:27.885Z"
+  "submittedAt": "2026-06-03T03:18:36.574Z"
 }
