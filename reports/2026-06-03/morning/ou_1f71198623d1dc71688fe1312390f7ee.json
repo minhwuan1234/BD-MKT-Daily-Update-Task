@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Audit 5 bài SEO có AI traffic",
+      "output": "3 bài SEO có AI traffic content auditted",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Hoàn thiện audit content các page lớn theo ưu tiên đã sxep",
+      "output": "—",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-03T02:25:47.358Z"
+}
