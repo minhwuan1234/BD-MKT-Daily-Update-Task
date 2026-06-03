@@ -1,0 +1,18 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "tasks": [
+    {
+      "title": "Product_TTI VO",
+      "output": "Audio cho khách duyệt",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "BD_Cách nói về mình và sản phẩm của mình trong email outreach",
+      "output": "List một vài cách/công thức áp dụng để giới thiệu F theo cách \"dễ nhớ\" và mô tả sản phẩm mạnh",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-03T02:06:42.825Z"
+}
