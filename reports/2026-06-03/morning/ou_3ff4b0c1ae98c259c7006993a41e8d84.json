@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "viết lại first mail và follow up mail cho agency  +  first message cho linkedin agency đợt này",
+      "output": "xong flow mail và message đưa c giang review",
+      "expectedTime": "7h"
+    },
+    {
+      "title": "sửa lại mail case study hôm trước theo feedback của a tùng",
+      "output": "sửa xong 2 case",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-03T03:43:20.350Z"
+}
