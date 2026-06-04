@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "finalise message linkedin cho tệp agency",
+      "output": "chốt mess để gửi trong hôm nay",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "gửi mail cho agency ở australia + build contact list của NGO có hoạt động social",
+      "output": "min 150 mail + list min 30 bên",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-04T03:06:33.372Z"
+}
