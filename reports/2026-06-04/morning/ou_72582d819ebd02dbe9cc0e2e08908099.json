@@ -1,0 +1,19 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "memberName": "Minh Quân",
+  "tasks": [
+    {
+      "title": "Update 5 Skill automate process làm việc",
+      "output": "Bộ 5 skill tron claude",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Process task alert brief",
+      "output": "—",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-04T01:55:10.471Z"
+}
