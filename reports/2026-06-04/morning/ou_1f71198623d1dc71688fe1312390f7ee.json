@@ -1,0 +1,14 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Hoàn thiện audit content cho solution pages + use case pages",
+      "output": "Bản docs content đã được audit theo structure template của solution pages + use case pages",
+      "expectedTime": "6h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-04T02:36:17.617Z"
+}
