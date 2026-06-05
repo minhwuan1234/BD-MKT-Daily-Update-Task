@@ -1,0 +1,14 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Tiếp tục hoàn thiện audit content các trang: use cases + chỉnh sửa các trang đã viết theo feedback",
+      "output": "Bản docs các trang đã hoàn thiện để QC round 1",
+      "expectedTime": "5h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-05T02:36:41.759Z"
+}
