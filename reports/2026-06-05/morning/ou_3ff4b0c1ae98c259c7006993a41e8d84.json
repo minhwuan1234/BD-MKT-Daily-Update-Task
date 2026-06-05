@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "làm case study weekly và họp",
+      "output": "learning từ 3 case",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "draft message cho 4 hướng nhắn linkedin tệp agency",
+      "output": "message gửi c giang",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-05T05:48:30.343Z"
+}
