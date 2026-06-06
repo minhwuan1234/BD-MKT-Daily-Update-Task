@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "vt mail personalised cho 1 case agency làm cho NGO",
+      "output": "1 case",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "tổng hợp workflow BD gửi c hạnh",
+      "output": "workflow",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-06T02:05:49.519Z"
+}
