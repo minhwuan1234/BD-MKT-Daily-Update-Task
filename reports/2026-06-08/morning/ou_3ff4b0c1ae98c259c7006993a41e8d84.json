@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "xem lại recap meeting và build workflow của BD theo feedback của a Tùng",
+      "output": "workflow gửi a Tùng và c Hạnh",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "làm case study mail cho 1 bên agency hay làm cho NGO",
+      "output": "1 case",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "test 2 direction nhắn linkedin cho tệp agency + tiếp tục mail cho tệp này vì có response\nsegment tệp NGO và gửi mail\nbuild workflow BD",
+  "submittedAt": "2026-06-08T02:35:27.991Z"
+}
