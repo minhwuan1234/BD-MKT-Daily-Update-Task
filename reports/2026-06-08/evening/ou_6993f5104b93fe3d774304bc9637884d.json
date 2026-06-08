@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "Nuture SRs & Reach out clients",
+      "progress": "100%",
+      "timeSpent": "1.5h"
+    },
+    {
+      "title": "Hoàn thiện R&R plan",
+      "progress": "90%",
+      "timeSpent": "4h"
+    }
+  ],
+  "blockers": null,
+  "tomorrowPlan": "Em tiếp tục task 1 (daily task của em)\nSupport chị Manh \nReview và adjust plan theo feedback của các chị ạ",
+  "submittedAt": "2026-06-08T10:47:42.401Z"
+}
