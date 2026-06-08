@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Social Plan June",
+      "output": "File sheet plan social tháng 6 (có cả reddit + X để tăng brand mention)",
+      "expectedTime": "2h"
+    },
+    {
+      "title": "Audit content use case pages",
+      "output": "Content đã được audit của 5/14 trang use case",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "- Social Plan June\n- Hoàn thiện audit content các trang use case + sửa content theo feedback của Homepage + service pages + solution pages + visualization complexity\n- Social media (tạo bầng AI canva + Claude) ~ 5 posts (?)",
+  "submittedAt": "2026-06-08T02:56:38.503Z"
+}
