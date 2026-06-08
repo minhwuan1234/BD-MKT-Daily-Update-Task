@@ -1,0 +1,19 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Plan tuần cụ thể cho all members",
+      "output": "Plan",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "MKT_Feedback website cotent",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "BD_Plan tuần cụ thể cho all members + Tiếp tục tìm hiểu và đưa ra hypothesis cho các tệp\nMKT_Website new content + Healthcare Library",
+  "submittedAt": "2026-06-08T02:20:39.788Z"
+}
