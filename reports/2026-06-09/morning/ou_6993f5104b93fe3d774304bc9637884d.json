@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "Support account activities",
+      "output": "Hoàn thành các tasks chị Manh giao",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Pitching tới potential clients trên các nên tảng",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-09T02:05:51.796Z"
+}
