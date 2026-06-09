@@ -1,0 +1,19 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Slide deck up-sell/cross-sell Alpha Insurers",
+      "output": "Slide deck",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Nurturing 5 cases R&R",
+      "output": "Fill bảng action + gửi email",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-09T02:11:05.188Z"
+}
