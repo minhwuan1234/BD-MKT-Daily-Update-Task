@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "viết nốt phần what makes a good contact/offer/email gửi a Tùng",
+      "output": "docs hoàn chỉnh gồm flow và judgement để input cho tool",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "viết nốt case study cho catalyze agency + draft tin nhắn linkedin",
+      "output": "xong mail còn lại của case + draft tin nhắn gửi c Giang",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-09T01:55:20.725Z"
+}
