@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "xem lại recap meeting và build workflow của BD theo feedback của a Tùng",
+      "progress": "100%",
+      "timeSpent": "6h"
+    },
+    {
+      "title": "làm case study mail cho 1 bên agency hay làm cho NGO",
+      "progress": "50%",
+      "timeSpent": "0.5h"
+    }
+  ],
+  "blockers": "case kia e mới vt dc 1 trong số 2 mail",
+  "tomorrowPlan": "viết nốt case kia và viết nốt phần what makes a good contact/offer/email cho a tùng ạ",
+  "submittedAt": "2026-06-09T01:51:55.615Z"
+}
