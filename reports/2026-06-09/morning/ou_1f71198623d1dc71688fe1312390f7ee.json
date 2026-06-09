@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Audit content các trang use case",
+      "output": "Content 5/11 trang use cases đã được audit theo template",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "Sửa lại social plan June",
+      "output": "Social Plan June của LI - FB - IG - X - Reddit",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-09T02:03:37.309Z"
+}
