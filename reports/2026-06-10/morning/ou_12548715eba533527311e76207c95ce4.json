@@ -1,0 +1,19 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Lên plan + catch up 5 khách cũ",
+      "output": "Plan + emails",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Catch up vs các KH đang/vừa kết thúc dự án (5)",
+      "output": "Nurturing/reach out: Cortney, c Hà. Plan distribution for Neal. Case study for Rebeka. Working process for Henry",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-10T01:57:16.430Z"
+}
