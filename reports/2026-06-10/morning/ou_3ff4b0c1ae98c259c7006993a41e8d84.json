@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "sắp xếp lại data và fill các cột trong sheet tổng hợp sales request + họp với team lnd",
+      "output": "fill dc các trường thông tin về cty",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "draft flow nhắn cho hướng đi tìm các bên đang tuyển + comment mail c hân gửi",
+      "output": "flow nhắn + comment 3 mails",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-10T03:01:09.479Z"
+}
