@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Audit content use case pages: 5/5 (-> done toàn bộ use case pages)",
+      "output": "5/5 trang use case có content đã được audit (-> done toàn bộ use case pages)",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Audit content service: Animation Video Production",
+      "output": "Animation Video Production service page đã được audit theo template -> gửi anh Minh QC round 1",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-10T02:00:05.152Z"
+}
