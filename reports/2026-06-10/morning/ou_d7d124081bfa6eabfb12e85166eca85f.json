@@ -1,0 +1,19 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "MKT_Review content website",
+      "output": "Feedback",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "BD_Fill historical data + viết skill để build tool",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": "Lúc đầu e cố gắng build skill review cho con claude để ko phải đọc từng bài một nhưng mà ngốn mana quá, thường là review xong 2 -3 bài là nó hết usage rồi. Dù e đã cố gắng tiết kiệm bằng vài tips e thấy trên mạng :v",
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-10T01:53:55.135Z"
+}
