@@ -1,0 +1,19 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Lên plan + catch up 5 khách cũ",
+      "progress": "60%",
+      "timeSpent": "4h"
+    },
+    {
+      "title": "Catch up vs các KH đang/vừa kết thúc dự án (5)",
+      "progress": "80%",
+      "timeSpent": "4h"
+    }
+  ],
+  "blockers": "Bị gián đoạn bởi các việc account khác:\n- Reply KH (một khi đã reaching out sẽ rơi vào trạng thái chit-chat)\n- Nurturing cases\n- Support BD (small tát thui)\n- New SR support \n- Plan cho case gây mê (đang struggle với a Tùng ạ) TT",
+  "tomorrowPlan": "Main task: HOME + Case gây mê",
+  "submittedAt": "2026-06-10T10:55:47.840Z"
+}
