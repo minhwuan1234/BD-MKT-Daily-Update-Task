@@ -1,0 +1,19 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Data Record for tool",
+      "output": "khoảng 30-40 case win/lose with reasons + insights cho tool học ạ",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "MKT_review content website tiếp",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-11T02:57:05.245Z"
+}
