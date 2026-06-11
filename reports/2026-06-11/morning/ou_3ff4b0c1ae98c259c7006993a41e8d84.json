@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "fill sheet các case đã win trong tổng hợp sales request",
+      "output": "30 case",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "xong judgement cho mục what makes a good offer",
+      "output": "docs list ra judgement từng bước gửi a Tùng + rep tin nhắn linkedin",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": "hqua e input cho c chi để build tool nên chưa rep được trên linkedin ạ, nay e lm nốt",
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-11T02:02:46.716Z"
+}
