@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "Tiếp tục với R&R plan",
+      "progress": "100%",
+      "timeSpent": "6h"
+    },
+    {
+      "title": "Pitching tới potential clients trên các nên tảng",
+      "progress": "100%",
+      "timeSpent": "—"
+    }
+  ],
+  "blockers": null,
+  "tomorrowPlan": "Tiếp tục daily task và plan R&R",
+  "submittedAt": "2026-06-11T10:48:13.632Z"
+}
