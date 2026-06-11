@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Social media (tạo media = AI canva + Claude skills) + PB posts upload",
+      "output": "3 posts/ 3 mem + media for 1 social post",
+      "expectedTime": "3h"
+    },
+    {
+      "title": "Hoàn thiện nốt Animation Video Production service page (20% - hôm qua đã viết được 80%) + gửi c Manh outline cho case study chim ruồi. input muốn xin thêm từ khách để viết case study + chỉnh sửa content web theo feedback (Homepage từ chị Liu; Service Page: Content Structure & Solution Page: Complex Comm + Medical & Health từ c Giang)",
+      "output": "—",
+      "expectedTime": "4h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-11T02:02:52.043Z"
+}
