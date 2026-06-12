@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "Tiếp tục với R&R plan",
+      "output": "Fill in plan, draft email và gửi follow-up cho 2 -3 clients cũ",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Pitching tới potential clients trên các nên tảng",
+      "output": "Có thể pitch/message tới ít nhất 2 clients",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-12T01:48:01.957Z"
+}
