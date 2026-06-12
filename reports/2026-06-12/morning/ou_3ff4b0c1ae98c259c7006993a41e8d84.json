@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "fill sheet các case đã win trong tổng hợp sales request",
+      "output": "hqua e vs c giang fill dc 1 nửa, nay sẽ fill nốt cho đủ 30 case ạ",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "build list cho tệp cobblestone learning lookalike để reach tuần sau",
+      "output": "list min 100 contact",
+      "expectedTime": "3h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-12T02:25:33.675Z"
+}
