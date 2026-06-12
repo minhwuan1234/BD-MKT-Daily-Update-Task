@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Chỉnh sửa các trang content web theo feedback (homepage + service pages + solution pages)",
+      "output": "—",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Social + PB post upload",
+      "output": "3 posts social/ 3 platforms + 4 posts PB/ 2 mems",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-12T02:14:39.271Z"
+}
