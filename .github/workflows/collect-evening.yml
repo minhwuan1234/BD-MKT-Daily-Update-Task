@@ -53,12 +53,14 @@ jobs:
               members = json.load(f)
 
           id_to_name = {v['id']: k for k, v in members.items()}
-          id_to_pm   = {v['id']: v.get('pm') for k, v in members.items()}
+          id_to_pm   = {v['id']: v.get('pm', []) for k, v in members.items()}
 
-          name  = id_to_name.get(USER_ID, USER_ID)
-          pm_id = id_to_pm.get(USER_ID)
+          name   = id_to_name.get(USER_ID, USER_ID)
+          pm_ids = id_to_pm.get(USER_ID, [])
+          if isinstance(pm_ids, str):
+              pm_ids = [pm_ids] if pm_ids else []
 
-          if not pm_id:
+          if not pm_ids:
               print(f'{name} has no PM assigned, skipping.')
               exit(0)
 
@@ -154,7 +156,7 @@ jobs:
 
           evening_dir = pathlib.Path(f'reports/{DATE}/evening')
           submitted_count = len(list(evening_dir.glob('*.json'))) if evening_dir.exists() else 1
-          total = len([v for v in members.values() if v.get('pm') == pm_id])
+          total = len([v for v in members.values() if pm_ids[0] in (v.get('pm') or [])])
 
           elements = [
               {
@@ -213,14 +215,15 @@ jobs:
             "elements": elements
           }
 
-          result = lark_post(
-              'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
-              {
-                  'receive_id': pm_id,
-                  'msg_type':   'interactive',
-                  'content':    json.dumps(card),
-              },
-              token=token
-          )
-          print(f'Notified PM {pm_id} for {name}: code={result.get("code","?")} msg={result.get("msg","")}')
+          for pm_id in pm_ids:
+              result = lark_post(
+                  'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+                  {
+                      'receive_id': pm_id,
+                      'msg_type':   'interactive',
+                      'content':    json.dumps(card),
+                  },
+                  token=token
+              )
+              print(f'Notified PM {pm_id} for {name}: code={result.get("code","?")} msg={result.get("msg","")}')
           PYEOF
