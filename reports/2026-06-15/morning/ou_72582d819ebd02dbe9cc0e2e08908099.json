@@ -3,33 +3,37 @@
   "memberName": "Minh Quân",
   "tasks": [
     {
-      "title": "Update Tool BD-MKT",
-      "output": "Version 2 của tool",
-      "expectedTime": "5h",
+      "title": "task A",
+      "output": "Â",
+      "expectedTime": "2h",
       "steps": [
         {
-          "what": "Bước 1",
-          "output": "Bước 1 A"
+          "what": "A",
+          "output": "A"
         },
         {
-          "what": "Bước 2",
-          "output": "Bước 1 B"
+          "what": "A",
+          "output": "A"
         }
       ]
     },
     {
-      "title": "Task 2",
-      "output": "Output Task 2",
-      "expectedTime": "4h",
+      "title": "B",
+      "output": "B",
+      "expectedTime": "3h",
       "steps": [
         {
-          "what": "as",
-          "output": "—"
+          "what": "B",
+          "output": "B"
+        },
+        {
+          "what": "B",
+          "output": "B"
         }
       ]
     }
   ],
-  "blockers": "khum",
-  "weeklyGoal": "Goal",
-  "submittedAt": "2026-06-15T09:03:20.290Z"
+  "blockers": "Stuck",
+  "weeklyGoal": null,
+  "submittedAt": "2026-06-15T09:19:35.705Z"
 }
