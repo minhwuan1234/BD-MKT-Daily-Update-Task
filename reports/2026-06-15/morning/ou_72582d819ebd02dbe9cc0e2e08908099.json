@@ -5,7 +5,7 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "3h",
+      "expectedTime": "2h",
       "steps": [
         {
           "what": "test",
@@ -20,12 +20,8 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "3h",
+      "expectedTime": "4h",
       "steps": [
-        {
-          "what": "test",
-          "output": "test"
-        },
         {
           "what": "test",
           "output": "test"
@@ -33,5 +29,5 @@
       ]
     }
   ],
-  "submittedAt": "2026-06-15T16:20:49.553Z"
+  "submittedAt": "2026-06-15T16:26:34.553Z"
 }
