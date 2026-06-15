@@ -3,37 +3,16 @@
   "memberName": "Minh Quân",
   "tasks": [
     {
-      "title": "task A",
-      "output": "Â",
+      "title": "1",
+      "output": "1",
       "expectedTime": "2h",
       "steps": [
         {
-          "what": "A",
-          "output": "A"
-        },
-        {
-          "what": "A",
-          "output": "A"
-        }
-      ]
-    },
-    {
-      "title": "B",
-      "output": "B",
-      "expectedTime": "3h",
-      "steps": [
-        {
-          "what": "B",
-          "output": "B"
-        },
-        {
-          "what": "B",
-          "output": "B"
+          "what": "1",
+          "output": "1"
         }
       ]
     }
   ],
-  "blockers": "Stuck",
-  "weeklyGoal": null,
-  "submittedAt": "2026-06-15T09:19:35.705Z"
+  "submittedAt": "2026-06-15T09:27:38.619Z"
 }
