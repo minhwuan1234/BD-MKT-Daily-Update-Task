@@ -1,0 +1,35 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "memberName": "Minh Quân",
+  "tasks": [
+    {
+      "title": "Update Tool BD-MKT",
+      "output": "Version 2 của tool",
+      "expectedTime": "5h",
+      "steps": [
+        {
+          "what": "Bước 1",
+          "output": "Bước 1 A"
+        },
+        {
+          "what": "Bước 2",
+          "output": "Bước 1 B"
+        }
+      ]
+    },
+    {
+      "title": "Task 2",
+      "output": "Output Task 2",
+      "expectedTime": "4h",
+      "steps": [
+        {
+          "what": "as",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "blockers": "khum",
+  "weeklyGoal": "Goal",
+  "submittedAt": "2026-06-15T09:03:20.290Z"
+}
