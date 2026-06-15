@@ -20,12 +20,14 @@ jobs:
         env:
           LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
           LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          WORKER_URL:      ${{ secrets.WORKER_URL }}
         run: |
           python3 - <<'PYEOF'
           import json, urllib.request, os, datetime, pathlib
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
+          WORKER_URL = os.environ.get('WORKER_URL', '')
 
           USER_ID = '${{ github.event.client_payload.userId }}'
           DATE    = '${{ github.event.client_payload.date }}'
@@ -84,19 +86,61 @@ jobs:
           except:
               date_str = DATE
 
-          tasks = report.get('tasks', [])
-          task_lines = []
-          for t in tasks:
-              if 'title' in t:
-                  et = t.get('expectedTime', '')
-                  output = t.get('output', '')
-                  et_str = f" ⏱ _{et}_" if et and et != '—' else ''
-                  output_str = f"\n  └ Output: {output}" if output and output != '—' else ''
-                  task_lines.append(f"📌 {t['title']}{et_str}{output_str}")
+          # Weekly goal từ thứ 2
+          def get_monday_str(date_str):
+              d = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+              diff = -6 if d.weekday() == 6 else (0 - d.weekday())
+              mon = d + datetime.timedelta(days=diff)
+              return mon.strftime('%Y-%m-%d')
 
-          tasks_md     = '\n'.join(task_lines) if task_lines else '(không có task)'
-          blockers     = report.get('blockers')
-          weekly_goal  = report.get('weeklyGoal')
+          weekly_goal = None
+          try:
+              monday_str = get_monday_str(DATE)
+              monday_file = pathlib.Path(f'reports/{monday_str}/morning/{USER_ID}.json')
+              if monday_file.exists():
+                  with open(monday_file) as f:
+                      monday_report = json.load(f)
+                  weekly_goal = monday_report.get('weeklyGoal')
+          except:
+              pass
+
+          tasks = report.get('tasks', [])
+
+          # Build task elements với steps breakdown
+          task_elements = []
+          for i, t in enumerate(tasks, 1):
+              title        = t.get('title', '?')
+              output       = t.get('output', '—')
+              expected_time = t.get('expectedTime', '—')
+              steps        = t.get('steps', [])
+
+              # Task header
+              task_elements.append({
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"**{i}. {title}**\n📦 Output: {output}　⏱ Dự kiến: {expected_time}"
+                }
+              })
+
+              # Steps breakdown
+              if steps:
+                  step_lines = []
+                  for si, step in enumerate(steps, 1):
+                      what   = step.get('what', '?')
+                      s_out  = step.get('output', '—')
+                      step_lines.append(f"  {si}. {what}")
+                      if s_out and s_out != '—':
+                          step_lines.append(f"     └ Output: _{s_out}_")
+                  task_elements.append({
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": '\n'.join(step_lines)
+                    }
+                  })
+
+              task_elements.append({"tag": "hr"})
 
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
           submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
@@ -111,51 +155,59 @@ jobs:
                   "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
                 }
               },
-              {"tag": "hr"},
-              {
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": tasks_md}
-              }
+              {"tag": "hr"}
           ]
 
-          # Khó khăn
+          elements += task_elements
+
+          # Blockers
+          blockers = report.get('blockers')
           if blockers:
-              elements += [
-                  {"tag": "hr"},
-                  {
-                    "tag": "div",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": f"🚧 **Khó khăn:**\n{blockers}"
-                    }
-                  }
-              ]
+              elements.append({
+                "tag": "div",
+                "text": {"tag": "lark_md", "content": f"🚧 **Khó khăn:**\n{blockers}"}
+              })
+              elements.append({"tag": "hr"})
 
-          # Weekly goal (chỉ hiện nếu có)
+          # Weekly goal
           if weekly_goal:
-              elements += [
-                  {"tag": "hr"},
-                  {
-                    "tag": "div",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"
-                    }
-                  }
-              ]
+              elements.append({
+                "tag": "div",
+                "text": {"tag": "lark_md", "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"}
+              })
+              elements.append({"tag": "hr"})
 
-          elements += [
-              {"tag": "hr"},
+          # Approve / Clarify buttons
+          callback_url = f'{WORKER_URL}/lark-callback' if WORKER_URL else ''
+          elements.append({
+            "tag": "action",
+            "actions": [
               {
-                "tag": "note",
-                "elements": [
-                  {
-                    "tag": "plain_text",
-                    "content": f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
-                  }
-                ]
+                "tag":  "button",
+                "text": {"tag": "plain_text", "content": "✅ Approve"},
+                "type": "primary",
+                "value": json.dumps({"type": "approve", "userId": USER_ID, "date": DATE}),
+                **({"url": callback_url} if callback_url else {}),
+              },
+              {
+                "tag":  "button",
+                "text": {"tag": "plain_text", "content": "💬 Cần clarify"},
+                "type": "default",
+                "value": json.dumps({"type": "clarify", "userId": USER_ID, "date": DATE}),
+                **({"url": callback_url} if callback_url else {}),
+              },
+            ]
+          })
+
+          elements.append({
+            "tag": "note",
+            "elements": [
+              {
+                "tag": "plain_text",
+                "content": f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
               }
-          ]
+            ]
+          })
 
           card = {
             "header": {
