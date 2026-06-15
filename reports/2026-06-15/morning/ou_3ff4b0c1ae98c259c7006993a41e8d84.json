@@ -1,0 +1,19 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "tasks": [
+    {
+      "title": "tìm list elearning agency giống cobblestone learning có service animation",
+      "output": "list min 50 công ty + best contact point",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "hoàn thành tài liệu về tệp agency production để đưa task nhắn linkedin cho c hân",
+      "output": "docs tài liệu + case study nhắn trc đây",
+      "expectedTime": "30P"
+    }
+  ],
+  "blockers": "hnay e chiều mới đi làm nên tổng số tgian ít hơn ạ. hôm trc e build list trên apollo và thấy chưa dc sát nên nay build lại = method khác",
+  "weeklyGoal": "reach tệp cobblestone learning lookalikes\nlàm thêm case study để test tool của a Tùng",
+  "submittedAt": "2026-06-15T08:50:38.789Z"
+}
