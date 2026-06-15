@@ -177,24 +177,39 @@ jobs:
               })
               elements.append({"tag": "hr"})
 
-          # Approve / Clarify buttons
-          elements.append({
-            "tag": "action",
-            "actions": [
-              {
-                "tag":  "button",
-                "text": {"tag": "plain_text", "content": "✅ Approve"},
-                "type": "primary",
-                "value": json.dumps({"type": "approve", "userId": USER_ID, "date": DATE}),
-              },
-              {
-                "tag":  "button",
-                "text": {"tag": "plain_text", "content": "💬 Cần clarify"},
-                "type": "default",
-                "value": json.dumps({"type": "clarify", "userId": USER_ID, "date": DATE}),
-              },
-            ]
-          })
+          # 3 nút per task: Đồng ý / Xem lại / Từ chối
+          for ti, t in enumerate(tasks):
+              t_title = t.get('title', f'Task {ti+1}')
+              elements.append({
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"**Review Task {ti+1}:** {t_title}"
+                }
+              })
+              elements.append({
+                "tag": "action",
+                "actions": [
+                  {
+                    "tag":   "button",
+                    "text":  {"tag": "plain_text", "content": "✅ Đồng ý"},
+                    "type":  "primary",
+                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "approved"}),
+                  },
+                  {
+                    "tag":   "button",
+                    "text":  {"tag": "plain_text", "content": "👀 Xem lại"},
+                    "type":  "default",
+                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "review"}),
+                  },
+                  {
+                    "tag":   "button",
+                    "text":  {"tag": "plain_text", "content": "❌ Từ chối"},
+                    "type":  "danger",
+                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "rejected"}),
+                  },
+                ]
+              })
 
           elements.append({
             "tag": "note",
