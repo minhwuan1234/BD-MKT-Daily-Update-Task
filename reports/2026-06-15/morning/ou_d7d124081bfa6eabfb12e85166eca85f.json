@@ -1,0 +1,19 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Study Health NGOs",
+      "output": "Health NGOs direction (sheet Main Pain)",
+      "expectedTime": "5h"
+    },
+    {
+      "title": "Account_Prepare for Ladybird call",
+      "output": "—",
+      "expectedTime": "—"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "BD_Viết skills cho tool + study về tệp eLearning agencies & Health NGOs\nAccount_R&R ideas với Manh \nMKT_Plan viết mini use cases",
+  "submittedAt": "2026-06-15T02:07:48.616Z"
+}
