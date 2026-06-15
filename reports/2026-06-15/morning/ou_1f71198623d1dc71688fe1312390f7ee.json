@@ -1,0 +1,19 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Sửa content web theo feedback",
+      "output": "Homepage + services page + sub service pages + solution pages: done -> đẩy a tony draft layout",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Reddit search terms used (list)  -> conversation mining & brand mentions",
+      "output": "1 list Reddit search terms used (update liên tục để 30mins/ day comment)",
+      "expectedTime": "1h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "- Sửa xong toàn bộ content web theo feedback để đẩy cho a Tony draft layout (~2 ngày đầu tuần)\n- Plan setup priority để viết và expand content cho list mini use case -> start viết mini use case (~3 mini use cases / week)\n- Update content anim calculator cost + content mới cho 1 partner (web niche: design) (support anh Minh)",
+  "submittedAt": "2026-06-15T02:28:35.182Z"
+}
