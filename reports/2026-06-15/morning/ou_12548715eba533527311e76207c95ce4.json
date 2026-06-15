@@ -1,0 +1,19 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Research + draft idea Youtube content marketing Alpha Insurer",
+      "output": "Content (document), review cùng team BD",
+      "expectedTime": "4h"
+    },
+    {
+      "title": "Ladybird prep + call",
+      "output": "Meeting agenda and research (document) + meeting notes after call",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "1. Plan được tất cả các khách hàng + send out action cho R&R (kết hợp với team BD để generate ideas cho các KH ưu tiên)\n2. Content + phân loại cho email marketing: general content plan + F'birthday",
+  "submittedAt": "2026-06-15T02:24:13.481Z"
+}
