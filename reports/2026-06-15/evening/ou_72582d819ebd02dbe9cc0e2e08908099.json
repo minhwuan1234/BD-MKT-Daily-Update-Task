@@ -1,0 +1,33 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "memberName": "Minh Quân",
+  "tasks": [
+    {
+      "title": "1",
+      "output": "1",
+      "progress": "100%",
+      "timeSpent": "2h",
+      "steps": [
+        {
+          "what": "1",
+          "output": "1",
+          "progress": "100%"
+        }
+      ]
+    },
+    {
+      "title": "1",
+      "output": "1",
+      "progress": "100%",
+      "timeSpent": "1.5h",
+      "steps": [
+        {
+          "what": "1",
+          "output": "1",
+          "progress": "100%"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-15T10:50:27.054Z"
+}
