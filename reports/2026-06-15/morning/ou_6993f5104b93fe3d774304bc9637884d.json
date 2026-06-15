@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "1) Draft & sent catch-up emails for R&R plan. 2) Fill in clients' analyses",
+      "output": "1) Sent at least 3-4 emails. 2) Fill in at least 2 more clients",
+      "expectedTime": "6h"
+    },
+    {
+      "title": "Pitching jobs",
+      "output": "3 pitching messages sent",
+      "expectedTime": "2h"
+    }
+  ],
+  "blockers": null,
+  "weeklyGoal": "- Complete the setup of automated email marketing F.'s birthday\n- Fill in at least 12 clients' analyses for R&R plan\n- Send at least 10 catch-up emails for old clients\n- Pitch at least 10 clients",
+  "submittedAt": "2026-06-15T02:22:55.159Z"
+}
