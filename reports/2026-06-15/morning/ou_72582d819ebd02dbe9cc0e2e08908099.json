@@ -5,7 +5,7 @@
     {
       "title": "1",
       "output": "1",
-      "expectedTime": "5h",
+      "expectedTime": "—",
       "steps": [
         {
           "what": "1",
@@ -17,8 +17,13 @@
       "title": "1",
       "output": "1",
       "expectedTime": "—",
-      "steps": []
+      "steps": [
+        {
+          "what": "1",
+          "output": "1"
+        }
+      ]
     }
   ],
-  "submittedAt": "2026-06-15T09:50:19.644Z"
+  "submittedAt": "2026-06-15T10:34:10.792Z"
 }
