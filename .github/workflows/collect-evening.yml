@@ -44,7 +44,6 @@ jobs:
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
               {'app_id': APP_ID, 'app_secret': APP_SECRET}
           )
-          print(f'Auth response: {auth}')
           token = auth.get('tenant_access_token')
           if not token:
               print(f'ERROR: Cannot get token. Response: {auth}')
@@ -84,7 +83,7 @@ jobs:
           except:
               date_str = DATE
 
-          # Lấy weekly goal từ morning report thứ 2 của tuần
+          # Weekly goal từ thứ 2
           def get_monday_str(date_str):
               d = datetime.datetime.strptime(date_str, '%Y-%m-%d')
               diff = -6 if d.weekday() == 6 else (0 - d.weekday())
@@ -104,27 +103,54 @@ jobs:
 
           tasks = report.get('tasks', [])
           task_elements = []
-          extra_lines = []
 
           for i, t in enumerate(tasks, 1):
-              if t.get('subtask'):
-                  time_s = t.get('timeSpent', '—')
-                  extra_lines.append(
-                      f"🆕 Task phát sinh: {t.get('title','?')}"
-                      + (f" ({time_s})" if time_s != '—' else '')
-                  )
-              else:
-                  title    = t.get('title', '?')
-                  progress = t.get('progress', '—')
-                  time_s   = t.get('timeSpent', '—')
+              title      = t.get('title', '?')
+              progress   = t.get('progress', '—')
+              time_spent = t.get('timeSpent', '—')
+              steps      = t.get('steps', [])
+
+              # Emoji progress
+              try:
+                  prog_val = int(progress.replace('%', ''))
+                  if prog_val == 100:
+                      prog_emoji = '🟢'
+                  elif prog_val >= 60:
+                      prog_emoji = '🟡'
+                  else:
+                      prog_emoji = '🔴'
+              except:
+                  prog_emoji = '⚪'
+
+              task_elements.append({
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"**{i}. {title}**\n{prog_emoji} Tiến độ tổng: **{progress}**　⏱ Thực tế: {time_spent}"
+                }
+              })
+
+              # Steps breakdown
+              if steps:
+                  step_lines = []
+                  for si, step in enumerate(steps, 1):
+                      what      = step.get('what', '?')
+                      s_prog    = step.get('progress', '—')
+                      try:
+                          sp_val = int(s_prog.replace('%', ''))
+                          s_emoji = '✅' if sp_val == 100 else ('🔶' if sp_val >= 50 else '⬜')
+                      except:
+                          s_emoji = '⬜'
+                      step_lines.append(f"  {s_emoji} {si}. {what} — _{s_prog}_")
                   task_elements.append({
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
-                      "content": f"**{i}. {title}**\n📈 Progress: {progress}　⏱ Thời gian: {time_s}"
+                      "content": '\n'.join(step_lines)
                     }
                   })
-                  task_elements.append({"tag": "hr"})
+
+              task_elements.append({"tag": "hr"})
 
           evening_dir = pathlib.Path(f'reports/{DATE}/evening')
           submitted_count = len(list(evening_dir.glob('*.json'))) if evening_dir.exists() else 1
@@ -142,13 +168,6 @@ jobs:
           ]
 
           elements += task_elements
-
-          if extra_lines:
-              elements.append({
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": '\n'.join(extra_lines)}
-              })
-              elements.append({"tag": "hr"})
 
           blockers = report.get('blockers')
           if blockers:
