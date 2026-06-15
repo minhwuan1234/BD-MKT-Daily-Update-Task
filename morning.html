@@ -8,6 +8,160 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── TASK CARD ── */
+    .task-card {
+      background: #fff;
+      border: 1px solid #E8E0D6;
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .task-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .task-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-label);
+    }
+    .task-badge {
+      font-size: 11px;
+      font-weight: 500;
+      background: rgba(255,147,51,0.12);
+      color: var(--orange-dark);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .task-badge.optional {
+      background: #f0ebe3;
+      color: #999;
+    }
+    .task-fields-row {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 12px;
+      align-items: end;
+    }
+
+    /* ── STEPS ── */
+    .steps-section {
+      border-top: 1px solid #EEE8E0;
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .steps-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #aaa;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .step-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,147,51,0.12);
+      color: var(--orange-dark);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+    .step-inputs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .step-input {
+      width: 100%;
+      padding: 8px 11px;
+      background: #FAF7F3;
+      border: 1px solid #E0D8CE;
+      border-radius: 6px;
+      font-family: 'Rethink Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+      box-sizing: border-box;
+    }
+    .step-input::placeholder { color: #bbb; font-weight: 400; }
+    .step-input:focus {
+      border-color: var(--orange-text);
+      box-shadow: 0 0 0 3px rgba(254,138,34,0.14);
+    }
+    .step-input.output-input {
+      font-size: 11px;
+      border-style: dashed;
+      color: #777;
+    }
+    .step-input.output-input:focus {
+      border-style: solid;
+    }
+    .step-delete {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid #e0d8ce;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 8px;
+      color: #bbb;
+      font-size: 13px;
+      transition: all 140ms ease;
+      padding: 0;
+      line-height: 1;
+    }
+    .step-delete:hover { border-color: #e55; color: #e55; background: #fff0f0; }
+    .add-step-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 7px 12px;
+      background: none;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-family: 'Rethink Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #bbb;
+      cursor: pointer;
+      transition: all 140ms ease;
+      margin-top: 2px;
+    }
+    .add-step-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange-dark);
+      background: rgba(255,147,51,0.04);
+    }
+
+    /* task2 steps hidden until title filled */
+    #task2-steps { display: none; }
+  </style>
 </head>
 <body>
 <div class="page-wrapper">
@@ -38,16 +192,18 @@
         <p>Thank kiuuuuuu☀️</p>
         <p class="state-sub">Làm việc lăng xuất e nhé 🚀</p>
       </div>
-      <div id="state-form" style="display:none; flex-direction:column; gap:32px; width:100%;">
+
+      <div id="state-form" style="display:none; flex-direction:column; gap:28px; width:100%;">
         <div class="form-header">
           <div class="title-row">
             <div class="gap-8">
               <h1 class="form-title">Khởi động mornin<span class="spark">✦</span></h1>
-              <p class="form-subtitle">Update nhẹ nhàng tý  — <span id="today-label"></span></p>
+              <p class="form-subtitle">Update nhẹ nhàng tý — <span id="today-label"></span></p>
             </div>
             <div class="rocket-icon">☀️</div>
           </div>
         </div>
+
         <div class="form-body">
 
           <!-- WEEKLY GOAL -->
@@ -56,65 +212,99 @@
             <textarea class="field-textarea" id="weekly-goal" placeholder=""></textarea>
           </div>
 
-          <!-- Task 1 -->
-          <div class="field-group">
-            <label class="field-label">Task 1 (Main Task)</label>
-            <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Task 1  — Output dự kiến (Thứ có thể gửi, review hoặc dùng tiếp sau khi xong task.)</label>
-            <input class="field-input" type="text" id="output1" placeholder="Output/kết quả mong đợi của task này..." />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Task 1 — Thời gian dự kiến hoàn thành</label>
-            <div class="select-wrapper">
-              <select class="field-select" id="time1">
-                <option value="">-- Chọn thời gian --</option>
-                <option value="30P">30 phút</option>
-                <option value="1h">1h</option>
-                <option value="2h">2h</option>
-                <option value="3h">3h</option>
-                <option value="4h">4h</option>
-                <option value="5h">5h</option>
-                <option value="6h">6h</option>
-                <option value="7h">7h</option>
-                <option value="8h">8h</option>
-              </select>
-              <span class="select-arrow">&#8964;</span>
+          <!-- ── TASK 1 CARD ── -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <span class="task-card-title">Task 1</span>
+              <span class="task-badge">Bắt buộc</span>
+            </div>
+
+            <div class="field-group" style="gap:8px; margin:0;">
+              <label class="field-label">Tên task chính</label>
+              <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
+            </div>
+
+            <div class="task-fields-row">
+              <div class="field-group" style="gap:8px; margin:0;">
+                <label class="field-label">Output dự kiến <span class="optional">— thứ có thể gửi/review sau khi xong</span></label>
+                <input class="field-input" type="text" id="output1" placeholder="Output/kết quả mong đợi..." />
+              </div>
+              <div class="field-group" style="gap:8px; margin:0;">
+                <label class="field-label">Thời gian</label>
+                <div class="select-wrapper">
+                  <select class="field-select" id="time1">
+                    <option value="">-- Chọn --</option>
+                    <option value="30P">30 phút</option>
+                    <option value="1h">1h</option>
+                    <option value="2h">2h</option>
+                    <option value="3h">3h</option>
+                    <option value="4h">4h</option>
+                    <option value="5h">5h</option>
+                    <option value="6h">6h</option>
+                    <option value="7h">7h</option>
+                    <option value="8h">8h</option>
+                  </select>
+                  <span class="select-arrow">&#8964;</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEPS TASK 1 -->
+            <div class="steps-section" id="task1-steps">
+              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
+              <div id="steps1-container"></div>
+              <button class="add-step-btn" id="add-step1" type="button">+ Thêm bước</button>
             </div>
           </div>
 
-          <!-- Task 2 -->
-          <div class="field-group">
-            <label class="field-label">Task 2 <span class="optional">— Có task này thì cũng ghi output luôn nhé</span></label>
-            <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Task 2 — Output dự kiến <span class="optional">(optional)</span></label>
-            <input class="field-input" type="text" id="output2" placeholder="Output/kết quả mong đợi của task này..." />
-          </div>
-          <div class="field-group">
-            <label class="field-label">Task 2 — Thời gian dự kiến hoàn thành <span class="optional">(optional)</span></label>
-            <div class="select-wrapper">
-              <select class="field-select" id="time2">
-                <option value="">-- Chọn thời gian --</option>
-                <option value="30P">30 phút</option>
-                <option value="1h">1h</option>
-                <option value="2h">2h</option>
-                <option value="3h">3h</option>
-                <option value="4h">4h</option>
-                <option value="5h">5h</option>
-                <option value="6h">6h</option>
-                <option value="7h">7h</option>
-                <option value="8h">8h</option>
-              </select>
-              <span class="select-arrow">&#8964;</span>
+          <!-- ── TASK 2 CARD ── -->
+          <div class="task-card" style="border-style: dashed;">
+            <div class="task-card-header">
+              <span class="task-card-title">Task 2</span>
+              <span class="task-badge optional">Optional</span>
+            </div>
+
+            <div class="field-group" style="gap:8px; margin:0;">
+              <label class="field-label">Tên task <span class="optional">— nếu có task thứ hai</span></label>
+              <input class="field-input" type="text" id="task2" placeholder="Task thứ hai nếu có..." />
+            </div>
+
+            <div class="task-fields-row">
+              <div class="field-group" style="gap:8px; margin:0;">
+                <label class="field-label">Output dự kiến <span class="optional">(optional)</span></label>
+                <input class="field-input" type="text" id="output2" placeholder="Output/kết quả mong đợi..." />
+              </div>
+              <div class="field-group" style="gap:8px; margin:0;">
+                <label class="field-label">Thời gian</label>
+                <div class="select-wrapper">
+                  <select class="field-select" id="time2">
+                    <option value="">-- Chọn --</option>
+                    <option value="30P">30 phút</option>
+                    <option value="1h">1h</option>
+                    <option value="2h">2h</option>
+                    <option value="3h">3h</option>
+                    <option value="4h">4h</option>
+                    <option value="5h">5h</option>
+                    <option value="6h">6h</option>
+                    <option value="7h">7h</option>
+                    <option value="8h">8h</option>
+                  </select>
+                  <span class="select-arrow">&#8964;</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEPS TASK 2 — ẩn cho đến khi điền title -->
+            <div class="steps-section" id="task2-steps">
+              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
+              <div id="steps2-container"></div>
+              <button class="add-step-btn" id="add-step2" type="button">+ Thêm bước</button>
             </div>
           </div>
 
-          <!-- Khó khăn -->
+          <!-- BLOCKERS -->
           <div class="field-group">
-            <label class="field-label">Có task nào cần hỗ trợ không nhỉ? (Điều đang cản tiến độ/chất lượng hoặc cần hỗ trợ.) 
+            <label class="field-label">Có task nào cần hỗ trợ không nhỉ? <span class="optional">— Điều đang cản tiến độ/chất lượng</span></label>
             <textarea class="field-textarea" id="blockers" placeholder="Đang bị stuck ở đâu không? Note lại để team support nhé..."></textarea>
           </div>
 
@@ -125,6 +315,7 @@
     </div>
   </div>
 </div>
+
 <script>
 const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
@@ -139,16 +330,12 @@ const QUOTES = [
 ];
 
 const IMAGES = [
-  'assets/hero-1.png',
-  'assets/hero-2.png',
-  'assets/hero-3.png',
-  'assets/hero-4.png',
-  'assets/hero-5.png',
-  'assets/hero-6.png',
+  'assets/hero-1.png','assets/hero-2.png','assets/hero-3.png',
+  'assets/hero-4.png','assets/hero-5.png','assets/hero-6.png',
 ];
 
 const vnDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
-const vnDay  = vnDate.getDay(); // 0=CN, 1=T2...6=T7
+const vnDay  = vnDate.getDay();
 const dayIdx = vnDay === 0 ? 5 : (vnDay - 1) % QUOTES.length;
 
 document.getElementById('daily-quote').textContent = QUOTES[dayIdx].text;
@@ -157,75 +344,127 @@ document.getElementById('quote-author').textContent = QUOTES[dayIdx].author;
 const src = IMAGES[dayIdx];
 const heroEl = document.getElementById('hero-gif');
 if (src.endsWith('.mp4') || src.endsWith('.webm')) {
-  heroEl.style.backgroundImage = '';
-  heroEl.innerHTML = `<video id="hero-video" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
-  heroEl.insertAdjacentHTML('afterend', `
-    <button id="btn-mute" onclick="
-      const v=document.getElementById('hero-video');
-      v.muted=!v.muted;
-      this.textContent=v.muted?'🔇':'🔊';
-    " style="
-      position:absolute;bottom:16px;right:16px;z-index:20;
-      background:rgba(0,0,0,0.45);border:none;color:white;
-      border-radius:99px;padding:6px 14px;cursor:pointer;
-      font-size:16px;backdrop-filter:blur(4px);
-    ">🔇</button>
-  `);
+  heroEl.innerHTML = `<video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" src="${src}"></video>`;
 } else {
   heroEl.style.backgroundImage = `url('${src}')`;
 }
 
 function getDateStr(d) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-
-// Lấy ngày thứ 2 của tuần hiện tại (VN)
 function getMondayStr(d) {
-  const day = d.getDay(); // 0=CN
+  const day = d.getDay();
   const diff = day === 0 ? -6 : 1 - day;
   const mon = new Date(d);
   mon.setDate(d.getDate() + diff);
   return getDateStr(mon);
 }
-
 function todayLabel() {
-  return vnDate.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+  return vnDate.toLocaleDateString('vi-VN', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' });
 }
-
 function showState(name) {
-  ['loading', 'error', 'success', 'form'].forEach(s => {
+  ['loading','error','success','form'].forEach(s => {
     const el = document.getElementById(`state-${s}`);
     if (!el) return;
     el.style.display = (s === name) ? 'flex' : 'none';
   });
 }
 
-const userId = new URLSearchParams(location.search).get('userId');
+// ── STEPS ENGINE ────────────────────────────────────────────────
+const MAX_STEPS = 5;
+
+function createStepRow(taskIdx, stepNum) {
+  const row = document.createElement('div');
+  row.className = 'step-row';
+  row.dataset.step = stepNum;
+  row.innerHTML = `
+    <div class="step-num">${stepNum}</div>
+    <div class="step-inputs">
+      <input class="step-input" type="text" placeholder="Bước này làm gì?" data-field="what" />
+      <input class="step-input output-input" type="text" placeholder="→ Output bước này là gì?" data-field="output" />
+    </div>
+    <button class="step-delete" type="button" title="Xoá bước">✕</button>
+  `;
+  row.querySelector('.step-delete').addEventListener('click', () => {
+    row.remove();
+    reindexSteps(taskIdx);
+    updateAddBtn(taskIdx);
+  });
+  return row;
+}
+
+function reindexSteps(taskIdx) {
+  const container = document.getElementById(`steps${taskIdx}-container`);
+  container.querySelectorAll('.step-row').forEach((row, i) => {
+    row.dataset.step = i + 1;
+    row.querySelector('.step-num').textContent = i + 1;
+  });
+}
+
+function updateAddBtn(taskIdx) {
+  const container = document.getElementById(`steps${taskIdx}-container`);
+  const btn = document.getElementById(`add-step${taskIdx}`);
+  const count = container.querySelectorAll('.step-row').length;
+  btn.style.display = count >= MAX_STEPS ? 'none' : 'flex';
+}
+
+function addStep(taskIdx) {
+  const container = document.getElementById(`steps${taskIdx}-container`);
+  const count = container.querySelectorAll('.step-row').length;
+  if (count >= MAX_STEPS) return;
+  const row = createStepRow(taskIdx, count + 1);
+  container.appendChild(row);
+  row.querySelector('input').focus();
+  updateAddBtn(taskIdx);
+}
+
+// Init: mỗi task bắt đầu với 1 step
+addStep(1);
+
+document.getElementById('add-step1').addEventListener('click', () => addStep(1));
+document.getElementById('add-step2').addEventListener('click', () => addStep(2));
+
+// Task 2 steps: chỉ hiện khi user điền title
+document.getElementById('task2').addEventListener('input', function() {
+  const stepsEl = document.getElementById('task2-steps');
+  const hasTitle = this.value.trim().length > 0;
+  stepsEl.style.display = hasTitle ? 'flex' : 'none';
+  // Init 1 step khi lần đầu hiện
+  if (hasTitle && document.getElementById('steps2-container').children.length === 0) {
+    addStep(2);
+  }
+});
+
+function getSteps(taskIdx) {
+  const container = document.getElementById(`steps${taskIdx}-container`);
+  const steps = [];
+  container.querySelectorAll('.step-row').forEach(row => {
+    const what   = row.querySelector('[data-field="what"]').value.trim();
+    const output = row.querySelector('[data-field="output"]').value.trim();
+    if (what) steps.push({ what, output: output || '—' });
+  });
+  return steps;
+}
+
+// ── INIT ────────────────────────────────────────────────────────
+const userId   = new URLSearchParams(location.search).get('userId');
 const isMonday = vnDay === 1;
 const mondayStr = getMondayStr(vnDate);
 
 async function initWeeklyGoal() {
-  const goalEl    = document.getElementById('weekly-goal');
-  const labelEl   = document.getElementById('weekly-goal-label');
-
+  const goalEl  = document.getElementById('weekly-goal');
+  const labelEl = document.getElementById('weekly-goal-label');
   if (isMonday) {
-    // Thứ 2 → cho điền mới
     goalEl.readOnly = false;
     goalEl.classList.remove('is-autofilled');
     labelEl.textContent = '🎯 Goal của tuần — Hôm nay là thứ 2, đặt goal cho tuần này nhé!';
   } else {
-    // T3-T6 → fetch goal từ thứ 2
     try {
-      const url = `${GITHUB_RAW}/reports/${mondayStr}/morning/${userId}.json?t=${Date.now()}`;
-      const res = await fetch(url);
+      const res = await fetch(`${GITHUB_RAW}/reports/${mondayStr}/morning/${userId}.json?t=${Date.now()}`);
       if (res.ok) {
         const data = await res.json();
-        const goal = data.weeklyGoal;
-        if (goal) {
-          goalEl.value = goal;
+        if (data.weeklyGoal) {
+          goalEl.value = data.weeklyGoal;
           goalEl.readOnly = true;
           goalEl.classList.add('is-autofilled');
           labelEl.textContent = '🎯 Goal của tuần';
@@ -250,17 +489,10 @@ if (!userId) {
   initWeeklyGoal();
 }
 
+// ── SUBMIT ──────────────────────────────────────────────────────
 document.getElementById('submit-btn').addEventListener('click', async () => {
-  const task1      = document.getElementById('task1').value.trim();
-  const output1    = document.getElementById('output1').value.trim();
-  const time1      = document.getElementById('time1').value;
-  const task2      = document.getElementById('task2').value.trim();
-  const output2    = document.getElementById('output2').value.trim();
-  const time2      = document.getElementById('time2').value;
-  const blockers   = document.getElementById('blockers').value.trim();
-  const weeklyGoal = isMonday ? document.getElementById('weekly-goal').value.trim() : null;
-
-  if (!task1) {
+  const task1Title = document.getElementById('task1').value.trim();
+  if (!task1Title) {
     const inp = document.getElementById('task1');
     inp.classList.add('field-error');
     inp.focus();
@@ -275,24 +507,32 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   btn.disabled = true;
   btn.textContent = 'Đang gửi...';
 
+  const task2Title = document.getElementById('task2').value.trim();
+  const weeklyGoal = isMonday ? document.getElementById('weekly-goal').value.trim() : null;
+
   const tasks = [{
-    title: task1,
-    output: output1 || '—',
-    expectedTime: time1 || '—',
+    title:        task1Title,
+    output:       document.getElementById('output1').value.trim() || '—',
+    expectedTime: document.getElementById('time1').value || '—',
+    steps:        getSteps(1),
   }];
-  if (task2) tasks.push({
-    title: task2,
-    output: output2 || '—',
-    expectedTime: time2 || '—',
-  });
+
+  if (task2Title) {
+    tasks.push({
+      title:        task2Title,
+      output:       document.getElementById('output2').value.trim() || '—',
+      expectedTime: document.getElementById('time2').value || '—',
+      steps:        getSteps(2),
+    });
+  }
 
   const payload = {
     type: 'morning',
     userId,
     date: getDateStr(vnDate),
     tasks,
-    blockers: blockers || null,
-    weeklyGoal: weeklyGoal || null,
+    blockers:    document.getElementById('blockers').value.trim() || null,
+    weeklyGoal:  weeklyGoal || null,
     submittedAt: new Date().toISOString(),
   };
 
