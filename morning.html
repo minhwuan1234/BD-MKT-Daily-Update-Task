@@ -228,16 +228,16 @@
       </div>
       <div id="state-success" class="state-box" style="display:none;">
         <p class="state-icon">✅</p>
-        <p>Thank kiuuuuuu☀️</p>
-        <p class="state-sub">Làm việc lăng xuất e nhé 🚀</p>
+        <p>Đã ghi nhận kế hoạch của bạn ☀️</p>
+        <p class="state-sub">Chúc bạn một ngày làm việc hiệu quả!</p>
       </div>
 
       <div id="state-form" style="display:none; flex-direction:column; gap:28px; width:100%;">
         <div class="form-header">
           <div class="title-row">
             <div class="gap-8">
-              <h1 class="form-title">Khởi động mornin<span class="spark">✦</span></h1>
-              <p class="form-subtitle">Update nhẹ nhàng tý — <span id="today-label"></span></p>
+              <h1 class="form-title">Kế hoạch ngày mới<span class="spark">✦</span></h1>
+              <p class="form-subtitle">Lên kế hoạch cho ngày — <span id="today-label"></span></p>
             </div>
             <div class="rocket-icon">☀️</div>
           </div>
@@ -249,7 +249,7 @@
           <div class="field-group" id="group-weekly-goal">
             <label class="field-label" id="weekly-goal-label">🎯 Goal tuần này là gì em nhỉ <span class="optional">— Trạng thái cuối tuần cần đạt, kiểm tra được</span></label>
             <div class="field-hint-block">
-              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ</button>
               <div class="hint-content">
                 <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Chốt bàn về logic để build tool v2</span></div>
                 <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Hoàn thành task đúng deadline</span></div>
@@ -266,22 +266,22 @@
             </div>
 
             <div class="field-group" style="gap:8px; margin:0;">
-              <label class="field-label">Tên task chính <span class="optional">— Việc bạn sẽ thực hiện hôm nay</span></label>
+              <label class="field-label">Task chính <span class="optional">— Việc bạn sẽ thực hiện hôm nay</span></label>
               <div class="field-hint-block">
-                <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+                <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ</button>
                 <div class="hint-content">
                   <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Phân tích questionnaire để gom problem chính</span></div>
                   <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Làm questionnaire</span></div>
                 </div>
               </div>
-              <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
+              <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay" />
             </div>
 
             <div class="task-fields-row">
               <div class="field-group" style="gap:8px; margin:0;">
-                <label class="field-label">Output dự kiến <span class="optional">— thứ có thể gửi/review sau khi xong</span></label>
+                <label class="field-label">Output dự kiến <span class="optional">— thứ có thể gửi hoặc review sau khi hoàn thành</span></label>
                 <div class="field-hint-block">
-                  <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+                  <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ</button>
                   <div class="hint-content">
                     <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Bảng 50 problems đã nhóm theo pain point</span></div>
                     <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Dig problem</span></div>
@@ -311,7 +311,7 @@
 
             <!-- STEPS TASK 1 -->
             <div class="steps-section" id="task1-steps">
-              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
+              <p class="steps-label">Các bước thực hiện</p>
               <div id="steps1-container"></div>
               <button class="add-step-btn" id="add-step1" type="button">+ Thêm bước</button>
             </div>
@@ -356,7 +356,7 @@
 
             <!-- STEPS TASK 2 — ẩn cho đến khi điền title -->
             <div class="steps-section" id="task2-steps">
-              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
+              <p class="steps-label">Các bước thực hiện</p>
               <div id="steps2-container"></div>
               <button class="add-step-btn" id="add-step2" type="button">+ Thêm bước</button>
             </div>
@@ -364,18 +364,18 @@
 
           <!-- BLOCKERS -->
           <div class="field-group">
-            <label class="field-label">Có task nào cần hỗ trợ không nhỉ? <span class="optional">— Điều đang cản tiến độ/chất lượng</span></label>
+            <label class="field-label">Có điểm nào cần hỗ trợ không? <span class="optional">— Điều đang cản tiến độ hoặc chất lượng</span></label>
             <div class="field-hint-block">
-              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ</button>
               <div class="hint-content">
                 <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Chưa rõ tiêu chí chọn critical problem, cần confirm với chị trước khi tiếp</span></div>
                 <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Chưa ạ / test / không có</span></div>
               </div>
             </div>
-            <textarea class="field-textarea" id="blockers" placeholder="Đang bị stuck ở đâu không? Note lại để team support nhé..."></textarea>
+            <textarea class="field-textarea" id="blockers" placeholder="Ghi lại nếu có điểm cần team hỗ trợ..."></textarea>
           </div>
 
-          <button class="submit-btn" id="submit-btn" type="button">Chạm nhẹ ☀️</button>
+          <button class="submit-btn" id="submit-btn" type="button">Gửi kế hoạch ☀️</button>
 
         </div>
       </div>
@@ -390,7 +390,7 @@ const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 function toggleHint(btn) {
   const content = btn.nextElementSibling;
   const isOpen = content.classList.toggle('open');
-  btn.textContent = isOpen ? '💡 Ẩn ví dụ ▴' : '💡 Xem ví dụ ▾';
+  btn.textContent = isOpen ? '💡 Ẩn ví dụ' : '💡 Xem ví dụ';
 }
 const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
@@ -531,7 +531,7 @@ async function initWeeklyGoal() {
   if (isMonday) {
     goalEl.readOnly = false;
     goalEl.classList.remove('is-autofilled');
-    labelEl.textContent = '🎯 Goal của tuần — Hôm nay là thứ 2, đặt goal cho tuần này nhé!';
+    labelEl.textContent = '🎯 Goal của tuần — Hôm nay là thứ 2, hãy đặt mục tiêu cho tuần này';
   } else {
     try {
       const res = await fetch(`${GITHUB_RAW}/reports/${mondayStr}/morning/${userId}.json?t=${Date.now()}`);
@@ -623,7 +623,7 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     showState('success');
   } catch (e) {
     btn.disabled = false;
-    btn.textContent = 'Chạm nhẹ ☀️';
+    btn.textContent = 'Gửi kế hoạch ☀️';
     alert(`❌ Gửi thất bại: ${e.message}`);
   }
 });
