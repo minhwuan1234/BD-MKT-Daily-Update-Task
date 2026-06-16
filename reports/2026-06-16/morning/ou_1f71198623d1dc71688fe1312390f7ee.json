@@ -1,0 +1,26 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Sửa content web theo feedback",
+      "output": "File sheet tracking tổng (toàn bộ new content website: 30 pages) gửi c Hà để setup lịch desgin cho anh Tony -> sẽ catchup và giục thường xuyên",
+      "expectedTime": "7h",
+      "steps": [
+        {
+          "what": "Rà soát feedback từ leader từng page",
+          "output": "—"
+        },
+        {
+          "what": "Chỉnh sửa cấu trúc và nội dung các section theo feedback từng page",
+          "output": "—"
+        },
+        {
+          "what": "Review và hoàn thiện nội dung từng page",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-16T02:16:14.127Z"
+}
