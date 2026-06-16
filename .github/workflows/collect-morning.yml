@@ -186,14 +186,15 @@ jobs:
               })
               form_elements.append({"tag": "hr"})
 
+          # Embed userId và date vào button name để Worker đọc được
+          submit_name = f"submit__{USER_ID}__{DATE}"
           form_elements.append({
             "tag": "button",
-            "name": f"submit_{USER_ID}",
+            "name": submit_name,
             "text": {"tag": "plain_text", "content": "📨 Gửi review"},
             "type": "primary",
             "width": "fill",
-            "form_action_type": "submit",
-            "value": json.dumps({"type": "form_submit", "userId": USER_ID, "date": DATE})
+            "form_action_type": "submit"
           })
 
           # JSON 2.0 card — dùng "card" field thay vì "content"
