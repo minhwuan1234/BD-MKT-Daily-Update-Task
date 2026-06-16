@@ -1,0 +1,40 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "R&R plan (plan out 6 contacts)",
+      "output": "Fill sheet + action to tackle",
+      "expectedTime": "4h",
+      "steps": [
+        {
+          "what": "Tìm hiểu công ty làm về gì, có gì new",
+          "output": "New in something?"
+        },
+        {
+          "what": "Tìm hiểu convo cũ",
+          "output": "Last touchpoint, project, existing opportunities"
+        },
+        {
+          "what": "Xác định relationship status",
+          "output": "Dormant relationship, Active relationship, no project, Lost contact ownership,..."
+        },
+        {
+          "what": "Xác định next phase goal",
+          "output": "reply when you reach out, share upcoming project, ..."
+        },
+        {
+          "what": "Xác định action ưu tiên",
+          "output": "Catch-up call, send idea proposal,..."
+        }
+      ]
+    },
+    {
+      "title": "Check & feedback contact của Linh",
+      "output": "Comment + re-direction nếu cần",
+      "expectedTime": "1h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-16T02:20:32.306Z"
+}
