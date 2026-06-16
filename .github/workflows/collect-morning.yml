@@ -23,7 +23,7 @@ jobs:
 
         run: |
           python3 - <<'PYEOF'
-          import json, urllib.request, os, datetime, pathlib
+          import json, urllib.request, urllib.error, os, datetime, pathlib
 
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
@@ -39,8 +39,14 @@ jobs:
               if token:
                   headers['Authorization'] = f'Bearer {token}'
               req = urllib.request.Request(url, data=data, headers=headers, method='POST')
-              with urllib.request.urlopen(req) as r:
-                  return json.loads(r.read())
+              try:
+                  with urllib.request.urlopen(req) as r:
+                      return json.loads(r.read())
+              except urllib.error.HTTPError as e:
+                  body = e.read().decode()
+                  print(f'HTTP {e.code} error for {url}')
+                  print(f'Response body: {body}')
+                  raise
 
           auth = lark_post(
               'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
