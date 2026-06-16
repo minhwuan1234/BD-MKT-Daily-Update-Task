@@ -191,9 +191,8 @@ jobs:
             "text": {"tag": "plain_text", "content": "📨 Gửi review"},
             "type": "primary",
             "width": "fill",
-            "behaviors": [{"type": "callback", "value": json.dumps({"type": "form_submit", "userId": USER_ID, "date": DATE})}],
             "action_type": "submit",
-            "form_name": form_name
+            "value": json.dumps({"type": "form_submit", "userId": USER_ID, "date": DATE})
           })
 
           # JSON 2.0 card — dùng "card" field thay vì "content"
