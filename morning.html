@@ -161,6 +161,45 @@
 
     /* task2 steps hidden until title filled */
     #task2-steps { display: none; }
+
+    /* ── EXAMPLE HINTS ── */
+    .field-hint-block {
+      background: #F9F6F1;
+      border: 1px solid #EEE8E0;
+      border-radius: 8px;
+      padding: 10px 13px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hint-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+    .hint-row .hint-icon { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+    .hint-row .hint-ok  { color: #2e7d32; }
+    .hint-row .hint-bad { color: #c62828; text-decoration: line-through; opacity: 0.7; }
+    .hint-toggle {
+      font-size: 11px;
+      color: #bbb;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      text-align: left;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hint-toggle:hover { color: var(--orange-dark); }
+    .hint-content { display: none; }
+    .hint-content.open { display: flex; flex-direction: column; gap: 5px; }
   </style>
 </head>
 <body>
@@ -208,8 +247,15 @@
 
           <!-- WEEKLY GOAL -->
           <div class="field-group" id="group-weekly-goal">
-            <label class="field-label" id="weekly-goal-label">🎯 Goal tuần này là gì em nhỉ (Trạng thái cuối tuần cần đạt nhé)</label>
-            <textarea class="field-textarea" id="weekly-goal" placeholder=""></textarea>
+            <label class="field-label" id="weekly-goal-label">🎯 Goal tuần này là gì em nhỉ <span class="optional">— Trạng thái cuối tuần cần đạt, kiểm tra được</span></label>
+            <div class="field-hint-block">
+              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+              <div class="hint-content">
+                <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Chốt bàn về logic để build tool v2</span></div>
+                <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Hoàn thành task đúng deadline</span></div>
+              </div>
+            </div>
+            <textarea class="field-textarea" id="weekly-goal" placeholder="Trạng thái cuối tuần cần đạt..."></textarea>
           </div>
 
           <!-- ── TASK 1 CARD ── -->
@@ -220,13 +266,27 @@
             </div>
 
             <div class="field-group" style="gap:8px; margin:0;">
-              <label class="field-label">Tên task chính</label>
+              <label class="field-label">Tên task chính <span class="optional">— Việc bạn sẽ thực hiện hôm nay</span></label>
+              <div class="field-hint-block">
+                <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+                <div class="hint-content">
+                  <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Phân tích questionnaire để gom problem chính</span></div>
+                  <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Làm questionnaire</span></div>
+                </div>
+              </div>
               <input class="field-input" type="text" id="task1" placeholder="Mô tả task chính hôm nay..." />
             </div>
 
             <div class="task-fields-row">
               <div class="field-group" style="gap:8px; margin:0;">
                 <label class="field-label">Output dự kiến <span class="optional">— thứ có thể gửi/review sau khi xong</span></label>
+                <div class="field-hint-block">
+                  <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+                  <div class="hint-content">
+                    <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Bảng 50 problems đã nhóm theo pain point</span></div>
+                    <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Dig problem</span></div>
+                  </div>
+                </div>
                 <input class="field-input" type="text" id="output1" placeholder="Output/kết quả mong đợi..." />
               </div>
               <div class="field-group" style="gap:8px; margin:0;">
@@ -251,7 +311,7 @@
 
             <!-- STEPS TASK 1 -->
             <div class="steps-section" id="task1-steps">
-              <p class="steps-label">Bóc nhỏ task — các bước cụ thể (Optional-để mọi người hiểu rõ hơn về thứ mình đang làm) </p>
+              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
               <div id="steps1-container"></div>
               <button class="add-step-btn" id="add-step1" type="button">+ Thêm bước</button>
             </div>
@@ -296,7 +356,7 @@
 
             <!-- STEPS TASK 2 — ẩn cho đến khi điền title -->
             <div class="steps-section" id="task2-steps">
-              <p class="steps-label">Bóc nhỏ task — các bước cụ thể (Optional)</p>
+              <p class="steps-label">Bóc nhỏ task — các bước cụ thể</p>
               <div id="steps2-container"></div>
               <button class="add-step-btn" id="add-step2" type="button">+ Thêm bước</button>
             </div>
@@ -305,6 +365,13 @@
           <!-- BLOCKERS -->
           <div class="field-group">
             <label class="field-label">Có task nào cần hỗ trợ không nhỉ? <span class="optional">— Điều đang cản tiến độ/chất lượng</span></label>
+            <div class="field-hint-block">
+              <button class="hint-toggle" onclick="toggleHint(this)">💡 Xem ví dụ ▾</button>
+              <div class="hint-content">
+                <div class="hint-row"><span class="hint-icon">✅</span><span class="hint-ok">Chưa rõ tiêu chí chọn critical problem, cần confirm với chị trước khi tiếp</span></div>
+                <div class="hint-row"><span class="hint-icon">❌</span><span class="hint-bad">Chưa ạ / test / không có</span></div>
+              </div>
+            </div>
             <textarea class="field-textarea" id="blockers" placeholder="Đang bị stuck ở đâu không? Note lại để team support nhé..."></textarea>
           </div>
 
@@ -318,6 +385,13 @@
 
 <script>
 const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
+
+// Toggle hint examples
+function toggleHint(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.toggle('open');
+  btn.textContent = isOpen ? '💡 Ẩn ví dụ ▴' : '💡 Xem ví dụ ▾';
+}
 const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
 const QUOTES = [
@@ -380,8 +454,8 @@ function createStepRow(taskIdx, stepNum) {
   row.innerHTML = `
     <div class="step-num">${stepNum}</div>
     <div class="step-inputs">
-      <input class="step-input" type="text" placeholder="Bước này làm gì?" data-field="what" />
-      <input class="step-input output-input" type="text" placeholder="→ Output bước này là gì?" data-field="output" />
+      <input class="step-input" type="text" placeholder="Bước này làm gì? vd: Đọc lại script và note concept chính" data-field="what" />
+      <input class="step-input output-input" type="text" placeholder="→ Output? vd: Danh sách concept key cần visual hoá" data-field="output" />
     </div>
     <button class="step-delete" type="button" title="Xoá bước">✕</button>
   `;
