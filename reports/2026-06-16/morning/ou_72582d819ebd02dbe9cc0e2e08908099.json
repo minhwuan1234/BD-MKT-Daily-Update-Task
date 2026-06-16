@@ -3,31 +3,27 @@
   "memberName": "Minh Quân",
   "tasks": [
     {
-      "title": "test",
-      "output": "test",
-      "expectedTime": "3h",
+      "title": "tesst",
+      "output": "tesst",
+      "expectedTime": "—",
       "steps": [
         {
-          "what": "test",
-          "output": "test"
+          "what": "tesst",
+          "output": "tesst"
         }
       ]
     },
     {
-      "title": "test",
-      "output": "test",
-      "expectedTime": "2h",
+      "title": "tesst",
+      "output": "tesst",
+      "expectedTime": "—",
       "steps": [
         {
-          "what": "test",
-          "output": "test"
-        },
-        {
-          "what": "test",
-          "output": "test"
+          "what": "tesst",
+          "output": "tesst"
         }
       ]
     }
   ],
-  "submittedAt": "2026-06-16T08:00:32.698Z"
+  "submittedAt": "2026-06-16T08:06:51.371Z"
 }
