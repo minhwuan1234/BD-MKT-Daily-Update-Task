@@ -311,7 +311,7 @@
 
             <!-- STEPS TASK 1 -->
             <div class="steps-section" id="task1-steps">
-              <p class="steps-label">Các bước thực hiện (optional để giúp mọi người hiểu process làm việc dễ dàng hơn)</p>
+              <p class="steps-label">Các bước thực hiện</p>
               <div id="steps1-container"></div>
               <button class="add-step-btn" id="add-step1" type="button">+ Thêm bước</button>
             </div>
@@ -561,6 +561,63 @@ if (!userId) {
   showState('form');
   document.getElementById('today-label').textContent = todayLabel();
   initWeeklyGoal();
+
+  // ── Pre-fill data cũ nếu là revision ──────────────────────────
+  const prefillParam = new URLSearchParams(location.search).get('prefill');
+  if (prefillParam) {
+    try {
+      const prefill = JSON.parse(decodeURIComponent(escape(atob(prefillParam))));
+      const tasks   = prefill.tasks || [];
+
+      // Task 1
+      if (tasks[0]) {
+        const t = tasks[0];
+        document.getElementById('task1').value = t.title || '';
+        document.getElementById('task1-output').value = t.output || '';
+        document.getElementById('task1-time').value   = t.expectedTime || '';
+
+        // Fill steps task 1
+        const stepsEl1 = document.getElementById('task1-steps');
+        const existingRows1 = stepsEl1.querySelectorAll('.step-row');
+        existingRows1.forEach(r => r.remove());
+        (t.steps || []).forEach((s, si) => {
+          addStep(1);
+          const rows = stepsEl1.querySelectorAll('.step-row');
+          const row  = rows[rows.length - 1];
+          row.querySelector('[data-field="what"]').value   = s.what   || '';
+          row.querySelector('[data-field="output"]').value = s.output || '';
+        });
+      }
+
+      // Task 2
+      if (tasks[1] && tasks[1].title) {
+        const t = tasks[1];
+        document.getElementById('task2').value = t.title || '';
+        document.getElementById('task2-output').value = t.output || '';
+        document.getElementById('task2-time').value   = t.expectedTime || '';
+        document.getElementById('task2-steps').style.display = 'block';
+
+        // Fill steps task 2
+        const stepsEl2 = document.getElementById('task2-steps');
+        const existingRows2 = stepsEl2.querySelectorAll('.step-row');
+        existingRows2.forEach(r => r.remove());
+        (t.steps || []).forEach((s, si) => {
+          addStep(2);
+          const rows = stepsEl2.querySelectorAll('.step-row');
+          const row  = rows[rows.length - 1];
+          row.querySelector('[data-field="what"]').value   = s.what   || '';
+          row.querySelector('[data-field="output"]').value = s.output || '';
+        });
+      }
+
+      // Blockers và weekly goal nếu có
+      if (prefill.blockers)   document.getElementById('blockers').value    = prefill.blockers;
+      if (prefill.weeklyGoal) document.getElementById('weekly-goal').value = prefill.weeklyGoal;
+
+    } catch(e) {
+      console.warn('prefill parse error:', e);
+    }
+  }
 }
 
 // ── SUBMIT ──────────────────────────────────────────────────────
