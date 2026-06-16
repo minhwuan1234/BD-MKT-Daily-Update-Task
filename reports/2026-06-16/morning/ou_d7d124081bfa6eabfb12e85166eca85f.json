@@ -1,0 +1,19 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Fill tiếp data base thêm cases",
+      "output": "30 cases mới",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "Account_RR idea & Alpha Insurers proposal loom video",
+      "output": "—",
+      "expectedTime": "—",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-16T02:04:15.266Z"
+}
