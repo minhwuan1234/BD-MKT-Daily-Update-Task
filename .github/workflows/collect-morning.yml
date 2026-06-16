@@ -188,6 +188,7 @@ jobs:
 
           form_elements.append({
             "tag": "button",
+            "name": f"submit_{USER_ID}",
             "text": {"tag": "plain_text", "content": "📨 Gửi review"},
             "type": "primary",
             "width": "fill",
