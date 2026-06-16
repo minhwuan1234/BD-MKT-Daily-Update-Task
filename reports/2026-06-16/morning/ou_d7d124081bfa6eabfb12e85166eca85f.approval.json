@@ -1,0 +1,13 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "date": "2026-06-16",
+  "status": "reviewed",
+  "decisions": {
+    "_userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+    "_date": "2026-06-16",
+    "task_1": "review",
+    "task_0": "approved"
+  },
+  "pmId": "ou_8e9e77f0614c49ed43c999b6b09ec381",
+  "updatedAt": "2026-06-16T03:21:31.558Z"
+}
