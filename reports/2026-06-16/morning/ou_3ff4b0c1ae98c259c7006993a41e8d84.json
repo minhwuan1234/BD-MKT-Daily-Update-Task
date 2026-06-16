@@ -1,0 +1,29 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "fill nốt database về case clients đã win để input cho tool của a Tùng",
+      "output": "fill dc hết tên + contact + sales request (goal: ~100 client)",
+      "expectedTime": "5h",
+      "steps": [
+        {
+          "what": "vào các list client của mình + sheet sales request + airtable để tổng hợp lại thành 1 bảng riêng",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "enrich cho list cobblestone learning lookalike",
+      "output": "~50 contact dc enrich",
+      "expectedTime": "3h",
+      "steps": [
+        {
+          "what": "tìm best contact point + email + linkedin + website cho 50 cty trong list đã tìm dc",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-16T02:35:52.921Z"
+}
