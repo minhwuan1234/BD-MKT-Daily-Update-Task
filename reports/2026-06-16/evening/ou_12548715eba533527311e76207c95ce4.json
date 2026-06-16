@@ -1,0 +1,17 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "R&R plan (plan out 6 contacts)",
+      "progress": "90%",
+      "timeSpent": "5h"
+    },
+    {
+      "title": "Check & feedback contact của Linh",
+      "progress": "100%",
+      "timeSpent": "1.5h"
+    }
+  ],
+  "submittedAt": "2026-06-16T10:53:51.652Z"
+}
