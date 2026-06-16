@@ -16,7 +16,7 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "6h",
+      "expectedTime": "3h",
       "steps": [
         {
           "what": "test",
@@ -25,5 +25,5 @@
       ]
     }
   ],
-  "submittedAt": "2026-06-16T07:37:33.963Z"
+  "submittedAt": "2026-06-16T07:38:52.463Z"
 }
