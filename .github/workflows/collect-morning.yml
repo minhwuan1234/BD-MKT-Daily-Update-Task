@@ -115,33 +115,38 @@ jobs:
 
           blockers    = report.get('blockers')
 
-          # ── Build card JSON 1.0 ──
-          elements = [
+
+          form_name = f"review_form_{USER_ID}"
+
+          # Build form elements (JSON 2.0)
+          form_elements = [
             {
-              "tag": "div",
-              "text": {
-                "tag": "lark_md",
-                "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
-              }
+              "tag": "markdown",
+              "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
             },
             {"tag": "hr"}
           ]
 
-          # Tasks với steps breakdown
+          if blockers:
+              form_elements.append({
+                "tag": "markdown",
+                "content": f"🚧 **Khó khăn:**\n{blockers}"
+              })
+              form_elements.append({"tag": "hr"})
+
+          if weekly_goal:
+              form_elements.append({
+                "tag": "markdown",
+                "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"
+              })
+              form_elements.append({"tag": "hr"})
+
           for i, t in enumerate(tasks):
               title         = t.get('title', '?')
               output        = t.get('output', '—')
               expected_time = t.get('expectedTime', '—')
               steps         = t.get('steps', [])
-
-              elements.append({
-                "tag": "div",
-                "text": {
-                  "tag": "lark_md",
-                  "content": f"**{i+1}. {title}**\n📦 Output: {output}　⏱ Dự kiến: {expected_time}"
-                }
-              })
-
+              step_text = ""
               if steps:
                   step_lines = []
                   for si, step in enumerate(steps, 1):
@@ -151,71 +156,54 @@ jobs:
                       if s_out and s_out != '—':
                           line += f" → {s_out}"
                       step_lines.append(line)
-                  elements.append({
-                    "tag": "div",
-                    "text": {"tag": "lark_md", "content": '\n'.join(step_lines)}
-                  })
+                  step_text = "\n" + "\n".join(step_lines)
 
-              elements.append({"tag": "hr"})
-
-          # Blockers
-          if blockers:
-              elements.append({
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": f"🚧 **Khó khăn:**\n{blockers}"}
+              form_elements.append({
+                "tag": "markdown",
+                "content": f"**{i+1}. {title}**\n📦 Output: {output}　⏱ Dự kiến: {expected_time}{step_text}"
               })
-              elements.append({"tag": "hr"})
-
-          # Weekly goal
-          if weekly_goal:
-              elements.append({
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"}
-              })
-              elements.append({"tag": "hr"})
-
-          # 3 nút per task
-          for ti, t in enumerate(tasks):
-              t_title = t.get('title', f'Task {ti+1}')
-              elements.append({
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": f"**Review Task {ti+1}:** {t_title}"}
-              })
-              elements.append({
-                "tag": "action",
-                "actions": [
-                  {
-                    "tag": "button",
-                    "text": {"tag": "plain_text", "content": "✅ Đồng ý"},
-                    "type": "primary",
-                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "approved"}),
-                  },
-                  {
-                    "tag": "button",
-                    "text": {"tag": "plain_text", "content": "👀 Xem lại"},
-                    "type": "default",
-                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "review"}),
-                  },
-                  {
-                    "tag": "button",
-                    "text": {"tag": "plain_text", "content": "❌ Từ chối"},
-                    "type": "danger",
-                    "value": json.dumps({"type": "task_review", "userId": USER_ID, "date": DATE, "taskIdx": ti, "decision": "rejected"}),
-                  },
+              form_elements.append({
+                "tag": "select_static",
+                "name": f"decision_{i}",
+                "placeholder": {"tag": "plain_text", "content": "Chọn quyết định..."},
+                "options": [
+                  {"text": {"tag": "plain_text", "content": "✅ Đồng ý"},  "value": "approved"},
+                  {"text": {"tag": "plain_text", "content": "👀 Xem lại"}, "value": "review"},
+                  {"text": {"tag": "plain_text", "content": "❌ Từ chối"}, "value": "rejected"},
                 ]
               })
+              form_elements.append({
+                "tag": "input",
+                "name": f"reason_{i}",
+                "placeholder": {"tag": "plain_text", "content": "Feedback / lý do (không bắt buộc)..."},
+                "max_length": 300
+              })
+              form_elements.append({"tag": "hr"})
 
-          elements.append({
-            "tag": "note",
-            "elements": [{"tag": "plain_text", "content": f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"}]
+          form_elements.append({
+            "tag": "button",
+            "text": {"tag": "plain_text", "content": "📨 Gửi review"},
+            "type": "primary",
+            "width": "fill",
+            "behaviors": [{"type": "callback", "value": json.dumps({"type": "form_submit", "userId": USER_ID, "date": DATE})}],
+            "action_type": "submit",
+            "form_name": form_name
           })
 
-          card = {
+          # JSON 2.0 card — dùng "card" field thay vì "content"
+          card_v2 = {
+            "schema": "2.0",
             "header": {
               "title": {"tag": "plain_text", "content": f"☀️ Kế hoạch sáng — {date_str}"},
               "template": "green"
             },
-            "elements": elements
+            "body": {
+              "elements": [{
+                "tag": "form",
+                "name": form_name,
+                "elements": form_elements
+              }]
+            }
           }
 
           for pm_id in pm_ids:
@@ -224,7 +212,7 @@ jobs:
                   {
                       'receive_id': pm_id,
                       'msg_type':   'interactive',
-                      'content':    json.dumps(card),
+                      'content':    json.dumps(card_v2),
                   },
                   token=token
               )
