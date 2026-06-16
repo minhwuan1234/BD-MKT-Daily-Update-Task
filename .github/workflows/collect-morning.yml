@@ -224,7 +224,8 @@ jobs:
             ]
           })
 
-          card = {
+          # Card có nút (cho PM chính — pm_ids[0] = Hạnh)
+          card_interactive = {
             "header": {
               "title": {
                 "tag": "plain_text",
@@ -235,13 +236,31 @@ jobs:
             "elements": elements
           }
 
-          for pm_id in pm_ids:
+          # Card read-only (cho PM phụ — không có nút review)
+          elements_readonly = [e for e in elements if e.get("tag") != "action"]
+          elements_readonly.append({
+            "tag": "note",
+            "elements": [{"tag": "plain_text", "content": "👁 Bạn đang xem với tư cách observer"}]
+          })
+          card_readonly = {
+            "header": {
+              "title": {
+                "tag": "plain_text",
+                "content": f"☀️ Kế hoạch sáng — {date_str}"
+              },
+              "template": "green"
+            },
+            "elements": elements_readonly
+          }
+
+          for i, pm_id in enumerate(pm_ids):
+              card_to_send = card_interactive if i == 0 else card_readonly
               result = lark_post(
                   'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
                   {
                       'receive_id': pm_id,
                       'msg_type':   'interactive',
-                      'content':    json.dumps(card),
+                      'content':    json.dumps(card_to_send),
                   },
                   token=token
               )
