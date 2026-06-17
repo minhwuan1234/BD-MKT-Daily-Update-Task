@@ -5,7 +5,7 @@
     {
       "title": "test",
       "progress": "100%",
-      "timeSpent": "8h",
+      "timeSpent": "4h",
       "steps": [
         {
           "what": "test",
@@ -16,7 +16,7 @@
     {
       "title": "test",
       "progress": "100%",
-      "timeSpent": "4h",
+      "timeSpent": "6.5h",
       "steps": [
         {
           "what": "test",
@@ -25,5 +25,8 @@
       ]
     }
   ],
-  "submittedAt": "2026-06-17T15:43:00.217Z"
+  "submittedAt": "2026-06-17T15:46:21.733Z",
+  "blockers": "ko",
+  "tomorrowPlan": "test",
+  "weeklyGoal": null
 }
