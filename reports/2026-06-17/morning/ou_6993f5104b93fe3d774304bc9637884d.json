@@ -1,0 +1,19 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "1) Draft & sent catch-up emails for R&R plan. 2) Fill in clients' analyses",
+      "output": "Fill in plan cho 3 clients và draft email cho 3 clients",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "Pitching jobs",
+      "output": "2 pitching messages sent",
+      "expectedTime": "1h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-17T02:03:31.578Z"
+}
