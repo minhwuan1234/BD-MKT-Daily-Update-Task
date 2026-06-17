@@ -5,6 +5,6 @@
   "Giang":     { "id": "ou_d7d124081bfa6eabfb12e85166eca85f", "pm": ["ou_8e9e77f0614c49ed43c999b6b09ec381", "ou_72582d819ebd02dbe9cc0e2e08908099"] },
   "Minh Anh":  { "id": "ou_12548715eba533527311e76207c95ce4", "pm": ["ou_8e9e77f0614c49ed43c999b6b09ec381", "ou_72582d819ebd02dbe9cc0e2e08908099"] },
   "Linh":      { "id": "ou_6993f5104b93fe3d774304bc9637884d", "pm": ["ou_8e9e77f0614c49ed43c999b6b09ec381", "ou_72582d819ebd02dbe9cc0e2e08908099"] },
-  "Minh Quân": { "id": "ou_72582d819ebd02dbe9cc0e2e08908099", "pm": ["ou_72582d819ebd02dbe9cc0e2e08908099", "ou_d7d124081bfa6eabfb12e85166eca85f"] },
+  "Minh Quân": { "id": "ou_72582d819ebd02dbe9cc0e2e08908099", "pm": ["ou_72582d819ebd02dbe9cc0e2e08908099"] },
   "Hân":       { "id": "ou_54c6d3cd8a2239d14e894f404591506a", "pm": ["ou_72582d819ebd02dbe9cc0e2e08908099", "ou_d7d124081bfa6eabfb12e85166eca85f"] }
 }
