@@ -1,0 +1,14 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "date": "2026-06-17",
+  "status": "reviewed",
+  "decisions": {
+    "_userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+    "_date": "2026-06-17",
+    "task_0": "approved",
+    "task_1": "approved",
+    "reason_1": "gửi lại c vào cuối ngày nhé, list priority tối thiểu cho 15 mini usecases"
+  },
+  "pmId": "ou_8e9e77f0614c49ed43c999b6b09ec381",
+  "updatedAt": "2026-06-17T02:34:10.762Z"
+}
