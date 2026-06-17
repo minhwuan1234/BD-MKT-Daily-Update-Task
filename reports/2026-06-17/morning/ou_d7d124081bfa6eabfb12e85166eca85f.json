@@ -1,0 +1,32 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "Proposal for Ladybird",
+      "output": "Proposal text",
+      "expectedTime": "3h",
+      "steps": [
+        {
+          "what": "Viết solution",
+          "output": "—"
+        },
+        {
+          "what": "Tìm ref phù hợp solution",
+          "output": "—"
+        },
+        {
+          "what": "Pricing + draft timeline",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "MKT_Plan mini use case",
+      "output": "—",
+      "expectedTime": "—",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-17T02:05:22.248Z"
+}
