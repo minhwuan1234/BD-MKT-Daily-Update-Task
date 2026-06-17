@@ -1,0 +1,14 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "date": "2026-06-17",
+  "status": "reviewed",
+  "decisions": {
+    "_userId": "ou_12548715eba533527311e76207c95ce4",
+    "_date": "2026-06-17",
+    "task_0": "approved",
+    "task_1": "approved",
+    "reason_1": "Idea proposal của Alpha đã clear chưa? Các task làm proposal luôn bị lố thời gian so với dự kiến nên e tự define và optimize dần nhé"
+  },
+  "pmId": "ou_8e9e77f0614c49ed43c999b6b09ec381",
+  "updatedAt": "2026-06-17T03:04:41.698Z"
+}
