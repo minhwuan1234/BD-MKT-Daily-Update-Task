@@ -5,7 +5,7 @@
     {
       "title": "test",
       "progress": "100%",
-      "timeSpent": "2h",
+      "timeSpent": "3h",
       "steps": [
         {
           "what": "test",
@@ -15,7 +15,7 @@
     },
     {
       "title": "test",
-      "progress": "60%",
+      "progress": "100%",
       "timeSpent": "3.5h",
       "steps": [
         {
@@ -25,5 +25,5 @@
       ]
     }
   ],
-  "submittedAt": "2026-06-17T15:32:18.085Z"
+  "submittedAt": "2026-06-17T15:41:20.733Z"
 }
