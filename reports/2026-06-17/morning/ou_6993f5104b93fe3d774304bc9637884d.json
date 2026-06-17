@@ -6,7 +6,16 @@
       "title": "1) Draft & sent catch-up emails for R&R plan. 2) Fill in clients' analyses",
       "output": "Fill in plan cho 3 clients và draft email cho 3 clients",
       "expectedTime": "5h",
-      "steps": []
+      "steps": [
+        {
+          "what": "Fill in analyses của 3 clients cũ để lên hướng tiếp cận",
+          "output": "Bản phân tích cụ thể về lí do họ không respond, objectives approach của mình và suggested actions chi tiết để có thể đủ dữ liệu viết email catch-up vào file \"Relationship Ladder\""
+        },
+        {
+          "what": "Draft email cho 3 client dựa vào actions đã phân tích từ trước và gửi cho clients khi đã được duyệt",
+          "output": "Draft email, sources cho email đó được fill vào file \"Linh's\" để nhận feedback và duyệt ạ"
+        }
+      ]
     },
     {
       "title": "Pitching jobs",
@@ -15,5 +24,5 @@
       "steps": []
     }
   ],
-  "submittedAt": "2026-06-17T02:03:31.578Z"
+  "submittedAt": "2026-06-17T02:39:16.767Z"
 }
