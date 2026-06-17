@@ -1,0 +1,15 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "date": "2026-06-17",
+  "status": "reviewed",
+  "decisions": {
+    "_userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+    "_date": "2026-06-17",
+    "task_0": "review",
+    "reason_0": "Xem lại đi em",
+    "task_1": "review",
+    "reason_1": "Xem lại cả cái này nữa"
+  },
+  "pmId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "updatedAt": "2026-06-17T01:50:12.530Z"
+}
