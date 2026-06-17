@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── TASK CARD ── */
     .task-card {
       background: #fff;
       border: 1px solid #E8E0D6;
@@ -47,8 +46,6 @@
       gap: 12px;
       align-items: end;
     }
-
-    /* ── STEPS ── */
     .steps-section {
       border-top: 1px solid #EEE8E0;
       padding-top: 14px;
@@ -113,9 +110,7 @@
       border-style: dashed;
       color: #777;
     }
-    .step-input.output-input:focus {
-      border-style: solid;
-    }
+    .step-input.output-input:focus { border-style: solid; }
     .step-delete {
       width: 24px;
       height: 24px;
@@ -158,11 +153,7 @@
       color: var(--orange-dark);
       background: rgba(255,147,51,0.04);
     }
-
-    /* task2 steps hidden until title filled */
     #task2-steps { display: none; }
-
-    /* ── EXAMPLE HINTS ── */
     .field-hint-block {
       background: #F9F6F1;
       border: 1px solid #EEE8E0;
@@ -205,7 +196,6 @@
 <body>
 <div class="page-wrapper">
   <div class="card">
-    <!-- LEFT PANEL -->
     <div class="left-panel">
       <div class="hero-gif" id="hero-gif"></div>
       <div class="hero-blur"></div>
@@ -215,7 +205,6 @@
         <p class="quote-author" id="quote-author"></p>
       </div>
     </div>
-    <!-- RIGHT PANEL -->
     <div class="right-panel">
       <div id="state-loading" class="state-box">
         <div class="spinner"></div>
@@ -245,7 +234,6 @@
 
         <div class="form-body">
 
-          <!-- WEEKLY GOAL -->
           <div class="field-group" id="group-weekly-goal">
             <label class="field-label" id="weekly-goal-label">🎯 Goal tuần này là gì em nhỉ <span class="optional">— Trạng thái cuối tuần cần đạt, kiểm tra được</span></label>
             <div class="field-hint-block">
@@ -258,7 +246,6 @@
             <textarea class="field-textarea" id="weekly-goal" placeholder="Trạng thái cuối tuần cần đạt..."></textarea>
           </div>
 
-          <!-- ── TASK 1 CARD ── -->
           <div class="task-card">
             <div class="task-card-header">
               <span class="task-card-title">Task 1</span>
@@ -309,15 +296,13 @@
               </div>
             </div>
 
-            <!-- STEPS TASK 1 -->
             <div class="steps-section" id="task1-steps">
-              <p class="steps-label">Các bước thực hiện (Optional để mọi người hiểu rõ process làm việc của mình)</p>
+              <p class="steps-label">Các bước thực hiện(Optional để mọi người hiểu rõ hơn về những thứ mình đang làm</p>
               <div id="steps1-container"></div>
               <button class="add-step-btn" id="add-step1" type="button">+ Thêm bước</button>
             </div>
           </div>
 
-          <!-- ── TASK 2 CARD ── -->
           <div class="task-card" style="border-style: dashed;">
             <div class="task-card-header">
               <span class="task-card-title">Task 2</span>
@@ -354,7 +339,6 @@
               </div>
             </div>
 
-            <!-- STEPS TASK 2 — ẩn cho đến khi điền title -->
             <div class="steps-section" id="task2-steps">
               <p class="steps-label">Các bước thực hiện</p>
               <div id="steps2-container"></div>
@@ -362,7 +346,6 @@
             </div>
           </div>
 
-          <!-- BLOCKERS -->
           <div class="field-group">
             <label class="field-label">Có điểm nào cần hỗ trợ không? <span class="optional">— Điều đang cản tiến độ hoặc chất lượng</span></label>
             <div class="field-hint-block">
@@ -386,12 +369,12 @@
 <script>
 const WORKER_URL = 'https://bd-mkt-daily-report.minhwuan889.workers.dev';
 
-// Toggle hint examples
 function toggleHint(btn) {
   const content = btn.nextElementSibling;
   const isOpen = content.classList.toggle('open');
   btn.textContent = isOpen ? '💡 Ẩn ví dụ' : '💡 Xem ví dụ';
 }
+
 const GITHUB_RAW = 'https://raw.githubusercontent.com/minhwuan1234/BD-MKT-Daily-Update-Task/main';
 
 const QUOTES = [
@@ -492,18 +475,16 @@ function addStep(taskIdx) {
   updateAddBtn(taskIdx);
 }
 
-// Init: mỗi task bắt đầu với 1 step
+// Init: task 1 bắt đầu với 1 step
 addStep(1);
 
 document.getElementById('add-step1').addEventListener('click', () => addStep(1));
 document.getElementById('add-step2').addEventListener('click', () => addStep(2));
 
-// Task 2 steps: chỉ hiện khi user điền title
 document.getElementById('task2').addEventListener('input', function() {
   const stepsEl = document.getElementById('task2-steps');
   const hasTitle = this.value.trim().length > 0;
   stepsEl.style.display = hasTitle ? 'flex' : 'none';
-  // Init 1 step khi lần đầu hiện
   if (hasTitle && document.getElementById('steps2-container').children.length === 0) {
     addStep(2);
   }
@@ -572,18 +553,16 @@ if (!userId) {
       // Task 1
       if (tasks[0]) {
         const t = tasks[0];
-        document.getElementById('task1').value = t.title || '';
-        document.getElementById('task1-output').value = t.output || '';
-        document.getElementById('task1-time').value   = t.expectedTime || '';
+        document.getElementById('task1').value   = t.title        || '';
+        document.getElementById('output1').value = t.output       || '';  // FIX: was 'task1-output'
+        document.getElementById('time1').value   = t.expectedTime || '';  // FIX: was 'task1-time'
 
-        // Fill steps task 1
-        const stepsEl1 = document.getElementById('task1-steps');
-        const existingRows1 = stepsEl1.querySelectorAll('.step-row');
-        existingRows1.forEach(r => r.remove());
-        (t.steps || []).forEach((s, si) => {
-          addStep(1);
-          const rows = stepsEl1.querySelectorAll('.step-row');
-          const row  = rows[rows.length - 1];
+        const container1 = document.getElementById('steps1-container');
+        container1.querySelectorAll('.step-row').forEach(r => r.remove());
+        (t.steps || []).forEach(() => addStep(1));
+        container1.querySelectorAll('.step-row').forEach((row, i) => {
+          const s = t.steps[i];
+          if (!s) return;
           row.querySelector('[data-field="what"]').value   = s.what   || '';
           row.querySelector('[data-field="output"]').value = s.output || '';
         });
@@ -592,25 +571,22 @@ if (!userId) {
       // Task 2
       if (tasks[1] && tasks[1].title) {
         const t = tasks[1];
-        document.getElementById('task2').value = t.title || '';
-        document.getElementById('task2-output').value = t.output || '';
-        document.getElementById('task2-time').value   = t.expectedTime || '';
-        document.getElementById('task2-steps').style.display = 'block';
+        document.getElementById('task2').value   = t.title        || '';
+        document.getElementById('output2').value = t.output       || '';  // FIX: was 'task2-output'
+        document.getElementById('time2').value   = t.expectedTime || '';  // FIX: was 'task2-time'
+        document.getElementById('task2-steps').style.display = 'flex';
 
-        // Fill steps task 2
-        const stepsEl2 = document.getElementById('task2-steps');
-        const existingRows2 = stepsEl2.querySelectorAll('.step-row');
-        existingRows2.forEach(r => r.remove());
-        (t.steps || []).forEach((s, si) => {
-          addStep(2);
-          const rows = stepsEl2.querySelectorAll('.step-row');
-          const row  = rows[rows.length - 1];
+        const container2 = document.getElementById('steps2-container');
+        container2.querySelectorAll('.step-row').forEach(r => r.remove());
+        (t.steps || []).forEach(() => addStep(2));
+        container2.querySelectorAll('.step-row').forEach((row, i) => {
+          const s = t.steps[i];
+          if (!s) return;
           row.querySelector('[data-field="what"]').value   = s.what   || '';
           row.querySelector('[data-field="output"]').value = s.output || '';
         });
       }
 
-      // Blockers và weekly goal nếu có
       if (prefill.blockers)   document.getElementById('blockers').value    = prefill.blockers;
       if (prefill.weeklyGoal) document.getElementById('weekly-goal').value = prefill.weeklyGoal;
 
