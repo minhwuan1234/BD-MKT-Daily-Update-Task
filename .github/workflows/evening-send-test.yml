@@ -1,0 +1,108 @@
+name: Evening Send (Test — Minh Quân only)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  send-test-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Send evening link to Minh Quân
+        env:
+          LARK_APP_ID:     ${{ secrets.LARK_APP_ID }}
+          LARK_APP_SECRET: ${{ secrets.LARK_APP_SECRET }}
+          PAGES_BASE_URL:  ${{ secrets.PAGES_BASE_URL }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, urllib.request, urllib.error, os, datetime, time
+
+          APP_ID     = os.environ['LARK_APP_ID']
+          APP_SECRET = os.environ['LARK_APP_SECRET']
+          BASE_URL   = os.environ['PAGES_BASE_URL'].rstrip('/')
+
+          TEST_USER_ID = "ou_72582d819ebd02dbe9cc0e2e08908099"
+          TEST_NAME    = "Minh Quân"
+
+          def lark_post(url, payload, token=None):
+              data = json.dumps(payload).encode()
+              headers = {'Content-Type': 'application/json'}
+              if token:
+                  headers['Authorization'] = f'Bearer {token}'
+              req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+              try:
+                  with urllib.request.urlopen(req) as r:
+                      return json.loads(r.read())
+              except urllib.error.HTTPError as e:
+                  body = e.read().decode()
+                  print(f'HTTP Error {e.code}: {body}')
+                  raise
+
+          auth = lark_post(
+              'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
+              {'app_id': APP_ID, 'app_secret': APP_SECRET}
+          )
+          token = auth.get('tenant_access_token')
+          if not token:
+              print(f'ERROR: Cannot get token. Response: {auth}')
+              exit(1)
+
+          tz_offset = datetime.timezone(datetime.timedelta(hours=7))
+          now       = datetime.datetime.now(tz_offset)
+          today     = now.strftime('%d/%m/%Y')
+          day_vn    = {0:'Thứ 2',1:'Thứ 3',2:'Thứ 4',3:'Thứ 5',4:'Thứ 6',5:'Thứ 7',6:'Chủ nhật'}
+          day_name  = day_vn.get(now.weekday(), '')
+
+          ts   = int(time.time())
+          link = f'{BASE_URL}/evening.html?userId={TEST_USER_ID}&t={ts}'
+
+          card = {
+            "header": {
+              "title": {
+                "tag": "plain_text",
+                "content": f"🧪 [TEST] Good evening — {day_name} {today}"
+              },
+              "template": "yellow"
+            },
+            "elements": [
+              {
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": f"Chào **{TEST_NAME}**! Đây là link test form chiều.\nChỉ gửi cho bạn thôi nhé 🧪"
+                }
+              },
+              {"tag": "hr"},
+              {
+                "tag": "action",
+                "actions": [
+                  {
+                    "tag": "button",
+                    "text": {"tag": "plain_text", "content": "🌙 Điền form test chiều"},
+                    "type": "primary",
+                    "url": link
+                  }
+                ]
+              },
+              {
+                "tag": "note",
+                "elements": [
+                  {"tag": "plain_text", "content": "🧪 Test mode — chỉ gửi cho Minh Quân"}
+                ]
+              }
+            ]
+          }
+
+          result = lark_post(
+              'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+              {
+                  'receive_id': TEST_USER_ID,
+                  'msg_type':   'interactive',
+                  'content':    json.dumps(card),
+              },
+              token=token
+          )
+          print(f'Sent to {TEST_NAME}: code={result.get("code","?")} msg={result.get("msg","")}')
+          PYEOF
