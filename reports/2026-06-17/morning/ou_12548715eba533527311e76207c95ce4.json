@@ -1,0 +1,28 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Chuẩn bị F's birthday email package",
+      "output": "Content + design ideas (docs + references) + list of data người để gửi",
+      "expectedTime": "2h",
+      "steps": [
+        {
+          "what": "Check lại các campaigns, emails cũ để gather thông tin + idea",
+          "output": "Content + design idea"
+        },
+        {
+          "what": "Lọc data lead những người gửi (người đki ebook, drop/fail SR, old client,..)",
+          "output": "Target contact list"
+        }
+      ]
+    },
+    {
+      "title": "Action R&R (NC, Alpha Insurer, UNSW)",
+      "output": "Slide 2nd proposal cho Alpha, reach out NC, UNSW",
+      "expectedTime": "5h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-17T02:55:38.376Z"
+}
