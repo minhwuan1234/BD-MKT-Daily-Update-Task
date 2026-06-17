@@ -28,7 +28,6 @@ jobs:
           APP_ID     = os.environ['LARK_APP_ID']
           APP_SECRET = os.environ['LARK_APP_SECRET']
 
-
           USER_ID = '${{ github.event.client_payload.userId }}'
           DATE    = '${{ github.event.client_payload.date }}'
           FILE    = '${{ github.event.client_payload.filePath }}'
@@ -66,7 +65,6 @@ jobs:
 
           name   = id_to_name.get(USER_ID, USER_ID)
           pm_ids = id_to_pm.get(USER_ID, [])
-          # Support cả string lẫn array
           if isinstance(pm_ids, str):
               pm_ids = [pm_ids] if pm_ids else []
 
@@ -95,7 +93,7 @@ jobs:
           except:
               date_str = DATE
 
-          # Weekly goal từ thứ 2
+          # Weekly goal tu thu 2
           def get_monday_str(date_str):
               d = datetime.datetime.strptime(date_str, '%Y-%m-%d')
               diff = -6 if d.weekday() == 6 else (0 - d.weekday())
@@ -113,14 +111,12 @@ jobs:
           except:
               pass
 
-          tasks = report.get('tasks', [])
+          tasks    = report.get('tasks', [])
+          blockers = report.get('blockers')
 
           morning_dir = pathlib.Path(f'reports/{DATE}/morning')
           submitted_count = len(list(morning_dir.glob('*.json'))) if morning_dir.exists() else 1
           total = len([v for v in members.values() if pm_ids[0] in (v.get('pm') or [])])
-
-          blockers    = report.get('blockers')
-
 
           form_name = f"review_form_{USER_ID}"
 
@@ -133,13 +129,15 @@ jobs:
             {"tag": "hr"}
           ]
 
+          # Blockers — hien truoc tasks de PM chu y truoc
           if blockers:
               form_elements.append({
                 "tag": "markdown",
-                "content": f"🚧 **Khó khăn:**\n{blockers}"
+                "content": f"🚧 **Khó khăn / Cần hỗ trợ:**\n{blockers}"
               })
               form_elements.append({"tag": "hr"})
 
+          # Weekly goal
           if weekly_goal:
               form_elements.append({
                 "tag": "markdown",
@@ -147,6 +145,7 @@ jobs:
               })
               form_elements.append({"tag": "hr"})
 
+          # Tasks + review form
           for i, t in enumerate(tasks):
               title         = t.get('title', '?')
               output        = t.get('output', '—')
@@ -186,7 +185,7 @@ jobs:
               })
               form_elements.append({"tag": "hr"})
 
-          # Embed userId và date vào button name để Worker đọc được
+          # Submit button — embed userId + date vao name
           submit_name = f"submit__{USER_ID}__{DATE}"
           form_elements.append({
             "tag": "button",
@@ -197,7 +196,7 @@ jobs:
             "form_action_type": "submit"
           })
 
-          # JSON 2.0 card — dùng "card" field thay vì "content"
+          # JSON 2.0 card
           card_v2 = {
             "schema": "2.0",
             "header": {
