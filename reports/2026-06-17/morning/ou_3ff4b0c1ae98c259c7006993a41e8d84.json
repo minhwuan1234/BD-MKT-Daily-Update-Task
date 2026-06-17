@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "tiếp tục enrich cho data tệp cobblestone learning lookalike + draft mail cho tệp này",
+      "output": "thêm 50 contact đã enrich + draft mail",
+      "expectedTime": "8h",
+      "steps": [
+        {
+          "what": "tìm email + linkedin + website + best contact point từng cty",
+          "output": "—"
+        },
+        {
+          "what": "chỉ ra pattern của tệp + draft offer + draft mail",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-17T03:57:24.718Z"
+}
