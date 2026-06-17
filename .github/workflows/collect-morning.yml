@@ -133,13 +133,6 @@ jobs:
             {"tag": "hr"}
           ]
 
-          if blockers:
-              form_elements.append({
-                "tag": "markdown",
-                "content": f"🚧 **Khó khăn:**\n{blockers}"
-              })
-              form_elements.append({"tag": "hr"})
-
           if weekly_goal:
               form_elements.append({
                 "tag": "markdown",
@@ -183,6 +176,15 @@ jobs:
                 "name": f"reason_{i}",
                 "placeholder": {"tag": "plain_text", "content": "Feedback / lý do (không bắt buộc)..."},
                 "max_length": 300
+              })
+              form_elements.append({"tag": "hr"})
+
+          # Blockers — hiện sau tasks
+          if blockers:
+              form_elements.append({
+                "tag": "markdown",
+                "content": f"🚧 **Khó khăn / Blockers:**
+{blockers}"
               })
               form_elements.append({"tag": "hr"})
 
