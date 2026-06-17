@@ -3,27 +3,31 @@
   "memberName": "Minh Quân",
   "tasks": [
     {
-      "title": "test c Giang",
-      "output": "test c Giang",
-      "expectedTime": "4h",
+      "title": "Task 1",
+      "output": "Output Task 1",
+      "expectedTime": "5h",
       "steps": [
         {
-          "what": "test c Giang",
-          "output": "test c Giang"
+          "what": "Bước 1",
+          "output": "Output Bước 1"
+        },
+        {
+          "what": "Bước 2",
+          "output": "Output Bước 2"
         }
       ]
     },
     {
-      "title": "test c Giang",
-      "output": "test c Giang",
-      "expectedTime": "4h",
+      "title": "Task 2",
+      "output": "Output Task 2",
+      "expectedTime": "6h",
       "steps": [
         {
-          "what": "test c Giang",
-          "output": "test c Giang"
+          "what": "Bước 1",
+          "output": "Output bước 2"
         }
       ]
     }
   ],
-  "submittedAt": "2026-06-17T03:12:59.240Z"
+  "submittedAt": "2026-06-17T03:49:52.440Z"
 }
