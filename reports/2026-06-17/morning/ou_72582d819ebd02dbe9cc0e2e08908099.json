@@ -5,7 +5,7 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "4h",
+      "expectedTime": "6h",
       "steps": [
         {
           "what": "test",
@@ -16,14 +16,17 @@
     {
       "title": "test",
       "output": "test",
-      "expectedTime": "—",
+      "expectedTime": "4h",
       "steps": [
         {
           "what": "test",
-          "output": "—"
+          "output": "v"
         }
       ]
     }
   ],
-  "submittedAt": "2026-06-17T03:54:03.474Z"
+  "submittedAt": "2026-06-17T15:50:52.748Z",
+  "blockers": "test",
+  "tomorrowPlan": null,
+  "weeklyGoal": null
 }
