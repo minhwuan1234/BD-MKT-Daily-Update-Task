@@ -85,7 +85,7 @@ jobs:
           except:
               date_str = DATE
 
-          # Weekly goal từ thứ 2
+          # Weekly goal tu thu 2
           def get_monday_str(date_str):
               d = datetime.datetime.strptime(date_str, '%Y-%m-%d')
               diff = -6 if d.weekday() == 6 else (0 - d.weekday())
@@ -104,27 +104,49 @@ jobs:
               pass
 
           tasks = report.get('tasks', [])
-          task_elements = []
 
+          # Dem so nguoi da submit chieu
+          evening_dir = pathlib.Path(f'reports/{DATE}/evening')
+          submitted_count = len(list(evening_dir.glob('*.json'))) if evening_dir.exists() else 1
+          total = len([v for v in members.values() if pm_ids[0] in (v.get('pm') or [])])
+
+          # Build elements
+          elements = [
+            {
+              "tag": "div",
+              "text": {
+                "tag": "lark_md",
+                "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
+              }
+            },
+            {"tag": "hr"}
+          ]
+
+          # Weekly goal
+          if weekly_goal:
+              elements.append({
+                "tag": "div",
+                "text": {"tag": "lark_md", "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"}
+              })
+              elements.append({"tag": "hr"})
+
+          # Tasks
           for i, t in enumerate(tasks, 1):
               title      = t.get('title', '?')
               progress   = t.get('progress', '—')
               time_spent = t.get('timeSpent', '—')
               steps      = t.get('steps', [])
 
-              # Emoji progress
+              # Emoji progress tong
               try:
                   prog_val = int(progress.replace('%', ''))
-                  if prog_val == 100:
-                      prog_emoji = '🟢'
-                  elif prog_val >= 60:
-                      prog_emoji = '🟡'
-                  else:
-                      prog_emoji = '🔴'
+                  if prog_val == 100:   prog_emoji = '🟢'
+                  elif prog_val >= 60:  prog_emoji = '🟡'
+                  else:                 prog_emoji = '🔴'
               except:
                   prog_emoji = '⚪'
 
-              task_elements.append({
+              elements.append({
                 "tag": "div",
                 "text": {
                   "tag": "lark_md",
@@ -132,19 +154,19 @@ jobs:
                 }
               })
 
-              # Steps breakdown
+              # Step progress
               if steps:
                   step_lines = []
                   for si, step in enumerate(steps, 1):
-                      what      = step.get('what', '?')
-                      s_prog    = step.get('progress', '—')
+                      what     = step.get('what', '?')
+                      s_prog   = step.get('progress', '—')
                       try:
-                          sp_val = int(s_prog.replace('%', ''))
+                          sp_val  = int(s_prog.replace('%', ''))
                           s_emoji = '✅' if sp_val == 100 else ('🔶' if sp_val >= 50 else '⬜')
                       except:
                           s_emoji = '⬜'
                       step_lines.append(f"  {s_emoji} {si}. {what} — _{s_prog}_")
-                  task_elements.append({
+                  elements.append({
                     "tag": "div",
                     "text": {
                       "tag": "lark_md",
@@ -152,25 +174,9 @@ jobs:
                     }
                   })
 
-              task_elements.append({"tag": "hr"})
+              elements.append({"tag": "hr"})
 
-          evening_dir = pathlib.Path(f'reports/{DATE}/evening')
-          submitted_count = len(list(evening_dir.glob('*.json'))) if evening_dir.exists() else 1
-          total = len([v for v in members.values() if pm_ids[0] in (v.get('pm') or [])])
-
-          elements = [
-              {
-                "tag": "div",
-                "text": {
-                  "tag": "lark_md",
-                  "content": f"👤 **{name}** vừa submit\n🕐 {time_str}"
-                }
-              },
-              {"tag": "hr"}
-          ]
-
-          elements += task_elements
-
+          # Blockers — LUON HIEN neu co
           blockers = report.get('blockers')
           if blockers:
               elements.append({
@@ -179,27 +185,22 @@ jobs:
               })
               elements.append({"tag": "hr"})
 
+          # Tomorrow plan — LUON HIEN neu co
           tomorrow_plan = report.get('tomorrowPlan')
           if tomorrow_plan:
               elements.append({
                 "tag": "div",
-                "text": {"tag": "lark_md", "content": f"📋 **Plan ngày mai:**\n{tomorrow_plan}"}
+                "text": {"tag": "lark_md", "content": f"📋 **Kế hoạch ngày mai:**\n{tomorrow_plan}"}
               })
               elements.append({"tag": "hr"})
 
-          if weekly_goal:
-              elements.append({
-                "tag": "div",
-                "text": {"tag": "lark_md", "content": f"🎯 **Goal tuần này:**\n{weekly_goal}"}
-              })
-              elements.append({"tag": "hr"})
-
+          # Footer submit count
           elements.append({
             "tag": "note",
             "elements": [
               {
                 "tag": "plain_text",
-                "content": f"✅ Đã submit: {submitted_count}/{total} thành viên hôm nay"
+                "content": f"✅ Đã submit chiều: {submitted_count}/{total} thành viên hôm nay"
               }
             ]
           })
