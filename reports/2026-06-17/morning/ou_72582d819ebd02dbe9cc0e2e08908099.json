@@ -1,0 +1,29 @@
+{
+  "userId": "ou_72582d819ebd02dbe9cc0e2e08908099",
+  "memberName": "Minh Quân",
+  "tasks": [
+    {
+      "title": "test1",
+      "output": "test1",
+      "expectedTime": "3h",
+      "steps": [
+        {
+          "what": "test1",
+          "output": "test1"
+        }
+      ]
+    },
+    {
+      "title": "test2",
+      "output": "test2",
+      "expectedTime": "2h",
+      "steps": [
+        {
+          "what": "test2",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-17T01:49:44.684Z"
+}
