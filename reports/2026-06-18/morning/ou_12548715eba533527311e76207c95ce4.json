@@ -1,0 +1,22 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Review + sign Klett",
+      "output": "Get signature + scan signed contract",
+      "expectedTime": "2h",
+      "steps": []
+    },
+    {
+      "title": "Finish F's birthday package with content email + design ref + data list",
+      "output": "3 output (content email + design ref + data list)",
+      "expectedTime": "4h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-18T02:23:15.705Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
