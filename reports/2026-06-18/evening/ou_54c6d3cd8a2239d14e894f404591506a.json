@@ -1,0 +1,22 @@
+{
+  "userId": "ou_54c6d3cd8a2239d14e894f404591506a",
+  "memberName": "Hân",
+  "tasks": [
+    {
+      "title": "Draf message LinkedIn để gửi mass nhóm VPD",
+      "progress": "90%",
+      "timeSpent": "4h",
+      "steps": []
+    },
+    {
+      "title": "Lọc contact point và draf message nhóm đang mở prj",
+      "progress": "80%",
+      "timeSpent": "6h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-18T10:31:42.564Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
