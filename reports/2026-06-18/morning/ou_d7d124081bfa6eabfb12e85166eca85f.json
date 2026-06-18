@@ -3,25 +3,25 @@
   "memberName": "Giang",
   "tasks": [
     {
-      "title": "BD_Database fill cho đủ 100 cases 😅",
-      "output": "—",
-      "expectedTime": "—",
+      "title": "BD_Data Record for tool",
+      "output": "New cases. Hôm trước e gáy mấy chục case nhưng mà sự thật là mỗi buổi chắc căng lắm là 8-10 case là cùng ạ. Mình cần 100 cases",
+      "expectedTime": "2h",
       "steps": []
     },
     {
-      "title": "R",
-      "output": "—",
+      "title": "R&R_ideate offer upsell cho ông chim ruồi",
+      "output": "2 offers",
       "expectedTime": "—",
       "steps": [
         {
-          "what": "R&R_Ideate upsell offers cho ông chim ruồi",
+          "what": "Scan 2 cty ông ý đang bỏ quên và xem mình chui đc vào chỗ nào => offer",
           "output": "—"
         }
       ]
     }
   ],
-  "submittedAt": "2026-06-18T02:07:45.018Z",
-  "blockers": null,
+  "submittedAt": "2026-06-18T04:41:52.559Z",
+  "blockers": "cái fill data cần observation, ko record chỗ nào nên input thủ công, nên là hơi lâu ạ",
   "tomorrowPlan": null,
   "weeklyGoal": null
 }
