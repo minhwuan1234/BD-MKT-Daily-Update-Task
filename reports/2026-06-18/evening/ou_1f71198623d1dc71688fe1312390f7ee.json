@@ -1,0 +1,22 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Viết 5 mini use case",
+      "progress": "70%",
+      "timeSpent": "4h",
+      "steps": []
+    },
+    {
+      "title": "Tiếp tục update thêm về CTA + từ khóa cho Animation video production service page",
+      "progress": "100%",
+      "timeSpent": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-18T10:40:55.514Z",
+  "blockers": "nay em chưa viết xong mini use case do lúc 4h đi meeting với anh Minh ạ",
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
