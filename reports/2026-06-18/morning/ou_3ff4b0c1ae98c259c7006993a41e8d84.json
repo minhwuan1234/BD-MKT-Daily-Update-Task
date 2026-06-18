@@ -4,7 +4,7 @@
   "tasks": [
     {
       "title": "viết lại mail cho tệp cobblestone learning lookalikes theo direction của c giang + enrich thêm contact tệp này",
-      "output": "mail có đủ sequence + tìm thêm role account cho các contact đã có",
+      "output": "mail có đủ sequence + tìm thêm role account cho các contact đã có (goal: 100 contact)",
       "expectedTime": "6h",
       "steps": []
     },
@@ -20,8 +20,8 @@
       ]
     }
   ],
-  "submittedAt": "2026-06-18T03:04:17.943Z",
-  "blockers": null,
+  "submittedAt": "2026-06-18T05:19:06.436Z",
+  "blockers": "viết mail thì e làm nhanh thôi khoảng 3h là finalise r, nhưng enrich khá lâu vì đợt này phải vào apollo tìm contact ở vị trí PM + account cho từng cty vì AI ko tìm dc trên website. task fill case cũng khá tốn thời gian vì phải collect nhiều thông tin nên mỗi ngày bọn e chỉ điền dc khoảng 10 case, dự kiến hết tuần này sẽ xong cả list hơn 100 case ạ",
   "tomorrowPlan": null,
   "weeklyGoal": null
 }
