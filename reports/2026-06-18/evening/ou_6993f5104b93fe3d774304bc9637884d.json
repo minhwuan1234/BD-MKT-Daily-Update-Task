@@ -1,0 +1,22 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "1) Fill in R&R plan  2) Soạn mail gửi client",
+      "progress": "100%",
+      "timeSpent": "5h",
+      "steps": []
+    },
+    {
+      "title": "Pitching jobs",
+      "progress": "50%",
+      "timeSpent": "1h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-18T10:34:15.706Z",
+  "blockers": "Em chưa tìm được thêm job nào ạ. Và em đang đợi chị Manh đánh giá lại dùng Upwork nên job pitching đang chưa đạt target ngày.",
+  "tomorrowPlan": "Finalise R&R plan với những khách được assigned\nPitching potential job\nPlan & set up automated emails for F.'s birthday.",
+  "weeklyGoal": null
+}
