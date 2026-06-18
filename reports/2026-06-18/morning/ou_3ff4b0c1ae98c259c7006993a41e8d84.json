@@ -1,0 +1,27 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "viết lại mail cho tệp cobblestone learning lookalikes theo direction của c giang + enrich thêm contact tệp này",
+      "output": "mail có đủ sequence + tìm thêm role account cho các contact đã có",
+      "expectedTime": "6h",
+      "steps": []
+    },
+    {
+      "title": "fill nốt các case winning clients",
+      "output": "đủ 10 case",
+      "expectedTime": "2h",
+      "steps": [
+        {
+          "what": "tìm thông tin về project + communication của các khách mình để input vào tool",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-18T03:04:17.943Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
