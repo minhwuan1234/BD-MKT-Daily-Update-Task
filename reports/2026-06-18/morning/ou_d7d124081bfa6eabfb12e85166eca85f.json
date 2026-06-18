@@ -1,0 +1,27 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Database fill cho đủ 100 cases 😅",
+      "output": "—",
+      "expectedTime": "—",
+      "steps": []
+    },
+    {
+      "title": "R",
+      "output": "—",
+      "expectedTime": "—",
+      "steps": [
+        {
+          "what": "R&R_Ideate upsell offers cho ông chim ruồi",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-18T02:07:45.018Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
