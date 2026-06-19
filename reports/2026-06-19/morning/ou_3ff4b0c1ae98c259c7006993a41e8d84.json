@@ -1,0 +1,40 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "enrich thêm contact tệp cobblestone learning lookalikes + lọc ra những bên ko có PM/account mà chỉ có CEO + viết mail follow up cho những ng đã mở/click",
+      "output": "enrich dc 50 contact + 4 mail cho 2 role",
+      "expectedTime": "5h",
+      "steps": [
+        {
+          "what": "tìm email + linkedin của các PM/account của các elearning agencies",
+          "output": "—"
+        },
+        {
+          "what": "viết 2 mail follow up generic cho tệp đã mở",
+          "output": "—"
+        },
+        {
+          "what": "viết 2 mail gửi ví dụ sát với industry cho tệp đã click",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "fill nốt các case winning clients",
+      "output": "15 case (5 case từ hôm qua nay e lm nốt nx ạ)",
+      "expectedTime": "3h",
+      "steps": [
+        {
+          "what": "gather các thông tin về client cũ để input vào tool",
+          "output": "—"
+        }
+      ]
+    }
+  ],
+  "submittedAt": "2026-06-19T03:43:27.786Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
