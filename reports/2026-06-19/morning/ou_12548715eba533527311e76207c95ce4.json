@@ -1,0 +1,22 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Review R&R plan & Upwork job pitch của Linh",
+      "output": "Comment/chỉnh sửa về plan + detail emails. Đánh giá chất lượng job, cách pitch --> đánh giá overall potential của kênh Upwork + đề xuất",
+      "expectedTime": "2h",
+      "steps": []
+    },
+    {
+      "title": "R&R plan (4 khách đang nurturing) + plan 3 khách mới",
+      "output": "Fill plan + execute",
+      "expectedTime": "5h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-19T02:32:28.826Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
