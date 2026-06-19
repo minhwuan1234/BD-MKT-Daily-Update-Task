@@ -1,0 +1,22 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "1) Fill in clients' analyses  2) Draft & sent catch-up emails for R&R plan.",
+      "progress": "100%",
+      "timeSpent": "5h",
+      "steps": []
+    },
+    {
+      "title": "Pitching jobs",
+      "progress": "50%",
+      "timeSpent": "1h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-19T10:36:35.155Z",
+  "blockers": "Jobs vẫn chỉ có trên Fiverr, các platform khác không có job phù hợp ạ. Em đã được chị Manh cho phép tạm delay bên Upwork để báo anh Tùng ạ.",
+  "tomorrowPlan": "Refine lại R&R plan và soạn dần mail batch tiếp theo",
+  "weeklyGoal": null
+}
