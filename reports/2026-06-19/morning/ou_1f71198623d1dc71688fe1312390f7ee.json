@@ -1,0 +1,22 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Viết 4 mini use cases",
+      "output": "Hoàn thiện content cho 4 mini use case: Early Symptom Recognition Education; Healthcare Product Launch Videos; HIPAA Training Videos; Product & Service Knowledge Training",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "Social + PB up load",
+      "output": "2 posts social/ each platforms + 2 posts PB/ each mem schedule",
+      "expectedTime": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-19T02:20:21.957Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
