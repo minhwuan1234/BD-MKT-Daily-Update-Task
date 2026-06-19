@@ -1,0 +1,22 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD_Test Tool - prospecting + offer angle",
+      "output": "Feedback để improve tool",
+      "expectedTime": "4h",
+      "steps": []
+    },
+    {
+      "title": "BD_Analyze tệp BIG digital learning solution (tuần này reach thử các bên small-to-mid size nhưng số lượng contact tìm được ít)",
+      "output": "Main Pain + Offer + Angle outreach",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-19T03:47:06.926Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
