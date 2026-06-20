@@ -1,0 +1,35 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "sửa mail follow up cho tệp cobblestone learning lookalikes theo hướng gửi 1 link relevant tới họ",
+      "output": "2 mail cho những contact đã click vào first mail",
+      "expectedTime": "2h",
+      "steps": [
+        {
+          "what": "scan website của những bên có PM/account đã click vào first mail",
+          "output": "—"
+        },
+        {
+          "what": "tìm link use case trên website của F để fit với industry/service của những bên này",
+          "output": "—"
+        },
+        {
+          "what": "draft mail chung",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "fill thêm case winning clients",
+      "output": "5 case",
+      "expectedTime": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-20T04:00:09.520Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
