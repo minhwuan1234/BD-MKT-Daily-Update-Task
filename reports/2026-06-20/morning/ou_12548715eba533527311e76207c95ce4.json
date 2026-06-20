@@ -1,0 +1,16 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "R&R plan (3 khách)",
+      "output": "Update sheet + email sent",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-20T02:07:59.376Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
