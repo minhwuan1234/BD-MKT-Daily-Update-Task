@@ -1,0 +1,16 @@
+{
+  "userId": "ou_6993f5104b93fe3d774304bc9637884d",
+  "memberName": "Linh",
+  "tasks": [
+    {
+      "title": "Refine lại plan R&R bằng skill đã tạo trên Claude",
+      "output": "Plan cho 3 clients sẽ có suggested actions chi tiết hơn",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-20T02:03:10.106Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
