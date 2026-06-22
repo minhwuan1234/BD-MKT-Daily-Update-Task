@@ -1,0 +1,16 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Đào số và phân tích dữ liệu Q1 -> Q2",
+      "output": "Draft bảng tổng hợp (số liệu invoice vs production, new client vs R&R), key insights",
+      "expectedTime": "4h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-22T02:52:16.433Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": "Hoàn thành báo cáo quý 2"
+}
