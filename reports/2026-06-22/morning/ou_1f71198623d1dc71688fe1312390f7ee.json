@@ -1,0 +1,22 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Chốt list comparison pages cần viết (chốt lại cùng với BD và Prodcution team) -> sắp lịch và timeline viết các pages",
+      "output": "1 file sheet tổng hợp các comparison pages cần viết từ tài liệu của chị Hạnh + template của trang (gửi c Hạnh duyệt)",
+      "expectedTime": "2h",
+      "steps": []
+    },
+    {
+      "title": "Bổ sung FAQs vào các trang use cases",
+      "output": "—",
+      "expectedTime": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-22T05:46:26.752Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": "- Chốt list comparison pages cần viết (chốt lại cùng với BD và Prodcution team) -> sắp lịch và timeline viết các pages\n- Bổ sung FAQs vào 30 trang trên web\n- SEO content update for anim cost calculator (tiếp tục support anh M)\n- Mini use cases content writing ~ 5 bài \n- Catch up việc design lại web với a Tony và c Hà -> tuần này cần chốt được layout cho tất cả các trang"
+}
