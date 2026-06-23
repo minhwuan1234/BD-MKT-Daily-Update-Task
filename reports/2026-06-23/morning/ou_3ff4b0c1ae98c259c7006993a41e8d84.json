@@ -1,0 +1,35 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "finalise mail follow up cho những người đã open/click vào mail + enrich tiếp cho tệp agency giống cobblestone learning để add vào flow gửi",
+      "output": "6 mail tất cả + enrich đc min 50 contact",
+      "expectedTime": "5h",
+      "steps": [
+        {
+          "what": "input vào tool a Tùng build những bên click/open vào mail nhiều nhất",
+          "output": "—"
+        },
+        {
+          "what": "lấy offer ở tool combine lại để sửa mail đã viết",
+          "output": "—"
+        },
+        {
+          "what": "tìm mail và linkedin của PM/account của các agency",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "fill các bước đánh giá ntn là 1 contact list chất lượng cho c giang",
+      "output": "—",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-23T09:33:06.796Z",
+  "blockers": "sáng nay e quên điền mất ạ :((",
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
