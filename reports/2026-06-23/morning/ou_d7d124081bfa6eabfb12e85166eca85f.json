@@ -1,0 +1,35 @@
+{
+  "userId": "ou_d7d124081bfa6eabfb12e85166eca85f",
+  "memberName": "Giang",
+  "tasks": [
+    {
+      "title": "BD tool_Logic đánh giá SR Inbound: chia lane & treatment từng lane",
+      "output": "SR treatment map? (e tạm gọi nó thế :v)",
+      "expectedTime": "3h",
+      "steps": [
+        {
+          "what": "Check file SR Tracking xem account đang đánh giá SR như thế nào? Mấy loại? Score mỗi loại?",
+          "output": "Types & Definition"
+        },
+        {
+          "what": "Gap: người đánh giá với tool đánh giá?",
+          "output": "Comparision Table: Human vs Tool: các steps để đánh một SR"
+        },
+        {
+          "what": "Draft logic cho tool",
+          "output": "Draft map có các lane và treatment cho từng lane"
+        }
+      ]
+    },
+    {
+      "title": "BD_Product library format",
+      "output": "format (library này có gì) + fill khoảng 5 case sample",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-23T02:15:56.522Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
