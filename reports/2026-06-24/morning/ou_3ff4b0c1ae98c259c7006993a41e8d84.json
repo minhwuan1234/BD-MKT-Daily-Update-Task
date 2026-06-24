@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "sửa lại mail follow up cho tệp cobblestone learning lookalike và mail mass cho tệp video production agency theo feedback của c Giang và a Tùng + feedback mail cho c hân",
+      "output": "5 mail",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "tiếp tục enrich cho list cobblestone learning lookalike + test tool c giang đưa",
+      "output": "50 contact",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-24T04:08:52.915Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
