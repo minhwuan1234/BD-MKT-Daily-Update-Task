@@ -1,0 +1,22 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Viết mini use case",
+      "output": "3 mini use cases hoàn thiện content",
+      "expectedTime": "4h",
+      "steps": []
+    },
+    {
+      "title": "Viết comparison pages + bổ sung viết 1 trang use case",
+      "output": "Hoàn thiện content 2 comparison pages + content use case: SOP & workflow training",
+      "expectedTime": "4h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-24T02:05:40.840Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
