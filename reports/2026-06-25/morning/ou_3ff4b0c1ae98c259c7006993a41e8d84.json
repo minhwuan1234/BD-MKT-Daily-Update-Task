@@ -1,0 +1,31 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "build contact list cho tệp expert đã chia sẻ kiến thức trên 1 channel để mail lại theo hướng mới của c giang",
+      "output": "min 50 new contact có đủ thông tin, là podcast guest speaker",
+      "expectedTime": "4h",
+      "steps": [
+        {
+          "what": "đi tìm các list podcast liên quan đến 1 chuyên ngành cụ thể (VD: dental)",
+          "output": "—"
+        },
+        {
+          "what": "extract list các speaker + enrich tìm thông tin cá nhân",
+          "output": "—"
+        }
+      ]
+    },
+    {
+      "title": "draft mail cho 2 case personalised trong tệp cobblestone learning",
+      "output": "6 mail cho các role",
+      "expectedTime": "4h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-25T02:27:25.700Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
