@@ -1,0 +1,22 @@
+{
+  "userId": "ou_1f71198623d1dc71688fe1312390f7ee",
+  "memberName": "Nga Linh",
+  "tasks": [
+    {
+      "title": "Viết mini use case",
+      "output": "Hoàn thiện content 3 mini use cases",
+      "expectedTime": "4h",
+      "steps": []
+    },
+    {
+      "title": "SEO content update for anim cost calculator + Bổ sung FAQs for web pages",
+      "output": "—",
+      "expectedTime": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-25T04:51:25.881Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
