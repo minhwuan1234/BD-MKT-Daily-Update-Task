@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "build thêm list các expert đã sharing kiến thức trên 1 channel nhưng ko phải dentist + extract nốt list dentist hôm qua đã tìm dc",
+      "output": "min 50 contact expert mảng mới + thêm 50 contact dentist cũ",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "brainstorm và reply 3 bên đã rep mail và linkedin + finalise mail personalise cho 2 bên",
+      "output": "—",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-26T03:40:16.020Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
