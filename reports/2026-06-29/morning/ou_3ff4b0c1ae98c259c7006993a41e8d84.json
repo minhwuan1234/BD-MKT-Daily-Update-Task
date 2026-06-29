@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "tổng hợp các message từng gửi từ đầu năm đến giờ",
+      "output": "sheet tổng hợp gồm tệp gì + gửi message gì + performance ntn + các ver message đã thay đổi",
+      "expectedTime": "5h",
+      "steps": []
+    },
+    {
+      "title": "tiếp tục enrich + segment cho tệp dentist expert",
+      "output": "segment được min 20 ng đã own content (làm author, speaker, founder...) từ list đã build",
+      "expectedTime": "3h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-29T04:14:43.849Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": "tổng hợp các message đã từng gửi từ trước đến nay\ntiếp tục build list và segment tệp scientist/expert để gửi offer mới\nsửa mail follow up của tệp elearning agencies và build thêm list để gửi tiếp tục\nlàm 5 case study dentist"
+}
