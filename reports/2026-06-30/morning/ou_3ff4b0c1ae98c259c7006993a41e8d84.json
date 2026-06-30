@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "viết mail cho case personalised law firm + draft offer cho tệp dentist theo hướng mới",
+      "output": "2 mail cho 2 role cho case personalised + 2 mail cho 2 segment dentist",
+      "expectedTime": "4h",
+      "steps": []
+    },
+    {
+      "title": "sửa mail follow up cho tệp elearning agency + build list tệp elearning agency",
+      "output": "sửa 2 mail follow up + enrich min 50 contact",
+      "expectedTime": "4h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-30T04:11:58.883Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
