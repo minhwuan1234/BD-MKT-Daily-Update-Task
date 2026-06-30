@@ -1,0 +1,22 @@
+{
+  "userId": "ou_3ff4b0c1ae98c259c7006993a41e8d84",
+  "memberName": "Huyền Linh",
+  "tasks": [
+    {
+      "title": "viết mail cho case personalised law firm + draft offer cho tệp dentist theo hướng mới",
+      "progress": "100%",
+      "timeSpent": "4h",
+      "steps": []
+    },
+    {
+      "title": "sửa mail follow up cho tệp elearning agency + build list tệp elearning agency",
+      "progress": "50%",
+      "timeSpent": "2h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-06-30T11:05:21.000Z",
+  "blockers": "e mới xong list 50 contact hnay cho tệp elearning agency thui chưa kịp sửa mail, do domain bị vào spam nên e quay qa xử lý ạ",
+  "tomorrowPlan": "mai e sửa mail follow up (mail vào spam thì vẫn follow up dc) + mua và set up domain mới ạ",
+  "weeklyGoal": null
+}
