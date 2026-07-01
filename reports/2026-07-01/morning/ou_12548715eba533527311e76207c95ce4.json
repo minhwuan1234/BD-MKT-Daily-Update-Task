@@ -1,0 +1,22 @@
+{
+  "userId": "ou_12548715eba533527311e76207c95ce4",
+  "memberName": "Minh Anh",
+  "tasks": [
+    {
+      "title": "Prepare budget framing + outline họp với SRs mới",
+      "output": "File outline về goal của cuộc họp và các câu hỏi cần thiết",
+      "expectedTime": "3h",
+      "steps": []
+    },
+    {
+      "title": "Take care new SRs",
+      "output": "Personalized 1st responses",
+      "expectedTime": "1h",
+      "steps": []
+    }
+  ],
+  "submittedAt": "2026-07-01T02:30:23.865Z",
+  "blockers": null,
+  "tomorrowPlan": null,
+  "weeklyGoal": null
+}
